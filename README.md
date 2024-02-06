@@ -1,36 +1,32 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+萬隆基督的教會服事表
 
-## Getting Started
+## 開啟專案
 
 First, run the development server:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+$ npm install
+$ cp .env.template .env.local
+# open .env.local and put your google drive token
+$ npm run dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 功能列表
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+### 🚀 現有功能
 
-## Learn More
+-   **首頁** - 非常樸素的標題以及進入頁面按鈕
+-   **介接 Google Sheet API** - 但是使用者看不到嘿嘿
 
-To learn more about Next.js, take a look at the following resources:
+### 🛠️ 開發中的功能
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+-   **[頁面] 依據時間顯示所有服事** - UI 趕工中，還在做 Layout
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+### 📅 規劃中的功能
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+-   **[高優先][頁面] 選擇 user & 個人服事列表** - UI 趕工中，還在做 Layout
+-   **[高優先] PWA** - 供離線使用
+-   **[中] 美化 UI** - 有空一定！
+-   **[低] 介接 OAuth** - 未來 CRUD 會用到
