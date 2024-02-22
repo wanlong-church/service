@@ -1,7 +1,12 @@
 import React from 'react';
+import SheetView from './sheet-view';
 
-const DashboardPage = () => {
-	return <div>DashboardPage</div>;
+const DashboardPage = async () => {
+	return (
+		<>
+			<SheetView />
+		</>
+	);
 };
 
 export default DashboardPage;
