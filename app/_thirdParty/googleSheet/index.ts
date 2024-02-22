@@ -3,17 +3,18 @@ import { google } from 'googleapis';
 import { SHEET_COLUMN_ORDER } from './const';
 import { SheetFieldKey } from './interface';
 import { cache } from 'react';
+import { TIME_STAMP } from '@/app/const';
 
-type Column = {
+export type Column = {
 	id: SheetFieldKey;
 	name: string;
 };
-type Row = Record<SheetFieldKey, string>;
+export type Row = Record<SheetFieldKey, string>;
 /** 取得服事表總表資料
  * @param timestamp - seed for cache，若要取得最新資料則需要使用新的 timestamp，否則只會回傳快取的資料
  * */
 export const fetchGoogleSheetData = cache(
-	async (timestamp: Date = new Date()): Promise<{ header: Column[]; data: Row[] }> => {
+	async (timestamp: number = TIME_STAMP): Promise<{ header: Column[]; data: Row[] }> => {
 		/** TODO: server 給第一次資料後，client 後面如果需要新資料可以考慮建立一個 route 或 server action */
 		const client = new google.auth.JWT(process.env.GOOGLE_CLIENT_EMAIL, undefined, process.env.GOOGLE_PRIVATE_KEY, [
 			process.env.GOOGLE_DRIVE_ENDPOINT || '',
