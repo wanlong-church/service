@@ -2,7 +2,6 @@
 
 import React from 'react';
 import { Box, Flex, FlexProps, Icon } from '@chakra-ui/react';
-import { BsArrowDownCircleFill } from 'react-icons/bs';
 import { FaHome } from 'react-icons/fa';
 import { RiFileList2Fill } from 'react-icons/ri';
 import Link from 'next/link';
@@ -19,9 +18,9 @@ const navInfo = [
 		icon: RiFileList2Fill,
 	},
 ];
-const NavIcons = ({ flexProps }: { flexProps: FlexProps }) => {
+const Nav = ({ flexProps }: { flexProps?: FlexProps }) => {
 	return (
-		<Flex {...flexProps}>
+		<Flex justifyContent="center" alignItems="center" {...flexProps}>
 			{navInfo.map((nav) => (
 				<Box key={nav.path} as={Link} href={nav.path} mx="3">
 					<Icon as={nav.icon} boxSize={8} />
@@ -31,4 +30,4 @@ const NavIcons = ({ flexProps }: { flexProps: FlexProps }) => {
 	);
 };
 
-export default NavIcons;
+export default Nav;
