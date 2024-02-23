@@ -1,6 +1,6 @@
 import { Box, Flex, Icon } from '@chakra-ui/react';
 import React from 'react';
-import NavIcons from './nav-icons';
+import Nav from './nav';
 
 const DashboardLayout = ({
 	children,
@@ -16,7 +16,7 @@ const DashboardLayout = ({
 				{children}
 			</Box>
 			<Flex as="nav" justifyContent="center" p="3" bgColor="#F7F7F7" borderTop="1px">
-				<NavIcons gutter={3} />
+				<Nav />
 			</Flex>
 		</Flex>
 	);
