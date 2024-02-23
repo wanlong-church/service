@@ -1,7 +1,6 @@
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import { Providers } from './providers';
-import SafariHacks from './safari-hacks';
 import Script from 'next/script';
 
 const inter = Inter({ subsets: ['latin'] });
