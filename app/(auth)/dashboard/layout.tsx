@@ -15,9 +15,9 @@ const DashboardLayout = ({
 			<Box h={`calc(var(--vh) * 100 - 90px)`} overflow="auto">
 				{children}
 			</Box>
-			<Flex as="nav" justifyContent="center" p="3" bgColor="#F7F7F7" borderTop="1px">
+			<Box p="3" bgColor="#F7F7F7" borderTop="1px">
 				<Nav />
-			</Flex>
+			</Box>
 		</Flex>
 	);
 };
