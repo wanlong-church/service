@@ -25,8 +25,4 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 -   **[頁面] 依據時間顯示所有服事** - UI 趕工中
 
 ### 📅 規劃中的功能
-
--   **[高優先][頁面] 選擇 user & 個人服事列表**
--   **[高優先] PWA** - 供離線使用
--   **[中] 美化 UI** - 有空一定！
--   **[低] 介接 OAuth** - 未來 CRUD 會用到
+**[開發中功能請看 Projects](https://github.com/orgs/wanlong-church/projects/1)** 
