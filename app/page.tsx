@@ -22,7 +22,7 @@ export default function Page() {
 			<Box>
 				<Flex flexDir="column" alignItems="center">
 					<Button as={Link} href="/dashboard" colorScheme="blue">
-						進入服侍表
+						進入服事表
 					</Button>
 				</Flex>
 			</Box>
