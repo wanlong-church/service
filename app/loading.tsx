@@ -1,9 +1,8 @@
-import { Flex, Spinner } from '@chakra-ui/react';
 import React from 'react';
-
+import { Flex, Spinner } from '@chakra-ui/react';
 const RootLoading = () => {
 	return (
-		<Flex w='100vw' h={`calc(var(--vh) * 100)`} justifyContent="center" alignItems="center">
+		<Flex w="100vw" h="100vh" justifyContent="center" alignItems="center">
 			<Spinner size="xl" />
 		</Flex>
 	);

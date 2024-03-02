@@ -7,6 +7,7 @@ export const theme = {
 			'html, body': {
 				color: 'gray.600',
 				lineHeight: 'tall',
+				scrollBehavior: 'smooth',
 			},
 			a: {
 				color: 'teal.500',
