@@ -10,7 +10,7 @@ const DashboardLayout = ({
 		<Flex flexDir="column" w="100vw" h="100vh" maxH="100vh" bgColor="white" overflowY="auto">
 			<Flex as="header" justifyContent="center" bgColor="#F7F7F7" borderBottom="1px" p="3">
 				<Text fontSize="large" fontWeight="bold">
-					服事表
+					服事總表
 				</Text>
 			</Flex>
 			<Box h={`calc(100vh - 90px)`} overflow="auto">
