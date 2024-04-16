@@ -30,10 +30,10 @@ const SheetView = ({ sheetDataPromise }: { sheetDataPromise: Promise<GoogleSheet
 		const index = data.findIndex((row) => isDateInThisWeek(new Date(row.date)));
 		/** scroll margin 找不到解法，先定位到上一個元素呈現同一個效果 */
 		const thisWeekService = index > 0 ? data[index - 1] : data[0];
-		const elementId = thisWeekService ? `sheetAccordionItem_${new Date(thisWeekService.date).getTime()}` : '';
+		const elementId = generateSheetAccordionId(new Date(thisWeekService.date));
 		const element = document.getElementById(elementId);
 		if (element) {
-			/** TODO: 這裡設定 { scrollBehavior: smooth } 會壞掉，超爛 */
+			/** TODO: 這裡設定 { scrollBehavior: smooth } 會壞掉 */
 			element.scrollIntoView();
 		}
 	}, [data]);
@@ -88,7 +88,7 @@ const SheetAccordionItem = ({ row, header }: { row: Row; header: Column[] }) => 
 	const date = new Date(row.date);
 	const title = `${date.getMonth() + 1} 月 ${date.getDate()} 日`;
 	return (
-		<Box id={`sheetAccordionItem_${date.getTime()}`}>
+		<Box id={generateSheetAccordionId(date)}>
 			<AccordionItem>
 				<h2>
 					<AccordionButton>
@@ -124,7 +124,8 @@ const isDateInThisWeek = (date: Date) => {
 
 	return isSameYear && isWithinInterval(date, { start: startOfThisWeek, end: endOfThisWeek });
 };
-
+/** 生成 sheetAccordionItem 的共用 id */
+const generateSheetAccordionId = (date: Date = new Date()) => `sheetAccordionItem_${date.getTime()}`;
 //#endregion
 
 export default SheetView;
