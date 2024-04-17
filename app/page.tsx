@@ -1,16 +1,8 @@
-import { Box, Flex, Button, Text } from '@chakra-ui/react';
 import Link from 'next/link';
-
+import { Box, Button, Flex, Text } from '@chakra-ui/react';
 export default function Page() {
 	return (
-		<Flex
-			as="main"
-			flexDir="column"
-			justifyContent="center"
-			bgColor="whitesmoke"
-			h={`calc(var(--vh) * 100)`}
-			w="100vw"
-		>
+		<Flex as="main" flexDir="column" justifyContent="center" bgColor="whitesmoke" h="100vh" w="100vw">
 			<Box mb="30">
 				<Flex flexDir="column" alignItems="center">
 					{/* TODO: 這裏要用動畫== 絕對要 */}
