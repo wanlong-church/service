@@ -13,14 +13,17 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      # - name: Render app.yaml
-      #   uses: nowactions/envsubst@v1
-      #   env:
-      #     LINE_CHANNEL_ACCESS_TOKEN: ${{ secrets.LINE_CHANNEL_ACCESS_TOKEN }}
-      #   with:
-      #     with:
-      #     input: ./app.yaml.tmpl
-      #     output: ./app.yaml
+      - name: Render .env.local
+        uses: nowactions/envsubst@v1
+        env:
+          GOOGLE_DRIVE_ENDPOINT: ${{ secrets.GOOGLE_DRIVE_ENDPOINT }}
+          GOOGLE_CLIENT_EMAIL: ${{ secrets.GOOGLE_CLIENT_EMAIL }}
+          GOOGLE_PRIVATE_KEY: ${{ secrets.GOOGLE_PRIVATE_KEY }}
+          GOOGLE_SPREAD_SHEET_ID: ${{ secrets.GOOGLE_SPREAD_SHEET_ID }}
+        with:
+          with:
+          input: ./.env.local.template
+          output: ./.env.local
 
       - name: Authenticate with gcloud
         uses: 'google-github-actions/auth@v1'
