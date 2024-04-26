@@ -3,11 +3,11 @@ import { fetchGoogleSheetData } from '@/app/_thirdParty/googleSheet';
 import { Box, Flex, Spinner } from '@chakra-ui/react';
 import SheetView from './sheet-view';
 const DashboardPage = async () => {
-	// const sheetDataPromise = fetchGoogleSheetData();
+	const sheetDataPromise = fetchGoogleSheetData();
 	return (
 		<Box h="full" p="3">
 			嗚嗚壞掉惹
-			{/* <Suspense
+			<Suspense
 				fallback={
 					<Flex w="full" h="full" justifyContent="center" alignItems="center">
 						<Spinner size="xl" />
@@ -15,7 +15,7 @@ const DashboardPage = async () => {
 				}
 			>
 				<SheetView sheetDataPromise={sheetDataPromise} />
-			</Suspense> */}
+			</Suspense>
 		</Box>
 	);
 };
