@@ -3,22 +3,30 @@ name: CD
 on:
   push:
     branches:
-      - main
+      - "#23/feature/be_a_CD_Player"
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout
+        uses: actions/checkout@v4
 
-      - name: Install dependencies
-        run: npm install
+      # - name: Render app.yaml
+      #   uses: nowactions/envsubst@v1
+      #   env:
+      #     LINE_CHANNEL_ACCESS_TOKEN: ${{ secrets.LINE_CHANNEL_ACCESS_TOKEN }}
+      #   with:
+      #     with:
+      #     input: ./app.yaml.tmpl
+      #     output: ./app.yaml
 
-      - name: Build
-        run: npm run build
-
-      - name: Deploy
-        run: |
-          echo "Deploying to production..."
-          echo "Deployed!"
+      - name: Authenticate with gcloud
+        uses: 'google-github-actions/auth@v1'
+        with:
+          credentials_json: '${{ secrets.SA_JSON}}'
+          service_account: 'wl-service-schedule@appspot.gserviceaccount.com'
+      
+      - name: 'deploy'
+        uses: 'google-github-actions/deploy-appengine@v1'
