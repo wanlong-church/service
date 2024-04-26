@@ -26,7 +26,7 @@ jobs:
         uses: 'google-github-actions/auth@v1'
         with:
           credentials_json: '${{ secrets.SA_JSON}}'
-          service_account: 'wl-service-schedule@appspot.gserviceaccount.com'
+          service_account: 'lowking@wl-service-schedule.iam.gserviceaccount.com'
       
       - name: 'deploy'
         uses: 'google-github-actions/deploy-appengine@v1'
