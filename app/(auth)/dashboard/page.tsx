@@ -4,7 +4,7 @@ import { Box, Button, Flex, Spinner } from '@chakra-ui/react';
 import SheetView from './sheet-view';
 
 const DashboardPage = async () => {
-	console.log(process.env);
+	console.log('process.env', process.env);
 	const sheetDataPromise = fetchGoogleSheetData();
 	return (
 		<Box h="full" p="3">
