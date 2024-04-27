@@ -21,7 +21,7 @@ jobs:
       - name: Set .env.local
         run: |
           touch .env.local
-          echo GOOGLE_SECRECT_KEY=${{ secrets.GOOGLE_SECRECT_KEY }} >> .env.local
+          echo GOOGLE_SECRECT_KEY=${{ secrets.GOOGLE_PRIVATE_KEY }} >> .env.local
 
       - name: Deploy
         uses: 'google-github-actions/deploy-appengine@v1'
