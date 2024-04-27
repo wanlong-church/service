@@ -3,7 +3,7 @@ name: CD
 on:
   push:
     branches:
-      - "#23/feature/be_a_CD_Player"
+      - main
 
 jobs:
   deploy:
