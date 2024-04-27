@@ -21,8 +21,15 @@ jobs:
       - name: Set .env.local
         run: |
           touch .env.local
-          secrets_value="${{ secrets.GOOGLE_SECRECT_KEY }}"
+          secrets_value="${{ secrets.GOOGLE_PRIVATE_KEY }}"
           printf "GOOGLE_SECRECT_KEY=%s\n" "$secrets_value" > .env.local
+
+      # - run: echo "Value of MY_SECRET1: $MY_SECRET1"
+      #   env:
+      #     MY_SECRET1: ${{ secrets.MY_SECRET1 }}
+
+      # - run: |
+      #     echo "MY_SECRET1=${{ secrets.MY_SECRET1 }}" >> .env
 
 
       - name: Deploy
