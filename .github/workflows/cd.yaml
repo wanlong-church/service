@@ -13,21 +13,10 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Install jq
-        run: sudo apt-get install -y jq
-
-      - name: Extract and set environment variables from JSON
-        run: |
-          # 解析 JSON 字串並設定環境變數
-          SERVICE_ACCOUNT=$(echo '${{ secrets.SA_JSON }}' | jq -r '.service_account')
-          echo "SERVICE_ACCOUNT=$SERVICE_ACCOUNT" >> $GITHUB_ENV
-
-
       - name: Authenticate with gcloud
         uses: 'google-github-actions/auth@v1'
         with:
-          credentials_json: '${{ secrets.SA_JSON }}' # 使用 GitHub Secrets 中的 SA_JSON
-          service_account: ${{ env.SERVICE_ACCOUNT }} # 使用環境變數
+          credentials_json: '${{ secrets.SA_JSON }}'
 
       - name: 'deploy'
         uses: 'google-github-actions/deploy-appengine@v1'
