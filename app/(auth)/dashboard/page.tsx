@@ -6,7 +6,6 @@ const DashboardPage = async () => {
 	const sheetDataPromise = fetchGoogleSheetData();
 	return (
 		<Box h="full" p="3">
-			嗚嗚壞掉惹
 			<Suspense
 				fallback={
 					<Flex w="full" h="full" justifyContent="center" alignItems="center">
