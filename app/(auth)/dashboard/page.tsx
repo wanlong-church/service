@@ -5,6 +5,7 @@ import SheetView from './sheet-view';
 
 const DashboardPage = async () => {
 	console.log('process.env', process.env);
+	console.log('process.env.GOOGLE_PRIVATE_KEY', process.env.GOOGLE_PRIVATE_KEY);
 	const sheetDataPromise = fetchGoogleSheetData();
 	return (
 		<Box h="full" p="3">
