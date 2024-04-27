@@ -13,23 +13,14 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      # 設定 Node.js 環境
-      - name: Set up Node.js
-        uses: actions/setup-node@v2
-        with:
-          node-version: '18' # 選擇你想要的 Node.js 版本
+      - name: Install jq
+        run: sudo apt-get install -y jq
 
-      # 增加一個步驟，執行 JavaScript 腳本來解析 JSON 字串並設定環境變數
-      - name: Set environment variables from JSON
+      - name: Extract and set environment variables from JSON
         run: |
-          // 解析 JSON 字串
-          const secretsJson = JSON.parse(process.env.SA_JSON);
-          
-          // 取得 service_account 屬性值
-          const serviceAccount = secretsJson.service_account;
-          
-          // 設定環境變數
-          process.env.SERVICE_ACCOUNT = serviceAccount;
+          # 解析 JSON 字串並設定環境變數
+          SERVICE_ACCOUNT=$(echo "${{ secrets.SA_JSON }}" | jq -r '.service_account')
+          echo "SERVICE_ACCOUNT=${SERVICE_ACCOUNT}" >> $GITHUB_ENV
 
       - name: Authenticate with gcloud
         uses: 'google-github-actions/auth@v1'
