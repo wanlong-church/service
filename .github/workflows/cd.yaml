@@ -13,19 +13,23 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Render .env.local
+        uses: nowactions/envsubst@v1
+        env:
+          GOOGLE_DRIVE_ENDPOINT: ${{ secrets.YOUR_GOOGLE_DRIVE_ENDPOINT }}
+          GOOGLE_CLIENT_EMAIL: ${{ secrets.YOUR_GOOGLE_CLIENT_EMAIL }}
+          GOOGLE_PRIVATE_KEY: ${{ secrets.YOUR_GOOGLE_PRIVATE_KEY }}
+          GOOGLE_SPREAD_SHEET_ID: ${{ secrets.YOUR_GOOGLE_SPREAD_SHEET_ID }}
+        with:
+          with:
+          input: ./.env.local.template
+          output: ./.env.local
+
       - name: Authenticate with gcloud
         uses: 'google-github-actions/auth@v1'
         with:
           credentials_json: '${{ secrets.SA_JSON}}'
           service_account: 'lowking@wl-service-schedule.iam.gserviceaccount.com'
-
-      - name: Generate .env.local file
-        run: |
-          sed -e "s/YOUR_GOOGLE_CLIENT_EMAIL/${{ secrets.GOOGLE_CLIENT_EMAIL }}/" \
-              -e "s/YOUR_GOOGLE_PRIVATE_KEY/${{ secrets.GOOGLE_PRIVATE_KEY }}/" \
-              -e "s/YOUR_MAIN_SPREAD_SHEET_ID/${{ secrets.MAIN_SPREAD_SHEET_ID }}/" \
-              -e "s/YOUR_GOOGLE_DRIVE_ENDPOINT/https:\/\/www.googleapis.com\/auth\/drive.readonly/" \
-              .env.local.template > .env.local
       
       - name: 'deploy'
         uses: 'google-github-actions/deploy-appengine@v1'
