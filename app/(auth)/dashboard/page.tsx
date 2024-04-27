@@ -5,16 +5,15 @@ import SheetView from './sheet-view';
 
 const DashboardPage = async () => {
 	try {
-		
-	console.log('process.env.GOOGLE_PRIVATE_KEY', process.env.GOOGLE_PRIVATE_KEY);
-	console.log('process.env', process.env);
-	} catch(error) {
-		console.log('error', error)
+		console.log('==== prefix: process.env.GOOGLE_PRIVATE_KEY', process.env.GOOGLE_PRIVATE_KEY);
+		console.log('==== prefix: process.env', process.env);
+	} catch (error) {
+		console.log('error', error);
 	}
-	const sheetDataPromise = fetchGoogleSheetData();
+	// const sheetDataPromise = fetchGoogleSheetData();/
 	return (
 		<Box h="full" p="3">
-			<Suspense
+			{/* <Suspense
 				fallback={
 					<Flex w="full" h="full" justifyContent="center" alignItems="center">
 						<Spinner size="xl" />
@@ -22,7 +21,7 @@ const DashboardPage = async () => {
 				}
 			>
 				<SheetView sheetDataPromise={sheetDataPromise} />
-			</Suspense>
+			</Suspense> */}
 		</Box>
 	);
 };
