@@ -18,18 +18,19 @@ jobs:
         with:
           credentials_json: '${{ secrets.SA_JSON }}'
 
-      - name: Set .env.local
-        run: |
+      # - name: Set .env.local
+      #   run: |
+      #     touch .env.local
+      #     secrets_value="${{ secrets.GOOGLE_PRIVATE_KEY }}"
+      #     printf "GOOGLE_SECRECT_KEY=%s\n" "$secrets_value" > .env.local
+
+      - run: echo "Value of GOOGLE_PRIVATE_KEY: $GOOGLE_PRIVATE_KEY"
+        env:
+          GOOGLE_PRIVATE_KEY: ${{ secrets.GOOGLE_PRIVATE_KEY }}
+
+      - run: |
           touch .env.local
-          secrets_value="${{ secrets.GOOGLE_PRIVATE_KEY }}"
-          printf "GOOGLE_SECRECT_KEY=%s\n" "$secrets_value" > .env.local
-
-      # - run: echo "Value of MY_SECRET1: $MY_SECRET1"
-      #   env:
-      #     MY_SECRET1: ${{ secrets.MY_SECRET1 }}
-
-      # - run: |
-      #     echo "MY_SECRET1=${{ secrets.MY_SECRET1 }}" >> .env
+          echo "GOOGLE_SECRECT_KEY=${{ secrets.GOOGLE_PRIVATE_KEY }}" >> .env.local
 
 
       - name: Deploy
