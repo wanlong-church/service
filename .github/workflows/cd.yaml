@@ -24,9 +24,16 @@ jobs:
       #     secrets_value="${{ secrets.GOOGLE_PRIVATE_KEY }}"
       #     printf "GOOGLE_SECRECT_KEY=%s\n" "$secrets_value" > .env.local
 
-      - run: echo "Value of GOOGLE_PRIVATE_KEY"
+      - name: Hello World
+        run: echo "Value of GOOGLE_PRIVATE_KEY"
         env:
           GOOGLE_PRIVATE_KEY: ${{ secrets.GOOGLE_PRIVATE_KEY }}
+          
+      - name: List contents of current directory
+        run: ls
+
+      - name: Display content of .env.local file
+        run: cat .env.local
 
       - run: |
           touch .env.local
