@@ -17,29 +17,24 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: '14' # 選擇你想要的 Node.js 版本
+          node-version: '18' # 選擇你想要的 Node.js 版本
 
       # 增加一個步驟，執行 JavaScript 腳本來解析 JSON 字串並設定環境變數
       - name: Set environment variables from JSON
         run: |
-          const fs = require('fs');
-
-          // 讀取從 GitHub Secrets 中取得的 JSON 字串
-          const secretsJsonStr = process.env.SA_JSON;
-          
           // 解析 JSON 字串
-          const secretsJson = JSON.parse(secretsJsonStr);
+          const secretsJson = JSON.parse(process.env.SA_JSON);
           
           // 取得 service_account 屬性值
-          const client_email = secretsJson.client_email;
-
+          const serviceAccount = secretsJson.service_account;
+          
           // 設定環境變數
-          process.env.SERVICE_ACCOUNT = client_email;
+          process.env.SERVICE_ACCOUNT = serviceAccount;
 
       - name: Authenticate with gcloud
         uses: 'google-github-actions/auth@v1'
         with:
-          credentials_json: '${{ secrets.SA_JSON}}' # 使用 GitHub Secrets 中的 SA_JSON
+          credentials_json: '${{ secrets.SA_JSON }}' # 使用 GitHub Secrets 中的 SA_JSON
           service_account: ${{ env.SERVICE_ACCOUNT }} # 使用環境變數
 
       - name: 'deploy'
