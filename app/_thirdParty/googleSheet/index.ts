@@ -15,6 +15,7 @@ export type GoogleSheetResponse = { header: Column[]; data: Row[] };
  * */
 export const fetchGoogleSheetData = cache(async (timestamp: number = TIME_STAMP): Promise<GoogleSheetResponse> => {
 	/** TODO: server 給第一次資料後，client 後面如果需要新資料可以考慮建立一個 route 或 server action */
+	console.log('private key:', process.env.GOOGLE_PRIVATE_KEY);
 	const client = new google.auth.JWT(process.env.GOOGLE_CLIENT_EMAIL, undefined, process.env.GOOGLE_PRIVATE_KEY, [
 		process.env.GOOGLE_DRIVE_ENDPOINT || '',
 	]);
