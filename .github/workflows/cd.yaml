@@ -18,15 +18,10 @@ jobs:
         with:
           credentials_json: '${{ secrets.SA_JSON }}'
 
-      - name: Replace secrets in file
+      - name: Set .env.local
         run: |
-          sed -i "s|YOUR_GOOGLE_DRIVE_ENDPOINT|${{ secrets.GOOGLE_DRIVE_ENDPOINT }}|g" .env.local.template
-          sed -i "s|YOUR_GOOGLE_CLIENT_EMAIL|${{ secrets.GOOGLE_CLIENT_EMAIL }}|g" .env.local.template
-          sed -i "s|YOUR_GOOGLE_PRIVATE_KEY|${{ secrets.GOOGLE_PRIVATE_KEY }}|g" .env.local.template
-          sed -i "s|YOUR_GOOGLE_SPREAD_SHEET_ID|${{ secrets.MAIN_SPREAD_SHEET_ID }}|g" .env.local.template
+          touch .env.local
+          echo GOOGLE_SECRECT_KEY=${{ secrets.GOOGLE_SECRECT_KEY }} >> .env.local
 
-      - name: Rename file
-        run: mv .env.local.template .env.local
-
-      - name: 'deploy'
+      - name: Deploy
         uses: 'google-github-actions/deploy-appengine@v1'
