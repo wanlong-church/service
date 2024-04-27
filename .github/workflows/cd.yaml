@@ -13,14 +13,6 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Replace secrets in .env.local.template
-        run: |
-          sed -e "s/YOUR_GOOGLE_DRIVE_ENDPOINT/${{ secrets.YOUR_GOOGLE_DRIVE_ENDPOINT }}/g" \
-              -e "s/YOUR_GOOGLE_CLIENT_EMAIL/${{ secrets.YOUR_GOOGLE_CLIENT_EMAIL }}/g" \
-              -e "s/YOUR_GOOGLE_PRIVATE_KEY/${{ secrets.YOUR_GOOGLE_PRIVATE_KEY }}/g" \
-              -e "s/YOUR_GOOGLE_SPREAD_SHEET_ID/${{ secrets.YOUR_GOOGLE_SPREAD_SHEET_ID }}/g" \
-              .env.local.template > .env.local
-
       - name: Authenticate with gcloud
         uses: 'google-github-actions/auth@v1'
         with:
