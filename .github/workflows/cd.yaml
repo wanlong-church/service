@@ -19,8 +19,9 @@ jobs:
       - name: Extract and set environment variables from JSON
         run: |
           # 解析 JSON 字串並設定環境變數
-          SERVICE_ACCOUNT=$(echo "${{ secrets.SA_JSON }}" | jq -r '.service_account')
-          echo "SERVICE_ACCOUNT=${SERVICE_ACCOUNT}" >> $GITHUB_ENV
+          SERVICE_ACCOUNT=$(echo '${{ secrets.SA_JSON }}' | jq -r '.service_account')
+          echo "SERVICE_ACCOUNT=$SERVICE_ACCOUNT" >> $GITHUB_ENV
+
 
       - name: Authenticate with gcloud
         uses: 'google-github-actions/auth@v1'
