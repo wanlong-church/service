@@ -1,0 +1,11 @@
+# [START app_yaml]
+runtime: nodejs18
+
+service: service
+
+handlers:
+  - url: /.*
+    secure: always
+    script: auto
+
+# [END app_yaml]

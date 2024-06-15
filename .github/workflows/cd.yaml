@@ -10,15 +10,21 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout
+        uses: actions/checkout@v4
 
-      - name: Install dependencies
-        run: npm install
+      - name: Authenticate with gcloud
+        uses: 'google-github-actions/auth@v1'
+        with:
+          credentials_json: '${{ secrets.SA_JSON }}'
 
-      - name: Build
-        run: npm run build
+      - name: intialize env
+        run: |
+          echo "GOOGLE_SECRECT_KEY=\"${{ secrets.GOOGLE_PRIVATE_KEY }}\"" > .env.production
+          echo "GOOGLE_SECRECT_KEY=\"${{ secrets.GOOGLE_PRIVATE_KEY }}\"" > .env.local          
+
 
       - name: Deploy
-        run: |
-          echo "Deploying to production..."
-          echo "Deployed!"
+        uses: 'google-github-actions/deploy-appengine@v1'
+        
+
