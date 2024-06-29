@@ -4,8 +4,8 @@ import { Providers } from './providers';
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-	title: '萬隆服侍表',
-	description: '萬隆服侍表',
+	title: '萬隆服事表',
+	description: '萬隆服事表',
 	manifest: '/manifest.json',
 };
 
