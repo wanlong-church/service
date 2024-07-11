@@ -1,21 +1,21 @@
-import React, { Suspense } from 'react';
+import { Suspense } from 'react';
 import { fetchGoogleSheetData } from '@/app/_thirdParty/googleSheet';
-import { Box, Flex, Spinner } from '@chakra-ui/react';
 import SheetView from './sheet-view';
+
 const DashboardPage = async () => {
 	const sheetDataPromise = fetchGoogleSheetData();
 	return (
-		<Box h="full" p="3">
+		<div className="h-full p-3">
 			<Suspense
 				fallback={
-					<Flex w="full" h="full" justifyContent="center" alignItems="center">
-						<Spinner size="xl" />
-					</Flex>
+					<div className="flex w-full h-full justify-center items-center">
+						<div className="animate-spin h-10 w-10 border-t-2 border-b-2 border-gray-900 rounded-full"></div>
+					</div>
 				}
 			>
 				<SheetView sheetDataPromise={sheetDataPromise} />
 			</Suspense>
-		</Box>
+		</div>
 	);
 };
 

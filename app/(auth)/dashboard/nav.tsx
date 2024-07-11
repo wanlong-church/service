@@ -1,10 +1,9 @@
-'use client';
-
 import React from 'react';
-import { Box, Flex, FlexProps, Icon } from '@chakra-ui/react';
 import { FaHome } from 'react-icons/fa';
 import { RiFileList2Fill } from 'react-icons/ri';
 import Link from 'next/link';
+import { cn } from '@/lib/utils';
+import { ClassValue } from 'clsx';
 
 const navInfo = [
 	{
@@ -18,15 +17,18 @@ const navInfo = [
 		icon: RiFileList2Fill,
 	},
 ];
-const Nav = ({ flexProps }: { flexProps?: FlexProps }) => {
+
+const Nav = ({ className }: { className?: ClassValue }) => {
 	return (
-		<Flex justifyContent="center" alignItems="center" {...flexProps}>
+		<div className={cn('flex justify-center items-center', className)}>
 			{navInfo.map((nav) => (
-				<Box key={nav.path} as={Link} href={nav.path} mx="3">
-					<Icon as={nav.icon} boxSize={8} />
-				</Box>
+				<div key={nav.path} className="mx-3">
+					<Link href={nav.path}>
+						<nav.icon className="w-8 h-8" />
+					</Link>
+				</div>
 			))}
-		</Flex>
+		</div>
 	);
 };
 

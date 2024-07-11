@@ -1,25 +1,17 @@
 import React from 'react';
-import { Box, Flex, Text } from '@chakra-ui/react';
 import Nav from './nav';
-const DashboardLayout = ({
-	children,
-}: Readonly<{
-	children: React.ReactNode;
-}>) => {
+
+const DashboardLayout = ({ children }: Readonly<{ children: React.ReactNode }>) => {
 	return (
-		<Flex flexDir="column" w="100vw" h="100vh" maxH="100vh" bgColor="white" overflowY="auto">
-			<Flex as="header" justifyContent="center" bgColor="#F7F7F7" borderBottom="1px" p="3">
-				<Text fontSize="large" fontWeight="bold">
-					服事總表
-				</Text>
-			</Flex>
-			<Box h={`calc(100vh - 90px)`} overflow="auto">
-				{children}
-			</Box>
-			<Box p="3" bgColor="#F7F7F7" borderTop="1px">
+		<div className="flex flex-col w-screen h-screen max-h-screen bg-white overflow-y-auto">
+			<header className="flex justify-center bg-gray-200 border-b p-3">
+				<h1 className="text-xl font-bold">服事表</h1>
+			</header>
+			<div className="h-[calc(100svh-90px)] overflow-auto">{children}</div>
+			<div className="p-3 bg-gray-200 border-t">
 				<Nav />
-			</Box>
-		</Flex>
+			</div>
+		</div>
 	);
 };
 

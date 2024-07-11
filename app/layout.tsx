@@ -1,7 +1,9 @@
 import type { Metadata } from 'next';
+import './globals.css';
 import { Inter } from 'next/font/google';
-import { Providers } from './providers';
-const inter = Inter({ subsets: ['latin'] });
+import { cn } from '@/lib/utils';
+
+const inter = Inter({ subsets: ['latin'], variable: '--font-sans' });
 
 export const metadata: Metadata = {
 	title: '萬隆服事表',
@@ -16,9 +18,7 @@ export default async function RootLayout({
 }>) {
 	return (
 		<html lang="zh-TW">
-			<body className={inter.className}>
-				<Providers>{children}</Providers>
-			</body>
+			<body className={cn('min-h-svh bg-background font-sans antialiased', inter.variable)}>{children}</body>
 		</html>
 	);
 }

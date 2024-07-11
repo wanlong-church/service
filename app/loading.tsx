@@ -1,10 +1,11 @@
+import { Loader2 } from 'lucide-react';
 import React from 'react';
-import { Flex, Spinner } from '@chakra-ui/react';
+
 const RootLoading = () => {
 	return (
-		<Flex w="100vw" h="100vh" justifyContent="center" alignItems="center">
-			<Spinner size="xl" />
-		</Flex>
+		<div className="flex w-full min-h-svh justify-center items-center">
+			<Loader2 className="animate-spin" />
+		</div>
 	);
 };
 
