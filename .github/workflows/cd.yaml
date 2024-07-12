@@ -20,8 +20,7 @@ jobs:
 
       - name: intialize env
         run: |
-          echo "GOOGLE_SECRECT_KEY=\"${{ secrets.GOOGLE_PRIVATE_KEY }}\"" > .env.production
-          echo "GOOGLE_SECRECT_KEY=\"${{ secrets.GOOGLE_PRIVATE_KEY }}\"" > .env.local          
+          echo "GOOGLE_PRIVATE_KEY=\"${{ secrets.GOOGLE_PRIVATE_KEY }}\"" > .env.production
 
 
       - name: Deploy
