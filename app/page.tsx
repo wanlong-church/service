@@ -1,7 +1,20 @@
-import Link from 'next/link';
-import { Button } from '@/components/ui/button';
+"use client"
 
-export default async function Page() {
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { useState } from 'react';
+import { useRouter, useSearchParams } from 'next/navigation';
+
+export default function Page() {
+	const searchParams = useSearchParams();
+    const userNameDefault = searchParams.get('user') || '';
+	const [userName, setUserName] = useState<string>(userNameDefault);
+    const router = useRouter();
+
+	const handleSubmit = () => {
+        router.push(`/dashboard?user=${encodeURIComponent(userName)}`);
+    };
+
 	return (
 		<div className="flex flex-col justify-center bg-whitesmoke h-screen w-screen">
 			<div className="mb-3">
@@ -13,9 +26,10 @@ export default async function Page() {
 			</div>
 			<div>
 				<div className="flex flex-col items-center">
-					<Link href="/dashboard">
-						<Button>進入服事表</Button>
-					</Link>
+					<div className="flex items-center space-x-2">
+					<Input placeholder="您的名字" value={userName} onChange={e => setUserName(e.target.value)} />
+					<Button onClick={handleSubmit}>進入服事表</Button>
+					</div>
 				</div>
 			</div>
 		</div>
