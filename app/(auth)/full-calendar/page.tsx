@@ -1,7 +1,7 @@
 import { fetchGoogleSheetData } from '@/app/_thirdParty/googleSheet';
 import SheetView from './sheet-view';
 
-export default function DashboardPage() {
+export default function FullCalendarPage() {
 	const sheetDataPromise = fetchGoogleSheetData();
 	return (
 		<div className="h-full p-3">

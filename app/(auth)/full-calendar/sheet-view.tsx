@@ -4,52 +4,41 @@ import { endOfWeek, getYear, isWithinInterval, startOfWeek } from 'date-fns';
 import { use, useEffect } from 'react';
 import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from '@/components/ui/accordion';
 import { Column, GoogleSheetResponse, Row } from '../../_thirdParty/googleSheet';
-import { useSearchParams } from 'next/navigation';
 
-const SheetView = ({
-	sheetDataPromise,
- }: { sheetDataPromise: Promise<GoogleSheetResponse>}) => {
-	const searchParams = useSearchParams();
-    const userName = searchParams.get('user') || '';
+const SheetView = ({ sheetDataPromise }: { sheetDataPromise: Promise<GoogleSheetResponse> }) => {
 	const sheetData = use<GoogleSheetResponse>(sheetDataPromise);
 	const { header, data } = sheetData;
 
-	/** Filter data by user name */
-  const filteredData = data.filter(
-	(row) => Object.values(row).some(
-		(value) => value.toString().includes(userName)
-	));
-
-	/** group data by year */
-	const groupedData = filteredData.reduce<Record<string, Row[]>>((acc, row) => {
+	/** 將 data 依照「年份」分組 */
+	const groupedData = data.reduce<Record<string, Row[]>>((acc, row) => {
 		const year = getYear(new Date(row.date));
 		acc[year] = acc[year] || [];
 		acc[year].push(row);
 		return acc;
 	}, {});
 
-	/** filter out columns to render */
+	/** 控制要渲染的欄位 */
 	const renderHeader = header.filter((column) => column.id !== 'date');
 
-	/** scroll to this week */
+	/** 預設頁面滑至當週的開合選單 */
 	useEffect(() => {
-		const index = filteredData.findIndex((row) => isDateInThisWeek(new Date(row.date)));
+		const index = data.findIndex((row) => isDateInThisWeek(new Date(row.date)));
 		/** scroll margin 找不到解法，先定位到上一個元素呈現同一個效果 */
-		const thisWeekService = index > 0 ? filteredData[index - 1] : filteredData[0];
+		const thisWeekService = index > 0 ? data[index - 1] : data[0];
 		const elementId = generateSheetAccordionId(new Date(thisWeekService.date));
 		const element = document.getElementById(elementId);
 		if (element) {
 			/** TODO: 這裡設定 { scrollBehavior: smooth } 會壞掉 */
 			element.scrollIntoView();
 		}
-	}, [filteredData]);
+	}, [data]);
 
 	return (
 		<div>
 			{Object.entries(groupedData)
 				.sort(([aYear], [bYear]) => parseInt(bYear) - parseInt(aYear))
 				.map(([year, rows]) => {
-					/** open this week's SheetAccordion */
+					/** 預設開啟當週服事 */
 					const thisWeekIndex = rows.findIndex((row) => isDateInThisWeek(new Date(row.date)));
 					const defaultIndex = ~thisWeekIndex ? [thisWeekIndex] : void 0;
 
@@ -58,7 +47,7 @@ const SheetView = ({
 							<div className="sticky top-0 mb-2 p-2 z-10 bg-gray-400">
 								<h2 className="text-2xl font-bold text-center">{year}</h2>
 							</div>
-							<SheetAccordion rows={rows} header={renderHeader} defaultIndex={defaultIndex} userName={userName} />
+							<SheetAccordion rows={rows} header={renderHeader} defaultIndex={defaultIndex} />
 						</div>
 					);
 				})}
@@ -69,35 +58,31 @@ const SheetView = ({
 const SheetAccordion = ({
 	rows,
 	header,
-	userName,
 	defaultIndex = [],
 }: {
 	rows: Row[];
 	header: Column[];
-	userName: string;
 	defaultIndex?: number[];
 }) => {
 	return (
 		<Accordion type="multiple" defaultValue={defaultIndex.map(String)}>
 			{rows.map((row, index) => (
-				<SheetAccordionItem key={index} row={row} header={header} index={index} userName={userName}/>
+				<SheetAccordionItem key={index} row={row} header={header} index={index} />
 			))}
 		</Accordion>
 	);
 };
 
-const SheetAccordionItem = ({ row, header, index, userName }: { row: Row; header: Column[]; index: number, userName: string }) => {
+const SheetAccordionItem = ({ row, header, index }: { row: Row; header: Column[]; index: number }) => {
 	const date = new Date(row.date);
-	const services = header.filter((column) => row[column.id]?.includes(userName));
-	const title = `${date.getMonth() + 1} 月 ${date.getDate()} 日 ${services.map(s => s.name).join(' ')}`;
-
+	const title = `${date.getMonth() + 1} 月 ${date.getDate()} 日`;
 	return (
 		<div id={generateSheetAccordionId(date)}>
 			<AccordionItem value={String(index)}>
 				<AccordionTrigger>{title}</AccordionTrigger>
 				<AccordionContent>
 					{header.map((column, idx) => (
-						row[column.id]?.includes(userName) &&  <div key={idx}>
+						<div key={idx}>
 							{column.name}: {row[column.id]}
 						</div>
 					))}
@@ -107,18 +92,19 @@ const SheetAccordionItem = ({ row, header, index, userName }: { row: Row; header
 	);
 };
 
-/** check if date is in this week */
+//#region utils function
+/** 判斷日期是否在本週 */
 const isDateInThisWeek = (date: Date) => {
 	const today = new Date();
-	/** check if date is in the same year */
+	/** 確認年份相同 */
 	const isSameYear = getYear(today) === getYear(date);
-	/** getting the start and end of this week */
+	/** 獲取本週的第一天（星期一）和最後一天（星期日）*/
 	const startOfThisWeek = startOfWeek(today, { weekStartsOn: 1 });
 	const endOfThisWeek = endOfWeek(today, { weekStartsOn: 1 });
 
 	return isSameYear && isWithinInterval(date, { start: startOfThisWeek, end: endOfThisWeek });
 };
-/** generate sheet accordion id */
+/** 生成 sheetAccordionItem 的共用 id */
 const generateSheetAccordionId = (date: Date = new Date()) => `sheetAccordionItem_${date.getTime()}`;
 //#endregion
 
