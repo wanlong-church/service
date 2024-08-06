@@ -28,3 +28,8 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 ### 📅 規劃中的功能
 
 **[開發中功能請看 Projects](https://github.com/orgs/wanlong-church/projects/1)**
+
+## 佈署
+
+1. 這個專案使用 Google App Engine 作為 production 佈署平台，透過 Github Action 進行自動佈署。
+2. 如果要調整 route，需要調整 `dispatch.yaml`，並且手動佈署： `gcloud app deploy dispatch.yaml`。
