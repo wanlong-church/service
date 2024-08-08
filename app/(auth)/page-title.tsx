@@ -12,8 +12,8 @@ export default function PageTitle() {
   const pathName = usePathname()
   const pageTitle = titleMap[pathName as Pathname] || ''
   return (
-    <header className="flex justify-center border-b bg-gray-200 p-3">
+    <div className="flex h-16 items-center justify-center border-b bg-gray-200 p-3">
       <h1 className="text-xl font-bold"> {pageTitle} </h1>
-    </header>
+    </div>
   )
 }

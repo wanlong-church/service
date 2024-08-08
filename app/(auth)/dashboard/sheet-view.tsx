@@ -60,8 +60,8 @@ const SheetView = ({ sheetDataPromise }: { sheetDataPromise: Promise<GoogleSheet
           const defaultIndex = ~thisWeekIndex ? [thisWeekIndex] : void 0
 
           return (
-            <div key={year} className="relative" id={`dog${year}`}>
-              <div className="sticky top-0 z-10 mb-2 bg-gray-400 p-2">
+            <div key={year} id={`year-${year}`}>
+              <div className="sticky z-10 mb-2 bg-gray-400 p-2">
                 <h2 className="text-center text-2xl font-bold">{year}</h2>
               </div>
               <SheetAccordion

@@ -25,13 +25,15 @@ export default function Page() {
         </div>
       </div>
       <div>
-        <div className="flex flex-col items-center">
-          <div className="flex items-center space-x-2">
+        <div className="flex flex-col items-center space-y-3 p-3">
+          <div className="flex items-center">
             <Input
               placeholder="您的名字"
               value={userName}
               onChange={(e) => setUserName(e.target.value)}
             />
+          </div>
+          <div className="flex items-center">
             <Button onClick={handleSubmit}>進入服事表</Button>
           </div>
         </div>

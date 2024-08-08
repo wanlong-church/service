@@ -18,9 +18,7 @@ export default async function RootLayout({
 }>) {
   return (
     <html lang="zh-TW">
-      <body className={cn('min-h-svh bg-background font-sans antialiased', inter.variable)}>
-        {children}
-      </body>
+      <body className={cn('bg-background font-sans antialiased', inter.variable)}>{children}</body>
     </html>
   )
 }
