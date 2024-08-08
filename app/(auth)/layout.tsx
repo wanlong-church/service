@@ -4,12 +4,12 @@ import PageTitle from './page-title'
 
 export default function Layout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <div className="flex h-screen max-h-screen w-screen flex-col overflow-y-auto bg-white">
-      <PageTitle />
-      <div className="h-[calc(100svh-143px)] overflow-auto">{children}</div>
-      <div className="border-t bg-gray-200 p-3">
-        <Nav />
-      </div>
+    <div className="flex h-dvh w-screen flex-col overflow-y-auto">
+      <header className="fixed left-0 right-0 top-0 z-10 h-16 bg-gray-200">
+        <PageTitle />
+      </header>
+      <main className="mb-16 mt-16 w-screen flex-grow overflow-auto">{children}</main>
+      <Nav className="fixed bottom-0 left-0 right-0 z-10 flex h-16 items-center justify-center bg-gray-200" />
     </div>
   )
 }

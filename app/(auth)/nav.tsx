@@ -3,7 +3,6 @@
 import React from 'react'
 import { FaHome } from 'react-icons/fa'
 import { RiCalendar2Fill, RiAccountCircleLine } from 'react-icons/ri'
-import Link from 'next/link'
 import { cn } from '@/lib/utils'
 import { ClassValue } from 'clsx'
 import { useRouter } from 'next/navigation'
@@ -35,11 +34,11 @@ const Nav = ({ className }: { className?: ClassValue }) => {
   }
 
   return (
-    <div className={cn('flex items-center justify-center space-x-4', className)}>
+    <div className={cn('h-16 space-x-4', className)}>
       {navInfo.map((navItem) => (
         <button
           key={navItem.path}
-          className="flex items-center"
+          className="service-item flex items-center"
           onClick={() => handleNavigation(navItem.path)}
         >
           <navItem.icon className="h-8 w-8" />
