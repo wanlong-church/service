@@ -11,31 +11,16 @@ import {
 } from '@/components/ui/dialog'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
-import { useRouter } from 'next/navigation'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
+import { useStore } from './page'
 
-export default function SearchBox({
-  userName,
-  setUserName,
-  setMode,
-}: {
-  userName: string
-  setUserName: (userName: string) => void
-  setMode: (mode: string) => void
-}) {
-  const [localUserName, setLocalUserName] = useState(userName)
-
-  const router = useRouter()
-  useEffect(() => {
-    if (userName) {
-      const query = `user=${encodeURIComponent(userName)}&mode=personal`
-      router.replace(`/dashboard?${query}`)
-    }
-  }, [userName, router])
+export default function SearchBox() {
+  const { user, setUser, setMode } = useStore((state) => state)
+  const [localUserName, setLocalUserName] = useState(user)
 
   const handleSubmit = () => {
     setMode('personal')
-    setUserName(localUserName)
+    setUser(localUserName)
   }
 
   return (

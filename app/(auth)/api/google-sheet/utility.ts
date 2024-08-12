@@ -1,7 +1,7 @@
 import { isValid } from 'date-fns'
 import { google } from 'googleapis'
-import { COLUMN_MAPPING_REVERSE } from '../../../const'
-import { SheetField } from '../../../interface'
+import { COLUMN_MAPPING_REVERSE } from '@/app/const'
+import { SheetField } from '@/app/interface'
 
 /**
  * Represents a row of data from the Google Sheet.

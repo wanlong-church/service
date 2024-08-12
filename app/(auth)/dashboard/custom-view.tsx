@@ -10,10 +10,10 @@ import { GoogleSheetResponse } from '../api/google-sheet/utility'
 
 export default function CustomView({
   sheetData,
-  userName,
+  user,
 }: {
   sheetData: GoogleSheetResponse
-  userName: string
+  user: string
 }) {
   const { data } = sheetData
   const [showPast, setShowPast] = useState(false)
@@ -24,7 +24,7 @@ export default function CustomView({
 
   data.forEach((row) => {
     SERVICE_TYPES.forEach((key) => {
-      if (row[key] && row[key].includes(userName)) {
+      if (row[key] && row[key].includes(user)) {
         // if service is prayer, change the date to 2 days earlier
         const date = new Date(row.date)
         if (key === 'prayer') {
