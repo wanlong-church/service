@@ -1,6 +1,6 @@
 'use client'
 
-import { GoogleSheetResponse, Row } from '@/app/_thirdParty/googleSheet'
+import { GoogleSheetResponse, Row } from '@/app/(auth)/api/google-sheet/utility'
 import { COLUMN_MAPPING, SHEET_FIELDS } from '@/app/const'
 import {
   Accordion,
