@@ -12,6 +12,7 @@ const nextConfig = {
   pwa: {
     dest: 'public',
   },
+  output: 'standalone',
 };
 
 export default process.env.NODE_ENV === 'development' ? nextConfig: withPWA(nextConfig);
