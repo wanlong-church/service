@@ -27,8 +27,10 @@ export default function SearchBox({
 
   const router = useRouter()
   useEffect(() => {
-    const query = `user=${encodeURIComponent(userName)}&mode=personal`
-    router.replace(`/dashboard?${query}`)
+    if (userName) {
+      const query = `user=${encodeURIComponent(userName)}&mode=personal`
+      router.replace(`/dashboard?${query}`)
+    }
   }, [userName, router])
 
   const handleSubmit = () => {

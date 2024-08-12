@@ -1,12 +1,12 @@
 'use client'
 
-import { GoogleSheetResponse } from '../../_thirdParty/googleSheet'
-import { SERVICE_TYPES, COLUMN_MAPPING, SERVICE_NOTES, SERVICE_TIME } from '@/app/const'
+import { SERVICE_TYPES } from '@/app/const'
 import { ServiceRecord } from '@/app/interface'
 import { Switch } from '@/components/ui/switch'
 import { Label } from '@/components/ui/label'
 import { useState } from 'react'
 import ServiceCard from './service-card'
+import { GoogleSheetResponse } from '../api/google-sheet/utility'
 
 export default function CustomView({
   sheetData,
