@@ -1,31 +1,12 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { create } from 'zustand'
-import { devtools, persist, createJSONStorage } from 'zustand/middleware'
 import { GoogleSheetResponse } from '../api/google-sheet/utility'
 import SearchHeader from './search-header'
 import FullView from './full-view'
 import CustomView from './custom-view'
 import Loading from '@/app/loading'
-import { DashboardMode, DashboardState } from '@/app/interface'
-
-export const useStore = create<DashboardState>()(
-  devtools(
-    persist(
-      (set, get) => ({
-        mode: 'all',
-        user: '',
-        setMode: (mode: DashboardMode) => set({ mode }),
-        setUser: (user: string) => set({ user }),
-      }),
-      {
-        name: 'dashboard-params',
-        storage: createJSONStorage(() => localStorage),
-      }
-    )
-  )
-)
+import { useStore } from './state'
 
 export default function DashboardPage() {
   const [sheetData, setSheetData] = useState<GoogleSheetResponse>({ data: [] })

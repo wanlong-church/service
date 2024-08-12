@@ -2,7 +2,7 @@
 
 import { Button } from '@/components/ui/button'
 import SearchBox from './search-box'
-import { useStore } from './page'
+import { useStore } from './state'
 
 export default function SearchHeader() {
   const { setMode } = useStore((state) => state)
