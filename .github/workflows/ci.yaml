@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node_version: [18.x, 20.x]
+        node_version: [18, 20]
 
     steps:
       - name: checkout
@@ -29,11 +29,11 @@ jobs:
         with:
           # npm cache files are stored in `~/.npm` on Linux/macOS
           path: ~/.npm
-          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+          key: ${{ env.cache-name }}-${{ matrix.node_version }}-${{ runner.os }}-${{ hashFiles('**/package-lock.json') }}
           restore-keys: |
-            ${{ runner.os }}-build-${{ env.cache-name }}-
-            ${{ runner.os }}-build-
-            ${{ runner.os }}-
+            ${{ env.cache-name }}-${{ matrix.node_version }}-${{ runner.os }}-
+            ${{ env.cache-name }}-${{ matrix.node_version }}-
+            ${{ env.cache-name }}-
 
       - name: Install dependencies
         run: npm install
