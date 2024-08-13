@@ -11,14 +11,16 @@ export default function MonthAccordionItem({ month, rows }: { month: string; row
     <AccordionItem value={`${month}`}>
       <AccordionTrigger>{month} 月服事表 </AccordionTrigger>
       <AccordionContent className="flex items-center justify-center">
-        <div className="flex flex-col gap-4">
+        <div className="flex flex-col gap-4 overflow-x-auto">
           <button
             onClick={() => window.open(sheetUrl, '_blank')}
             className="rounded bg-blue-500 px-4 py-2 font-semibold text-white transition duration-300 ease-in-out hover:bg-blue-600"
           >
             在 Google Sheet 表單中編輯
           </button>
-          <MonthServiceTable rows={rows} />
+          <div className="flex overflow-x-auto">
+            <MonthServiceTable rows={rows} />
+          </div>
         </div>
       </AccordionContent>
     </AccordionItem>
