@@ -3,5 +3,9 @@ import { getSheetUrl } from '@/app/(auth)/api/google-sheet/utility'
 
 export async function GET() {
   // return the url of the google sheet
-  return NextResponse.json({ url: getSheetUrl() })
+  try {
+    return NextResponse.json({ url: getSheetUrl() })
+  } catch (error) {
+    return NextResponse.json({ error: 'Error fetching sheet url' }, { status: 500 })
+  }
 }

@@ -1,22 +1,7 @@
 import { isValid } from 'date-fns'
 import { google } from 'googleapis'
 import { COLUMN_MAPPING_REVERSE } from '@/app/const'
-import { SheetField } from '@/app/interface'
-
-/**
- * Represents a row of data from the Google Sheet.
- * Each key is a SheetField, and the corresponding value is a string.
- */
-export type Row = Record<SheetField, string>
-
-/**
- * The structure of the response from fetching Google Sheet data.
- */
-export type GoogleSheetResponse = {
-  /** An array of Row objects containing the sheet data. */
-  data: Row[]
-  error?: string
-}
+import { GoogleSheetResponse, Row } from '@/app/type'
 
 /**
  * Fetches data from a Google Sheet and processes it into a structured format.

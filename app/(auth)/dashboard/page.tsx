@@ -1,34 +1,54 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { GoogleSheetResponse } from '../api/google-sheet/utility'
-import SearchHeader from './search-header'
-import FullView from './full-view'
-import CustomView from './custom-view'
+import SearchHeader from './components/search-header'
+import FullView from './components/full-view'
+import CustomView from './components/custom-view'
 import Loading from '@/app/loading'
 import { useStore } from './state'
+import { fetchGoogleSheetData, fetchGoogleSheetUrl } from '../api/client'
 
 export default function DashboardPage() {
-  const [sheetData, setSheetData] = useState<GoogleSheetResponse>({ data: [] })
   const [loading, setLoading] = useState(true)
-  const { mode, user } = useStore()
+
+  const [mode, sheetStatus, hasHydrated, setSheetStatus] = useStore((state) => [
+    state.mode,
+    state.sheetStatus,
+    state._hasHydrated,
+    state.setSheetStatus,
+  ])
   useEffect(() => {
-    fetch('/api/google-sheet', { next: { revalidate: 3600 } })
-      .then((response) => response.json())
-      .then((data) => {
-        setSheetData(data)
-      })
-      .finally(() => {
-        setLoading(false)
-      })
-  }, [])
+    // don't do anything before state is restored from local storage
+    if (!hasHydrated) {
+      return
+    }
+    // fetch url if it is empty
+    if (sheetStatus.url === '') {
+      fetchGoogleSheetUrl()
+        .then((data) => setSheetStatus({ url: data.url }))
+        .catch((error) => setSheetStatus({ error: error.message }))
+    }
+    // fetch data if it is empty
+    if (sheetStatus.data.length === 0) {
+      fetchGoogleSheetData()
+        .then((data) => setSheetStatus({ data: data.data, updated: new Date().toLocaleString() }))
+        .catch((error) => setSheetStatus({ error: error.message }))
+    }
+  }, [hasHydrated, setSheetStatus, sheetStatus.data.length, sheetStatus.url])
+
+  useEffect(() => {
+    // if state is restored from local storage and data is loaded, set loading to false
+    if (hasHydrated && sheetStatus.data.length > 0 && sheetStatus.url) {
+      setLoading(false)
+    }
+  }, [hasHydrated, sheetStatus])
 
   if (loading) {
     return <Loading />
   }
 
-  if (sheetData?.error) {
-    throw Error(sheetData.error)
+  if (sheetStatus.data.length === 0 && sheetStatus.error) {
+    throw Error(sheetStatus.error)
   }
 
   return (
@@ -36,13 +56,7 @@ export default function DashboardPage() {
       <div className="fixed left-0 top-0 z-10 h-16 w-full bg-gray-200">
         <SearchHeader />
       </div>
-      <div className="mt-16 flex-grow">
-        {mode === 'personal' ? (
-          <CustomView sheetData={sheetData} user={user} />
-        ) : (
-          <FullView sheetData={sheetData} />
-        )}
-      </div>
+      <div className="mt-16 flex-grow">{mode === 'personal' ? <CustomView /> : <FullView />}</div>
     </div>
   )
 }

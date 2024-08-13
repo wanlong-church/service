@@ -1,11 +1,11 @@
 /** @type {import('next').NextConfig} */
-import nextPwa from "next-pwa";
+
+import nextPwa from 'next-pwa'
 const withPWA = nextPwa({
-  dest: "public",
-});
+  dest: 'public',
+})
 const nextConfig = {
-  env: {
-  },
+  env: {},
   devIndicators: {
     autoPrerender: false,
   },
@@ -13,6 +13,6 @@ const nextConfig = {
     dest: 'public',
   },
   output: 'standalone',
-};
+}
 
-export default process.env.NODE_ENV === 'development' ? nextConfig: withPWA(nextConfig);
+export default process.env.NODE_ENV === 'development' ? nextConfig : withPWA(nextConfig)

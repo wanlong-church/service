@@ -1,5 +1,5 @@
 import { COLUMN_MAPPING, SERVICE_NOTES, SERVICE_TIME } from '@/app/const'
-import { ServiceRecord } from '@/app/interface'
+import { ServiceRecord } from '@/app/type'
 import { Button } from '@/components/ui/button'
 import {
   Card,
