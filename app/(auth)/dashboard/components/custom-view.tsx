@@ -1,21 +1,15 @@
 'use client'
 
 import { SERVICE_TYPES } from '@/app/const'
-import { ServiceRecord } from '@/app/interface'
+import { ServiceRecord } from '@/app/type'
 import { Switch } from '@/components/ui/switch'
 import { Label } from '@/components/ui/label'
 import { useState } from 'react'
 import ServiceCard from './service-card'
-import { GoogleSheetResponse } from '../api/google-sheet/utility'
+import { useStore } from '../state'
 
-export default function CustomView({
-  sheetData,
-  user,
-}: {
-  sheetData: GoogleSheetResponse
-  user: string
-}) {
-  const { data } = sheetData
+export default function CustomView() {
+  const [user, data] = useStore((state) => [state.user, state.sheetStatus.data])
   const [showPast, setShowPast] = useState(false)
 
   const newServices: ServiceRecord[] = []

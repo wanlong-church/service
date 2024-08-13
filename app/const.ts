@@ -1,4 +1,4 @@
-import { ServiceTime, ServiceType, SheetField } from './interface'
+import { ServiceTime, ServiceType, SheetField } from './type'
 
 /** 服事總表表頭順序 */
 export const SERVICE_TYPES = [

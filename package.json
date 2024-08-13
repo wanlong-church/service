@@ -6,10 +6,13 @@
     "dev": "next dev -H 0.0.0.0",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint --fix --dir pages --dir app --dir components --dir lib --dir layouts --dir scripts",
+    "lint": "next lint --fix --dir pages --dir app --dir components --dir lib --dir layouts --dir scripts && tsc",
     "prepare": "husky"
   },
   "lint-staged": {
+    "*.+(ts|tsx)": [
+      "bash -c tsc --noEmit"
+    ],
     "*.+(js|jsx|ts|tsx)": [
       "eslint --fix"
     ],
@@ -29,7 +32,7 @@
     "date-fns": "^3.3.1",
     "embla-carousel-react": "^8.0.0",
     "framer-motion": "^11.0.3",
-    "google-spreadsheet": "^4.1.1",
+    "google-spreadsheet": "^4.1.2",
     "googleapis": "^132.0.0",
     "lucide-react": "^0.350.0",
     "next": "^14.2.4",
@@ -42,6 +45,7 @@
     "zustand": "^4.5.4"
   },
   "devDependencies": {
+    "@types/next-pwa": "^5.6.9",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
@@ -58,7 +62,7 @@
     "prettier": "^3.3.3",
     "prettier-plugin-tailwindcss": "^0.6.5",
     "tailwindcss": "^3.4.1",
-    "typescript": "^5"
+    "typescript": "^5.5.4"
   },
   "engines": {
     "npm": ">=10.0.0",
