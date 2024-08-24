@@ -53,10 +53,10 @@ export default function DashboardPage() {
 
   return (
     <div>
-      <div className="fixed left-0 top-0 z-10 h-16 w-full bg-gray-200">
+      <div className="flex-grow pb-16">{mode === 'personal' ? <CustomView /> : <FullView />}</div>
+      <div className="fixed bottom-0 left-0 z-10 h-16 w-full bg-gray-200">
         <SearchHeader />
       </div>
-      <div className="mt-16 flex-grow">{mode === 'personal' ? <CustomView /> : <FullView />}</div>
     </div>
   )
 }
