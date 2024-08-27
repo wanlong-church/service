@@ -36,7 +36,7 @@ export const COLUMN_MAPPING: Record<SheetField, string> = {
   nurseryCoordinator: '幼兒主理',
   greeter: '接待',
   prayer: '禱告會',
-  meal: '愛宴',
+  meal: '愛筵',
   dishWashing: '洗碗',
   specialDay: '特別日子',
 }
