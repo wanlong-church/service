@@ -1,6 +1,7 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { Button } from '@/components/ui/button'
+import useGoogleSheetUrl from './service/_hooks/useGoogleSheetUrl'
 
 export default function Error({
   error,
@@ -9,14 +10,7 @@ export default function Error({
   error: Error & { digest?: string }
   reset: () => void
 }) {
-  const [sheetUrl, setSheetUrl] = useState<string>('')
-  useEffect(() => {
-    console.error(error)
-    fetch('/api/google-sheet/url')
-      .then((res) => res.json())
-      .then((data) => setSheetUrl(data.url))
-  }, [error])
-
+  const { data: sheetUrl, isSuccess } = useGoogleSheetUrl()
   return (
     <div className="flex min-h-screen items-center justify-center bg-gray-100">
       <div className="w-full max-w-md rounded-lg bg-white p-8 shadow-md">
@@ -49,12 +43,14 @@ export default function Error({
             </svg>
           </button>
         </p>
-        <button
+        <Button
+          disabled={!isSuccess}
           onClick={() => window.open(sheetUrl, '_blank')}
-          className="rounded bg-blue-500 px-4 py-2 font-semibold text-white transition duration-300 ease-in-out hover:bg-blue-600"
+          className="mr-2"
         >
           前往Google Sheet表單
-        </button>
+        </Button>
+        <Button onClick={() => window.location.reload()}>重新整理</Button>
       </div>
     </div>
   )

@@ -1,13 +1,17 @@
 'use client'
 
 import { Accordion } from '@/components/ui/accordion'
-import { useStore } from '../state'
 import MonthlyAccordionItem from './monthly-accordion-item'
-import { Row } from '@/app/type'
+import { GoogleSheetResponse, Row } from '@/app/type'
+import { cn } from '@/lib/utils'
 
-export default function FullView() {
-  const data = useStore((state) => state.sheetStatus.data)
-
+export default function AllServiceView({
+  data,
+  className,
+}: {
+  data: GoogleSheetResponse['data']
+  className?: string
+}) {
   /** group data by year and month */
   const groupedData = data.reduce<Record<string, Row[]>>((acc, row) => {
     const date = new Date(row.date)
@@ -23,7 +27,12 @@ export default function FullView() {
   const thisMonth = `${today.getFullYear()}-${today.getMonth() + 1}`
 
   return (
-    <Accordion type="single" collapsible className="w-full" defaultValue={thisMonth}>
+    <Accordion
+      type="single"
+      className={cn('w-full', className)}
+      collapsible
+      defaultValue={thisMonth}
+    >
       {Object.entries(groupedData).map(([key, rows]) => (
         <MonthlyAccordionItem key={key} month={key} rows={rows} />
       ))}

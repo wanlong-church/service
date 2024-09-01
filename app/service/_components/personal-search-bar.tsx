@@ -12,15 +12,17 @@ import {
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { useState } from 'react'
-import { useStore } from '../state'
+import { useUserStore } from '@/stores/useUserStore'
+import { useRouter } from 'next/navigation'
+import { generateQueryString } from '@/lib/utils'
 
-export default function SearchBox() {
-  const [user, setUser, setMode] = useStore((state) => [state.user, state.setUser, state.setMode])
+export default function PersonalSearchBar() {
+  const router = useRouter()
+  const [user, setUser] = useUserStore((state) => [state.user, state.setUser])
   const [localUserName, setLocalUserName] = useState(user)
-
   const handleSubmit = () => {
-    setMode('personal')
     setUser(localUserName)
+    router.push(`/service?${generateQueryString('user', localUserName)}`)
   }
 
   return (
@@ -41,7 +43,7 @@ export default function SearchBox() {
             <Input
               id="name"
               placeholder="請輸入名子"
-              defaultValue={localUserName}
+              defaultValue={user}
               onChange={(e) => setLocalUserName(e.target.value)}
               className="col-span-3"
             />

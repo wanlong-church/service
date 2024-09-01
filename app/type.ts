@@ -39,33 +39,6 @@ export type SheetStatus = {
 }
 
 /**
- * The mode of the dashboard view.
- */
-export type DashboardMode = 'all' | 'personal'
-
-/**
- * The type of our dashboard global state.
- */
-export type DashboardState = {
-  /** The current mode of the dashboard. */
-  mode: DashboardMode
-  /** The current user's identifier. */
-  user: string
-  /** The current status of the Google Sheet. */
-  sheetStatus: SheetStatus
-  /** Indicates whether the state has been hydrated from storage. */
-  _hasHydrated: boolean
-  /** Function to set the dashboard mode. */
-  setMode: (mode: DashboardMode) => void
-  /** Function to set the current user. */
-  setUser: (user: string) => void
-  /** Function to update the sheet status. */
-  setSheetStatus: (sheetStatus: Partial<SheetStatus>) => void
-  /** Function to set the hydration status. */
-  setHasHydrated: (hasHydrated: boolean) => void
-}
-
-/**
  * A type of service, defined in SERVICE_TYPES constant.
  */
 export type ServiceType = (typeof SERVICE_TYPES)[number]

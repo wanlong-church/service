@@ -1,25 +1,17 @@
 import { create } from 'zustand'
 import { devtools, persist, createJSONStorage } from 'zustand/middleware'
 
-import { DashboardMode, DashboardState, SheetStatus } from '@/app/type'
-
-export const useStore = create<DashboardState>()(
+export const useUserStore = create<UserStore>()(
   devtools(
     persist(
-      (set, get) => ({
-        mode: 'all',
+      (set) => ({
         user: '',
-        sheetStatus: { data: [], url: '' },
         _hasHydrated: false,
-        setMode: (mode: DashboardMode) => set({ mode }),
         setUser: (user: string) => set({ user }),
-        setSheetStatus: (sheetStatus: Partial<SheetStatus>) => {
-          set({ sheetStatus: { ...get().sheetStatus, ...sheetStatus } })
-        },
         setHasHydrated: (hasHydrated: boolean) => set({ _hasHydrated: hasHydrated }),
       }),
       {
-        name: 'dashboard-params',
+        name: 'user-store',
         storage: createJSONStorage(() => localStorage),
         onRehydrateStorage: (state) => {
           return () => state.setHasHydrated(true)
@@ -28,3 +20,17 @@ export const useStore = create<DashboardState>()(
     )
   )
 )
+
+/**
+ * The type of our user global state.
+ */
+export type UserStore = {
+  /** The current user's identifier. */
+  user: string
+  /** Indicates whether the state has been hydrated from storage. */
+  _hasHydrated: boolean
+  /** Function to set the current user. */
+  setUser: (user: string) => void
+  /** Function to set the hydration status. */
+  setHasHydrated: (hasHydrated: boolean) => void
+}

@@ -1,7 +1,9 @@
+'use client'
+
 import { GoogleSheetResponse, GoogleSheetUrlResponse } from '@/app/type'
 
 export async function fetchGoogleSheetData(): Promise<GoogleSheetResponse> {
-  const response = await fetch('/api/google-sheet', { next: { revalidate: 3600 } })
+  const response = await fetch('/api/google-sheet')
   const data: GoogleSheetResponse = await response.json()
   if (data.error) {
     throw new Error(data.error)

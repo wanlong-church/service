@@ -2,6 +2,8 @@ import type { Metadata } from 'next'
 import './globals.css'
 import { Inter } from 'next/font/google'
 import { cn } from '@/lib/utils'
+import { Providers } from '@/providers'
+import { Toaster } from '@/components/ui/toaster'
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-sans' })
 
@@ -18,7 +20,10 @@ export default async function RootLayout({
 }>) {
   return (
     <html lang="zh-TW">
-      <body className={cn('bg-background font-sans antialiased', inter.variable)}>{children}</body>
+      <body className={cn('bg-background font-sans antialiased', inter.variable)}>
+        <Providers>{children}</Providers>
+        <Toaster />
+      </body>
     </html>
   )
 }
