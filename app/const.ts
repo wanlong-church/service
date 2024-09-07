@@ -92,3 +92,12 @@ export const SERVICE_TIME: Record<ServiceType, ServiceTime> = {
   meal: { start: '09:00', end: '11:30' },
   dishWashing: { start: '12:30', end: '13:30' },
 }
+
+//#region React Query 相關變數
+export const QUERY_KEY = {
+  /** Google Sheet 資料 */
+  GOOGLE_SHEET: 'GOOGLE_SHEET',
+  /** Google Sheet 網址 */
+  GOOGLE_SHEET_URL: 'GOOGLE_SHEET_URL',
+} as const
+//#endregion

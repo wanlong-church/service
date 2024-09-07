@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server'
-import { getSheetUrl } from '@/app/(auth)/api/google-sheet/utility'
+import { getSheetUrl } from '../utility'
 
 export async function GET() {
   // return the url of the google sheet

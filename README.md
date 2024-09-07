@@ -14,20 +14,37 @@ $ npm run dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-## 功能列表
+## 目錄結構
 
-### 🚀 現有功能
-
-- **首頁** - 非常樸素的標題以及進入頁面按鈕
-- **介接 Google Sheet API** - 但是使用者看不到
-
-### 🛠️ 開發中的功能
-
-- **[頁面] 依據時間顯示所有服事** - UI 趕工中
-
-### 📅 規劃中的功能
-
-**[開發中功能請看 Projects](https://github.com/orgs/wanlong-church/projects/1)**
+├─app  
+│ ├─service # 服事表相關頁面與元件
+│ │ ├─_components # 包含服事表邏輯的元件
+│ │ ├─_hooks # 包含服事表邏輯的 hooks
+│ │ ├─page.tsx # 服事表主頁面
+│ ├─layout.tsx # 首頁 Layout
+│ ├─globals.css # 全域樣式
+│ ├─page.tsx # （首頁）APP 進入點
+├─components # 共用元件
+│ ├─ui # UI 元件
+├─lib # 共用函式庫
+│ ├─utils.ts # 工具函式
+├─providers # React Context Providers
+│ ├─index.tsx # 頂層 providers 進入點
+│ ├─query-client-provider.tsx # React Query Provider
+├─public # 靜態資源
+├─styles # 樣式檔案
+├─.github # GitHub 設定
+│ ├─workflows # GitHub Actions 工作流程
+├─.husky # Husky 設定
+├─.vscode # VSCode 設定
+├─.eslintrc.js # ESLint 設定
+├─.eslintignore # ESLint 忽略檔案
+├─.prettierignore # Prettier 忽略檔案
+├─next.config.mjs # Next.js 設定檔
+├─package.json # npm 套件管理檔案
+├─README.md # 專案說明文件
+├─tailwind.config.ts # Tailwind CSS 設定檔
+├─tsconfig.json # TypeScript 設定檔
 
 ## 佈署
 

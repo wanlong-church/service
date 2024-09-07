@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server'
-import { fetchGoogleSheetData } from '@/app/(auth)/api/google-sheet/utility'
 import { GoogleSheetResponse } from '@/app/type'
+import { fetchGoogleSheetData } from './utility'
 
 export async function GET() {
   try {

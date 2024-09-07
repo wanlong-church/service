@@ -1,3 +1,6 @@
+'use client'
+
+import { FaCalendarAlt } from 'react-icons/fa'
 import { COLUMN_MAPPING, SERVICE_NOTES, SERVICE_TIME } from '@/app/const'
 import { ServiceRecord } from '@/app/type'
 import { Button } from '@/components/ui/button'
@@ -9,10 +12,10 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card'
-import { FaCalendarAlt } from 'react-icons/fa'
+
+const BASE_CALENDAR_URL = 'https://calendar.google.com/calendar/render?action=TEMPLATE'
 
 const createGoogleCalendarLink = (service: ServiceRecord) => {
-  const baseUrl = 'https://calendar.google.com/calendar/render?action=TEMPLATE'
   const text = encodeURIComponent(`${COLUMN_MAPPING[service.type]}: ${service.user}`)
   const formatDate = (date: Date, time: string) => {
     const [month, day, year] = [date.getMonth() + 1, date.getDate(), date.getFullYear()]
@@ -23,7 +26,7 @@ const createGoogleCalendarLink = (service: ServiceRecord) => {
   const startDateTime = formatDate(service.date, SERVICE_TIME[service.type].start)
   const endDateTime = formatDate(service.date, SERVICE_TIME[service.type].end)
   const details = encodeURIComponent(SERVICE_NOTES[service.type].join('\n'))
-  return `${baseUrl}&text=${text}&dates=${startDateTime}/${endDateTime}&details=${details}`
+  return `${BASE_CALENDAR_URL}&text=${text}&dates=${startDateTime}/${endDateTime}&details=${details}`
 }
 
 export default function ServiceCard({ service }: { service: ServiceRecord }) {
