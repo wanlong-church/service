@@ -3,6 +3,13 @@ runtime: nodejs20
 
 service: service
 
+automatic_scaling:
+  max_num_instances: 2
+  min_num_instances: 0
+  target_cpu_utilization: 0.95
+  target_throughput_utilization: 0.95
+  max_concurrent_requests: 20
+
 handlers:
   - url: /.*
     secure: always
