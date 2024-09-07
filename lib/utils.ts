@@ -9,3 +9,15 @@ import { twMerge } from 'tailwind-merge'
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
 }
+
+/**
+ * 建立查詢字串
+ * @param name 查詢名稱
+ * @param value 查詢值
+ * @returns 查詢字串
+ */
+export function generateQueryString(name: string, value: string) {
+  const params = new URLSearchParams()
+  params.set(name, value)
+  return params.toString()
+}

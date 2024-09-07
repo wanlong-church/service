@@ -1,15 +1,10 @@
-'use client'
-
+import Link from 'next/link'
+import { redirect } from 'next/navigation'
 import { Button } from '@/components/ui/button'
-import { useRouter } from 'next/navigation'
 
+/** 目前首頁捨棄，將直接轉址至服事表 */
 export default function Page() {
-  const router = useRouter()
-
-  const handleSubmit = () => {
-    router.push(`/dashboard`)
-  }
-
+  redirect('/service')
   return (
     <div className="bg-whitesmoke flex h-screen w-screen flex-col justify-center">
       <div className="mb-3">
@@ -21,7 +16,9 @@ export default function Page() {
       <div>
         <div className="flex flex-col items-center space-y-3 p-3">
           <div className="flex items-center">
-            <Button onClick={handleSubmit}>進入服事表</Button>
+            <Button asChild>
+              <Link href={'/dashboard'}>進入服事表</Link>
+            </Button>
           </div>
         </div>
       </div>
