@@ -1,5 +1,7 @@
 'use client'
 
+import { useEffect } from 'react'
+import * as Sentry from '@sentry/nextjs'
 import { Button } from '@/components/ui/button'
 import useGoogleSheetUrl from './service/_hooks/useGoogleSheetUrl'
 
@@ -11,6 +13,11 @@ export default function Error({
   reset: () => void
 }) {
   const { data: sheetUrl, isSuccess } = useGoogleSheetUrl()
+  useEffect(() => {
+    console.log('sending sentry error: ', error)
+    Sentry.captureException(error)
+  }, [error])
+
   return (
     <div className="flex min-h-screen items-center justify-center bg-gray-100">
       <div className="w-full max-w-md rounded-lg bg-white p-8 shadow-md">
