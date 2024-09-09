@@ -20,25 +20,22 @@ export default function PersonalView({
     const pastServices: ServiceRecord[] = []
     const now = new Date()
 
-    structuredClone(data)
-      /**
-       * 禱告會的日期為星期五，所以需要減去兩天
-       * 轉換後對時間排序才準確
-       * */
-      .map((row) => ({
-        ...row,
-        date: row.prayer ? subDays(new Date(row.date), 2) : new Date(row.date),
-      }))
-      .sort((a, b) => compareAsc(a.date, b.date))
-      .forEach(({ date, ...restRow }) => {
-        SERVICE_TYPES.forEach((key) => {
-          const matchService = restRow[key] && restRow[key].includes(user)
-          if (!matchService) return
-          const serviceRecord = { date: date, type: key, user: restRow[key] }
-          if (isBefore(date, now)) pastServices.push(serviceRecord)
-          else newServices.push(serviceRecord)
-        })
+    structuredClone(data).forEach(({ date, ...restRow }) => {
+      SERVICE_TYPES.forEach((key) => {
+        const matchService = restRow[key] && restRow[key].includes(user)
+        if (!matchService) return
+        /**
+         * 禱告會的日期為星期五，所以需要減去兩天
+         * 轉換後對時間排序才準確
+         **/
+        const resolvedDate = key === 'prayer' ? subDays(new Date(date), 2) : new Date(date)
+        const serviceRecord = { date: resolvedDate, type: key, user: restRow[key] }
+        if (isBefore(resolvedDate, now)) pastServices.push(serviceRecord)
+        else newServices.push(serviceRecord)
       })
+    })
+    newServices.sort((a, b) => compareAsc(a.date, b.date))
+    pastServices.sort((a, b) => compareAsc(a.date, b.date))
     return { newServices, pastServices }
   }, [data, user])
   return (
