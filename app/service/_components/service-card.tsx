@@ -63,7 +63,13 @@ export default function ServiceCard({ service }: { service: ServiceRecord }) {
           variant={'outline'}
           onClick={() => {
             const url = createGoogleCalendarLink(service)
-            window.open(url, '_blank', 'noopener,noreferrer')
+            const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent)
+            if (isMobile) {
+              // avoid leaving empty tab on mobile
+              window.location.href = url
+            } else {
+              window.open(url, '_blank', 'noopener,noreferrer')
+            }
           }}
         >
           <FaCalendarAlt className="mr-2" />
