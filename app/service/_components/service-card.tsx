@@ -2,7 +2,7 @@
 
 import { FaCalendarAlt } from 'react-icons/fa'
 import { COLUMN_MAPPING, SERVICE_NOTES, SERVICE_TIME } from '@/app/const'
-import { ServiceRecord } from '@/app/type'
+import { ServiceRecord, TimeString } from '@/app/type'
 import { Button } from '@/components/ui/button'
 import {
   Card,
@@ -12,19 +12,26 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card'
+import { set, format, subHours } from 'date-fns'
 
 const BASE_CALENDAR_URL = 'https://calendar.google.com/calendar/render?action=TEMPLATE'
 
+const formatDate = (date: Date, time: TimeString): string => {
+  const [hour, minute] = time.split(':')
+  const dateWithTime = set(date, {
+    hours: Number(hour) || 0,
+    minutes: Number(minute) || 0,
+  })
+  /** 暫時沒想到優雅的解法，先自己轉換時區後，再依照 calendar 的格式 format */
+  const sub8Date = subHours(dateWithTime, 8)
+  return format(sub8Date, "yyyyMMdd'T'HHmm00'Z'")
+}
+
 const createGoogleCalendarLink = (service: ServiceRecord) => {
   const text = encodeURIComponent(`${COLUMN_MAPPING[service.type]}: ${service.user}`)
-  const formatDate = (date: Date, time: string) => {
-    const [month, day, year] = [date.getMonth() + 1, date.getDate(), date.getFullYear()]
-    const [hour, minute] = time.split(':')
-    const pad = (num: number) => String(num).padStart(2, '0')
-    return `${year}${pad(month)}${pad(day)}T${hour}${minute}00+8`
-  }
   const startDateTime = formatDate(service.date, SERVICE_TIME[service.type].start)
   const endDateTime = formatDate(service.date, SERVICE_TIME[service.type].end)
+  console.log(startDateTime, endDateTime)
   const details = encodeURIComponent(SERVICE_NOTES[service.type].join('\n'))
   return `${BASE_CALENDAR_URL}&text=${text}&dates=${startDateTime}/${endDateTime}&details=${details}`
 }
