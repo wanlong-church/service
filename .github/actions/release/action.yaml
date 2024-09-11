@@ -1,0 +1,44 @@
+name: Release
+description: Release nextjs app to GAE
+
+inputs:
+  SA_JSON:
+    description: 'Service Account JSON'
+    required: true
+
+runs:
+  using: 'composite'
+
+  steps:
+    - name: Setup Google App Engine Folder
+      run: |
+        cp -r .next/standalone .
+        cp -r .next/static standalone/.next/
+        cp -r public standalone/
+        cp app.yaml standalone/
+        cd standalone
+        cat > package.json << EOL
+        {
+          "name": "wl_service_schedule",
+          "version": "production",
+          "private": true,
+          "scripts": {
+            "gcp-build": ""
+          },
+          "dependencies": {
+            "next": "^14.2.5"
+          }
+        }
+        EOL
+        npm install
+      shell: bash
+
+    - name: Authenticate with gcloud
+      uses: "google-github-actions/auth@v1"
+      with:
+        credentials_json: "${{ inputs.SA_JSON }}"
+
+    - name: Deploy to App Engine
+      uses: "google-github-actions/deploy-appengine@v1"
+      with:
+        working_directory: standalone
