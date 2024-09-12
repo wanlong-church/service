@@ -2,6 +2,9 @@ import { NextResponse } from 'next/server'
 import { GoogleSheetResponse } from '@/app/type'
 import { fetchGoogleSheetData } from './utility'
 
+export const revalidate = 0
+export const dynamic = 'force-dynamic'
+
 export async function GET() {
   try {
     const sheetData: GoogleSheetResponse = await fetchGoogleSheetData()

@@ -14,7 +14,7 @@ export default function ReactQueryProvider({ children }: { children: React.React
     const qc = new QueryClient({
       defaultOptions: {
         queries: {
-          staleTime: 60 * 60 * 1000,
+          staleTime: 1000,
           gcTime: Infinity,
         },
         dehydrate: {
