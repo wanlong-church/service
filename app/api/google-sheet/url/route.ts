@@ -1,6 +1,9 @@
 import { NextResponse } from 'next/server'
 import { getSheetUrl } from '../utility'
 
+export const revalidate = 0
+export const dynamic = 'force-dynamic'
+
 export async function GET() {
   // return the url of the google sheet
   try {
