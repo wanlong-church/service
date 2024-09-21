@@ -3,13 +3,19 @@
 import { COLUMN_MAPPING, SHEET_FIELDS } from '@/app/const'
 import { AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion'
 import { Row } from '@/app/type'
-import useGoogleSheetUrl from '../_hooks/useGoogleSheetUrl'
 import { Button } from '@/components/ui/button'
 
-export default function MonthAccordionItem({ month, rows }: { month: string; rows: Row[] }) {
-  const { data: sheetUrl } = useGoogleSheetUrl()
+export default function MonthAccordionItem({
+  month,
+  rows,
+  sheetUrl,
+}: {
+  month: string
+  rows: Row[]
+  sheetUrl: string
+}) {
   return (
-    <AccordionItem value={`${month}`}>
+    <AccordionItem value={`${month}`} id={`${month}`}>
       <AccordionTrigger>{month} 月服事表 </AccordionTrigger>
       <AccordionContent className="flex items-center justify-center">
         <div className="flex flex-col gap-4 overflow-x-auto">
