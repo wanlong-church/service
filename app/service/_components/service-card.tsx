@@ -31,7 +31,6 @@ const createGoogleCalendarLink = (service: ServiceRecord) => {
   const text = encodeURIComponent(`${COLUMN_MAPPING[service.type]}: ${service.user}`)
   const startDateTime = formatDate(service.date, SERVICE_TIME[service.type].start)
   const endDateTime = formatDate(service.date, SERVICE_TIME[service.type].end)
-  console.log(startDateTime, endDateTime)
   const details = encodeURIComponent(SERVICE_NOTES[service.type].join('\n'))
   return `${BASE_CALENDAR_URL}&text=${text}&dates=${startDateTime}/${endDateTime}&details=${details}`
 }

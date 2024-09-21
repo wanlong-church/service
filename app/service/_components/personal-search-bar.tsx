@@ -38,11 +38,11 @@ export default function PersonalSearchBar() {
         <div className="grid gap-4 py-4">
           <div className="grid grid-cols-4 items-center gap-4">
             <Label htmlFor="name" className="text-right">
-              你的名子
+              你的名字
             </Label>
             <Input
               id="name"
-              placeholder="請輸入名子"
+              placeholder="請輸入名字"
               defaultValue={user}
               onChange={(e) => setLocalUserName(e.target.value)}
               className="col-span-3"
