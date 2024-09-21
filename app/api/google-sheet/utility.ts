@@ -1,7 +1,7 @@
 import { isValid } from 'date-fns'
 import { google } from 'googleapis'
 import { COLUMN_MAPPING_REVERSE } from '@/app/const'
-import { GoogleSheetResponse, Row } from '@/app/type'
+import { GoogleSheetResponse, GoogleSheetYear, Row } from '@/app/type'
 
 /**
  * Fetches data from a Google Sheet and processes it into a structured format.
@@ -21,14 +21,27 @@ export async function fetchGoogleSheetData(): Promise<GoogleSheetResponse> {
 
   // Fetch raw data from the Google Sheet
   const {
-    data: { values },
+    data: { values: currentYearValues },
   } = await sheetClient.spreadsheets.values.get({
     spreadsheetId: process.env.MAIN_SPREAD_SHEET_ID,
     range: '總表!A:S',
   })
 
   // Destructure the values array, separating header row from data rows
-  const [, headerRow, ...restRows] = values as string[][]
+  const [, headerRow, ...thisYearRestRows] = currentYearValues as string[][]
+
+  // Get the rest of the rows from the next year's sheet
+  let restRows = thisYearRestRows
+  if (process.env.NEXT_YEAR_SPREAD_SHEET_ID) {
+    const {
+      data: { values: nextYearValues },
+    } = await sheetClient.spreadsheets.values.get({
+      spreadsheetId: process.env.NEXT_YEAR_SPREAD_SHEET_ID,
+      range: '總表!A:S',
+    })
+    const [, , ...nextYearRestRows] = nextYearValues as string[][]
+    restRows = [...thisYearRestRows, ...nextYearRestRows]
+  }
 
   // Process the raw data
   const data = restRows
@@ -50,6 +63,12 @@ export async function fetchGoogleSheetData(): Promise<GoogleSheetResponse> {
   return { data }
 }
 
-export function getSheetUrl() {
-  return `https://docs.google.com/spreadsheets/d/${process.env.MAIN_SPREAD_SHEET_ID}`
+export function getSheetUrl(year: GoogleSheetYear) {
+  const sheetId =
+    year === 'current' ? process.env.MAIN_SPREAD_SHEET_ID : process.env.NEXT_YEAR_SPREAD_SHEET_ID
+  if (!sheetId) {
+    // return empty string
+    return ''
+  }
+  return `https://docs.google.com/spreadsheets/d/${sheetId}`
 }

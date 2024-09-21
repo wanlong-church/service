@@ -15,6 +15,7 @@ import {
 import { FaSyncAlt } from 'react-icons/fa'
 import { Button } from '@/components/ui/button'
 import useGoogleSheet from '../_hooks/useGoogleSheet'
+import useGoogleSheetUrl from '../_hooks/useGoogleSheetUrl'
 import { cn } from '@/lib/utils'
 import { useEffect, useState } from 'react'
 import { useToast } from '@/hooks/use-toast'
@@ -23,7 +24,12 @@ export default function SyncButton() {
   const { toast } = useToast()
   /** 紀錄下次同步成功後是否顯示 toast */
   const [showToast, setShowToast] = useState(false)
-  const { dataUpdatedAt, isFetching, isRefetching, refetch } = useGoogleSheet()
+  const { dataUpdatedAt, isFetching, isRefetching, refetch: refetchSheet } = useGoogleSheet()
+  const { refetch: refetchSheetUrl } = useGoogleSheetUrl()
+  const refetch = async () => {
+    await refetchSheet()
+    await refetchSheetUrl()
+  }
   const formattedDate = format(new Date(dataUpdatedAt), 'yyyy年MM月dd日 HH:mm:ss', { locale: zhTW })
   const isSyncing = isFetching || isRefetching
   useEffect(() => {

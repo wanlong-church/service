@@ -20,9 +20,15 @@ export type GoogleSheetResponse = {
  * The structure of the response from fetching Google Sheet Url.
  */
 export type GoogleSheetUrlResponse = {
-  url: string
+  thisYearUrl: string
+  nextYearUrl: string
   error?: string
 }
+
+/**
+ * The year of the Google Sheet.
+ */
+export type GoogleSheetYear = 'current' | 'next'
 
 /**
  * The current status of the Google Sheet data.

@@ -51,8 +51,8 @@ export default function Error({
           </button>
         </p>
         <Button
-          disabled={!isSuccess}
-          onClick={() => window.open(sheetUrl, '_blank')}
+          disabled={!isSuccess || !sheetUrl?.thisYearUrl}
+          onClick={() => window.open(sheetUrl?.thisYearUrl, '_blank')}
           className="mr-2"
         >
           前往Google Sheet表單
