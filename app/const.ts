@@ -34,7 +34,7 @@ export const COLUMN_MAPPING: Record<SheetField, string> = {
   soundControl: '音控直播',
   youthLeaderMiddleGrade: '兒主中年級',
   nurseryCoordinator: '幼兒主理',
-  greeter: '接待',
+  greeter: '招待',
   prayer: '禱告會',
   meal: '愛筵',
   dishWashing: '洗碗',
