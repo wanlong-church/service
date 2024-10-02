@@ -95,9 +95,9 @@ export const SERVICE_TIME: Record<ServiceType, ServiceTime> = {
 
 //#region React Query 相關變數
 export const QUERY_KEY = {
-  /** Google Sheet 資料 */
-  GOOGLE_SHEET: 'GOOGLE_SHEET',
-  /** Google Sheet 網址 */
-  GOOGLE_SHEET_URL: 'GOOGLE_SHEET_URL',
+  /** The key for useGoogleSheet, ensures that data is invalidated when the sheet is updated */
+  GOOGLE_SHEET: `GOOGLE_SHEET_${process.env.MAIN_SPREAD_SHEET_ID}`,
+  /** The key for useGoogleSheetUrl, ensures that data is invalidated when the sheet is updated */
+  GOOGLE_SHEET_URL: `GOOGLE_SHEET_URL_${process.env.MAIN_SPREAD_SHEET_ID}`,
 } as const
 //#endregion

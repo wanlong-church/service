@@ -8,8 +8,6 @@ export default function useGoogleSheet() {
     queryFn: fetchGoogleSheetData,
     throwOnError: true,
     select: (data) => data.data,
-    staleTime: 60 * 1000 * 1000,
-    gcTime: Infinity,
     retry: 3,
     retryDelay: 1000,
   })
