@@ -38,12 +38,13 @@ export default function AllServiceView({
     const date = new Date(row.date)
     const month = date.getMonth() + 1
     const year = date.getFullYear()
+    const key = `${year}-${month}`
+    acc[key] ??= []
+    acc[key].push(row)
+
     if (year < thisYear) {
       thisYear = year
     }
-    const key = `${year}-${month}`
-    acc[key] = acc[key] || []
-    acc[key].push(row)
     return acc
   }, {})
 
