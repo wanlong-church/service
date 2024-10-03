@@ -69,8 +69,8 @@ graph TD
 
 ### 發佈
 
-1. 發佈前，先到 `package.json` 將版本號修改: `npm version <new_version>`，進`main`。
-2. 建立新的 Github Release，榠稱選擇剛剛的version，建立tag，自動產生change log。
+1. 發佈前，先將版本號修改: `npm version <new_version>`，直接在main操作，這個指令會修改 `package.json` 與 `package-lock.json`。把上版的main推上github。
+2. 建立新的 Github Release，名稱選擇剛剛的version tag，自動產生change log。
 3. 如果有重要feature更新，寫一下Release Note。
 4. Release後會自動部署到Google App Engine。
 
