@@ -69,6 +69,11 @@ export type ServiceTime = {
   end: TimeString
 }
 
+export type ServiceLink = {
+  text: string
+  url: string
+}
+
 /**
  * A service record with date, type, and user.
  */
@@ -76,4 +81,5 @@ export type ServiceRecord = {
   date: Date
   type: ServiceType
   user: string
+  title: string
 }
