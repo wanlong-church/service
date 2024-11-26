@@ -134,8 +134,8 @@ export const SERVICE_META: Record<ServiceType, ServiceMeta> = {
     time: { start: '09:40', end: '11:30' },
   },
   prayer: {
-    notes: ['週五晚上 7：00 禱告會開始，列印程序單16份，準備同樣份數的詩歌本或者譜'],
-    time: { start: '18:50', end: '20:30' },
+    notes: ['週五晚上 7：30 禱告會開始，列印程序單16份，準備同樣份數的詩歌本或者譜'],
+    time: { start: '19:20', end: '20:30' },
   },
   meal: {
     notes: ['講道於 11:10~11:30 結束，愛宴準備須在 11:30 之前完成'],
