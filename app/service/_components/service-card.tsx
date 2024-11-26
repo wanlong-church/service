@@ -65,7 +65,7 @@ export default function ServiceCard({ service }: { service: ServiceRecord }) {
           ))}
         </ul>
       </CardContent>
-      <CardFooter className="space-x-2">
+      <CardFooter>
         <Button
           variant={'outline'}
           onClick={() => {
