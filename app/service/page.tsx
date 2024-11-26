@@ -1,6 +1,7 @@
 'use client'
 
 import { useRouter, usePathname, useSearchParams } from 'next/navigation'
+import { useShallow } from 'zustand/shallow'
 import Loading from '../loading'
 import PersonalView from './_components/personal-view'
 import AllServiceView from './_components/all-service-view'
@@ -14,10 +15,12 @@ export default function ServicesPage() {
   const pathname = usePathname()
   const searchParams = useSearchParams()
   const queryUser = searchParams.get('user')
-  const userStore = useUserStore((state) => ({
-    user: state.user,
-    setUser: state.setUser,
-  }))
+  const userStore = useUserStore(
+    useShallow((state) => ({
+      user: state.user,
+      setUser: state.setUser,
+    }))
+  )
   useEffect(() => {
     if (queryUser && queryUser !== userStore.user) {
       userStore.setUser(queryUser)

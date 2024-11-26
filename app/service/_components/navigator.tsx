@@ -1,6 +1,7 @@
 'use client'
 
 import Link from 'next/link'
+import { useShallow } from 'zustand/shallow'
 import { usePathname, useSearchParams } from 'next/navigation'
 import { Button } from '@/components/ui/button'
 import { useUserStore } from '@/stores/useUserStore'
@@ -9,7 +10,7 @@ import SyncButton from './sync-button'
 import { generateQueryString } from '@/lib/utils'
 
 export default function Navigator() {
-  const user = useUserStore((state) => state.user)
+  const user = useUserStore(useShallow((state) => state.user))
   const pathname = usePathname()
   const searchParams = useSearchParams()
   const onPersonalPage = pathname === '/service' && !!searchParams.get('user')

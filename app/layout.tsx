@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import './globals.css'
 import { Inter } from 'next/font/google'
+import { GoogleAnalytics } from '@next/third-parties/google'
 import { cn } from '@/lib/utils'
 import { Providers } from '@/providers'
 import { Toaster } from '@/components/ui/toaster'
@@ -24,6 +25,7 @@ export default async function RootLayout({
         <Providers>{children}</Providers>
         <Toaster />
       </body>
+      <GoogleAnalytics gaId="G-NNCSCYXNM9" />
     </html>
   )
 }
