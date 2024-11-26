@@ -1,11 +1,25 @@
 'use client'
 import { useMemo, useState } from 'react'
 import { subDays, compareAsc, isBefore } from 'date-fns'
-import { SERVICE_TYPES } from '@/app/const'
-import { GoogleSheetResponse, ServiceRecord } from '@/app/type'
+import { COLUMN_MAPPING, SERVICE_TYPES } from '@/app/const'
+import { GoogleSheetResponse, Row, ServiceRecord, ServiceType } from '@/app/type'
 import { Switch } from '@/components/ui/switch'
 import { Label } from '@/components/ui/label'
 import ServiceCard from './service-card'
+
+function serviceTitle(key: ServiceType, row: Row): string {
+  const title = COLUMN_MAPPING[key]
+  switch (key) {
+    case 'speaker':
+      return `${title} - ${row.sermonScope}`
+    case 'sundaySchool1':
+      return `${title} - ${row.sundaySchool1Topic}`
+    case 'sundaySchool2':
+      return `${title} - ${row.sundaySchool2Topic}`
+    default:
+      return title
+  }
+}
 
 export default function PersonalView({
   data,
@@ -20,16 +34,18 @@ export default function PersonalView({
     const pastServices: ServiceRecord[] = []
     const now = new Date()
 
-    structuredClone(data).forEach(({ date, ...restRow }) => {
+    structuredClone(data).forEach((row) => {
+      const { date, ...restRow } = row
       SERVICE_TYPES.forEach((key) => {
         const matchService = restRow[key] && restRow[key].includes(user)
         if (!matchService) return
+        const title = serviceTitle(key, row)
         /**
          * 禱告會的日期為星期五，所以需要減去兩天
          * 轉換後對時間排序才準確
          **/
         const resolvedDate = key === 'prayer' ? subDays(new Date(date), 2) : new Date(date)
-        const serviceRecord = { date: resolvedDate, type: key, user: restRow[key] }
+        const serviceRecord = { date: resolvedDate, type: key, user: restRow[key], title }
         if (isBefore(resolvedDate, now)) pastServices.push(serviceRecord)
         else newServices.push(serviceRecord)
       })
