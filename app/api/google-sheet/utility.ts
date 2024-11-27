@@ -8,13 +8,18 @@ import { GoogleSheetResponse, GoogleSheetYear, Row } from '@/app/type'
  * @returns {Promise<GoogleSheetResponse>} A promise that resolves to the processed sheet data.
  */
 export async function fetchGoogleSheetData(): Promise<GoogleSheetResponse> {
+  // Validate environment variables
+  const clientEmail = process.env.GOOGLE_CLIENT_EMAIL
+  const privateKey = process.env.GOOGLE_PRIVATE_KEY?.replace(/\\n/g, '\n')
+  const driveEndpoint = process.env.GOOGLE_DRIVE_ENDPOINT || ''
+
+  if (!clientEmail || !privateKey || !driveEndpoint) {
+    throw new Error('Missing required environment variables for Google Sheets API')
+  }
   // Initialize Google Auth client
-  const client = new google.auth.JWT(
-    process.env.GOOGLE_CLIENT_EMAIL,
-    undefined,
-    process.env.GOOGLE_PRIVATE_KEY,
-    [process.env.GOOGLE_DRIVE_ENDPOINT || '']
-  )
+  const client = new google.auth.JWT(clientEmail, undefined, privateKey, [driveEndpoint])
+
+  const SHEET_RANGE = '總表!A:V'
 
   // Create Google Sheets API client
   const sheetClient = google.sheets({ version: 'v4', auth: client })
@@ -24,7 +29,7 @@ export async function fetchGoogleSheetData(): Promise<GoogleSheetResponse> {
     data: { values: currentYearValues },
   } = await sheetClient.spreadsheets.values.get({
     spreadsheetId: process.env.MAIN_SPREAD_SHEET_ID,
-    range: '總表!A:S',
+    range: SHEET_RANGE,
   })
 
   // Destructure the values array, separating header row from data rows
@@ -37,7 +42,7 @@ export async function fetchGoogleSheetData(): Promise<GoogleSheetResponse> {
       data: { values: nextYearValues },
     } = await sheetClient.spreadsheets.values.get({
       spreadsheetId: process.env.NEXT_YEAR_SPREAD_SHEET_ID,
-      range: '總表!A:S',
+      range: SHEET_RANGE,
     })
     const [, , ...nextYearRestRows] = nextYearValues as string[][]
     restRows = [...thisYearRestRows, ...nextYearRestRows]

@@ -1,7 +1,7 @@
 'use client'
 
 import { FaCalendarAlt } from 'react-icons/fa'
-import { COLUMN_MAPPING, SERVICE_NOTES, SERVICE_TIME } from '@/app/const'
+import { COLUMN_MAPPING, SERVICE_META } from '@/app/const'
 import { ServiceRecord, TimeString } from '@/app/type'
 import { Button } from '@/components/ui/button'
 import {
@@ -13,6 +13,7 @@ import {
   CardTitle,
 } from '@/components/ui/card'
 import { set, format, subHours } from 'date-fns'
+import Link from 'next/link'
 
 const BASE_CALENDAR_URL = 'https://calendar.google.com/calendar/render?action=TEMPLATE'
 
@@ -29,9 +30,9 @@ const formatDate = (date: Date, time: TimeString): string => {
 
 const createGoogleCalendarLink = (service: ServiceRecord) => {
   const text = encodeURIComponent(`${COLUMN_MAPPING[service.type]}: ${service.user}`)
-  const startDateTime = formatDate(service.date, SERVICE_TIME[service.type].start)
-  const endDateTime = formatDate(service.date, SERVICE_TIME[service.type].end)
-  const details = encodeURIComponent(SERVICE_NOTES[service.type].join('\n'))
+  const startDateTime = formatDate(service.date, SERVICE_META[service.type].time.start)
+  const endDateTime = formatDate(service.date, SERVICE_META[service.type].time.end)
+  const details = encodeURIComponent(SERVICE_META[service.type].notes.join('\n'))
   return `${BASE_CALENDAR_URL}&text=${text}&dates=${startDateTime}/${endDateTime}&details=${details}`
 }
 
@@ -44,20 +45,20 @@ export default function ServiceCard({ service }: { service: ServiceRecord }) {
     >
       <CardHeader>
         <CardTitle>
-          {service.date.toLocaleDateString()} {COLUMN_MAPPING[service.type]}
+          {service.date.toLocaleDateString()} {service.title}
         </CardTitle>
         <CardDescription>
           <p>
             {COLUMN_MAPPING[service.type]}: {service.user}
           </p>
           <p>
-            {SERVICE_TIME[service.type].start} - {SERVICE_TIME[service.type].end}
+            {SERVICE_META[service.type].time.start} - {SERVICE_META[service.type].time.end}
           </p>
         </CardDescription>
       </CardHeader>
       <CardContent>
         <ul>
-          {SERVICE_NOTES[service.type].map((note) => (
+          {SERVICE_META[service.type].notes.map((note) => (
             <li key={note} className="mb-2">
               {note}
             </li>
@@ -81,6 +82,13 @@ export default function ServiceCard({ service }: { service: ServiceRecord }) {
           <FaCalendarAlt className="mr-2" />
           加入行事曆
         </Button>
+        {SERVICE_META[service.type].links?.map((link) => (
+          <Button key={link.url} variant={'outline'} asChild>
+            <Link target="_blank" href={link.url}>
+              {link.text}
+            </Link>
+          </Button>
+        ))}
       </CardFooter>
     </Card>
   )
