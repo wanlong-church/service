@@ -1,26 +1,30 @@
-name: Release New Version
+name: Release Please
+
+permissions:
+  contents: write
+  pull-requests: write
 
 on:
-  release:
-    types: [published]
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+    inputs:
+      skip-github-release:
+        description: 'Skip creating a GitHub release'
+        required: false
+        type: boolean
+        default: false
+      skip-github-pull-request:
+        description: 'Skip creating a GitHub pull request'
+        required: false
+        type: boolean
+        default: false
 
 jobs:
-  build-and-deploy:
-    runs-on: ubuntu-latest
-    outputs:
-      release_version: ${{ steps.get_version.outputs.version }}
-    steps:
-      - uses: actions/checkout@v4
-      - name: Get version from package.json
-        id: get_version
-        run: echo "version=$(node -p "require('./package.json').version")" >> $GITHUB_OUTPUT
-      - name: build
-        uses: ./.github/actions/build
-        with:
-          SENTRY_RELEASE: ${{ steps.get_version.outputs.version }}
-          SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
-          GOOGLE_PRIVATE_KEY: ${{ secrets.GOOGLE_PRIVATE_KEY }}
-      - name: deploy to Google App Engine
-        uses: ./.github/actions/release
-        with:
-          SA_JSON: ${{ secrets.SA_JSON }}
+    release-please:
+      runs-on: ubuntu-latest
+      steps:
+        - uses: googleapis/release-please-action@v4
+          with:
+            token: ${{ secrets.RELEASE_PLEASE_TOKEN }}
