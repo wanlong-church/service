@@ -67,12 +67,14 @@ graph TD
 1. 這個專案使用 Google App Engine 作為 production 佈署平台，透過 Github Action 進行自動佈署。
 2. 如果要調整 route，需要調整 `dispatch.yaml`，並且手動佈署： `gcloud app deploy dispatch.yaml`。
 
-### 發佈
+### 部署
 
-1. 發佈前，先將版本號修改: `npm version <new_version>`，直接在main操作，這個指令會修改 `package.json` 與 `package-lock.json`。把上版的main推上github。
-2. 建立新的 Github Release，名稱選擇剛剛的version tag，自動產生change log。
-3. 如果有重要feature更新，寫一下Release Note。
-4. Release後會自動部署到Google App Engine。
+本專案使用 [Please Release](https://github.com/googleapis/release-please) 進行自動部署
+
+1. 手動觸發我們的 [release pipeline](https://github.com/wanlong-church/service/actions/workflows/release.yaml)，點 `run workflow`。
+2. 完成以後我們會收到一個release pr，會根據我們上次release到現在的[commit message](https://www.conventionalcommits.org/)覺定發佈版本。
+3. 確認沒有問題，merge release pr以後，會自動發佈 [Github Release](https://github.com/wanlong-church/service/releases)。
+4. 發佈 [Github Release](https://github.com/wanlong-church/service/releases) 後會自動部署到Google App Engine。
 
 ### 監控
 
