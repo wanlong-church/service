@@ -26,7 +26,9 @@ runs:
             "gcp-build": ""
           },
           "dependencies": {
-            "next": "^14.2.5"
+            "import-in-the-middle": "^1.11.2",
+            "next": "^15.0.3",
+            "require-in-the-middle": "^7.4.0"
           }
         }
         EOL
