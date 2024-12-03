@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.4.1](https://github.com/wanlong-church/service/compare/v0.4.0...v0.4.1) (2024-12-03)
+
+
+### Bug Fixes
+
+* fix next 15 standalone deployment ([#135](https://github.com/wanlong-church/service/issues/135)) ([c49cb27](https://github.com/wanlong-church/service/commit/c49cb2731d17eecfb20eb1383961fac501a2db43))
+
 ## [0.4.0](https://github.com/wanlong-church/service/compare/v0.3.0...v0.4.0) (2024-12-03)
 
 
