@@ -1,5 +1,60 @@
 # Changelog
 
+## [0.4.0](https://github.com/wanlong-church/service/compare/v0.3.0...v0.4.0) (2024-12-03)
+
+
+### Features
+
+* **cicd:** add release please ([#108](https://github.com/wanlong-church/service/issues/108)) ([d136199](https://github.com/wanlong-church/service/commit/d136199ba3d8ca91d2c8a1efb9a02aa7633be61a)), closes [#107](https://github.com/wanlong-church/service/issues/107)
+* **deps:** adding dependabot ([#95](https://github.com/wanlong-church/service/issues/95)) ([c3ae314](https://github.com/wanlong-church/service/commit/c3ae3143af52615e70620ff1cc014be67adb113f))
+* **ui:** add more service info ([#98](https://github.com/wanlong-church/service/issues/98)) ([6eede88](https://github.com/wanlong-church/service/commit/6eede884ce2971b5d82b39413bb7c62b7afae9e1))
+
+
+### Bug Fixes
+
+* **cicd:** release please tag config ([89c0d8b](https://github.com/wanlong-church/service/commit/89c0d8bc9d29c09fce09fe626ea6340a6a4b9ec2))
+* **doc:** fix .env.local.template ([#92](https://github.com/wanlong-church/service/issues/92)) ([e5ab1b1](https://github.com/wanlong-church/service/commit/e5ab1b1d0b7718b0198aaf428fa302c5315ea8cf))
+
+
+### Build Related
+
+* add more changelog sections ([de5dc2e](https://github.com/wanlong-church/service/commit/de5dc2e52a883f9fad0b45fa2b54790df8e0ce42))
+* add release-please workflow ([78ff8b1](https://github.com/wanlong-church/service/commit/78ff8b1fb71813cbf8b31329433820f1fabbaa3e))
+* **deps-dev:** bump @eslint/js from 9.15.0 to 9.16.0 ([#121](https://github.com/wanlong-church/service/issues/121)) ([f54d735](https://github.com/wanlong-church/service/commit/f54d73521c8d75d7fd6d9d0cd6bc514250cbc717))
+* **deps-dev:** bump @tanstack/eslint-plugin-query ([#105](https://github.com/wanlong-church/service/issues/105)) ([7bcbec1](https://github.com/wanlong-church/service/commit/7bcbec10af807699a1ae218a7eca941ef3a3c98c))
+* **deps-dev:** bump @tanstack/eslint-plugin-query ([#118](https://github.com/wanlong-church/service/issues/118)) ([c4fab29](https://github.com/wanlong-church/service/commit/c4fab29c3eb3f5c891137b051b594167b25f34bd))
+* **deps-dev:** bump @tanstack/eslint-plugin-query ([#129](https://github.com/wanlong-church/service/issues/129)) ([306a9df](https://github.com/wanlong-church/service/commit/306a9dfe8c1769f3dc1c19dbc3faeefd2c8d23f8))
+* **deps-dev:** bump @typescript-eslint/eslint-plugin ([#127](https://github.com/wanlong-church/service/issues/127)) ([6440068](https://github.com/wanlong-church/service/commit/6440068cbc1dc946f7678300a9fafef74b34394f))
+* **deps-dev:** bump eslint from 9.15.0 to 9.16.0 ([#122](https://github.com/wanlong-church/service/issues/122)) ([05615f3](https://github.com/wanlong-church/service/commit/05615f309e8a50fc6d1a1584ff250ffc2020efff))
+* **deps-dev:** bump globals from 15.12.0 to 15.13.0 ([#123](https://github.com/wanlong-church/service/issues/123)) ([16494d6](https://github.com/wanlong-church/service/commit/16494d6fb60b71181497aeacc290b5503c509eb7))
+* **deps-dev:** bump prettier from 3.4.0 to 3.4.1 ([#100](https://github.com/wanlong-church/service/issues/100)) ([f5e65fd](https://github.com/wanlong-church/service/commit/f5e65fd2b12c322d841789d2413b2a4364c0bc55))
+* **deps:** bump @sentry/nextjs from 8.40.0 to 8.41.0 ([#117](https://github.com/wanlong-church/service/issues/117)) ([a6f6375](https://github.com/wanlong-church/service/commit/a6f6375775ce9bf3897af3db6f7777a645877558))
+* **deps:** bump @sentry/nextjs from 8.41.0 to 8.42.0 ([#130](https://github.com/wanlong-church/service/issues/130)) ([7562aaa](https://github.com/wanlong-church/service/commit/7562aaaa59fb9d55253f4c39f7899106cef185c8))
+* **deps:** bump @tanstack/query-sync-storage-persister ([#124](https://github.com/wanlong-church/service/issues/124)) ([54f3280](https://github.com/wanlong-church/service/commit/54f3280050720b420c0d26253c26bde38ff3f46e))
+* **deps:** bump @tanstack/query-sync-storage-persister ([#128](https://github.com/wanlong-church/service/issues/128)) ([c02e567](https://github.com/wanlong-church/service/commit/c02e5677074359c3fc43485c3b0d2b4fc1ae772a))
+* **deps:** bump @tanstack/query-sync-storage-persister ([#99](https://github.com/wanlong-church/service/issues/99)) ([e6c4a44](https://github.com/wanlong-church/service/commit/e6c4a44696732a2d9040b16138d9c51092fb0225))
+* **deps:** bump @tanstack/react-query from 5.61.3 to 5.61.5 ([#101](https://github.com/wanlong-church/service/issues/101)) ([2e5974d](https://github.com/wanlong-church/service/commit/2e5974d5f45026c8cbd8eadc6a6951a1728b6362))
+* **deps:** bump @tanstack/react-query-devtools from 5.61.3 to 5.61.5 ([#102](https://github.com/wanlong-church/service/issues/102)) ([55e23c0](https://github.com/wanlong-church/service/commit/55e23c017467f6688f408f7ffbfbe263ed2a775b))
+* **deps:** bump @tanstack/react-query-devtools from 5.61.5 to 5.62.0 ([#120](https://github.com/wanlong-church/service/issues/120)) ([b29c574](https://github.com/wanlong-church/service/commit/b29c574aa513e266e7053c0fe29437338acc4c08))
+* **deps:** bump @tanstack/react-query-devtools from 5.62.0 to 5.62.2 ([#133](https://github.com/wanlong-church/service/issues/133)) ([934c51f](https://github.com/wanlong-church/service/commit/934c51fbd6db5a3e130babad641c99a5ba7e4dc3))
+* **deps:** bump @tanstack/react-query-persist-client ([#119](https://github.com/wanlong-church/service/issues/119)) ([549f993](https://github.com/wanlong-church/service/commit/549f9932d5e3f0d4c79eb89d77824a8a2cf15f5f))
+* **deps:** bump @tanstack/react-query-persist-client ([#131](https://github.com/wanlong-church/service/issues/131)) ([d1ec9d9](https://github.com/wanlong-church/service/commit/d1ec9d9db46be827240ef3042fe50a9653243ee1))
+* **deps:** bump class-variance-authority from 0.7.0 to 0.7.1 ([#96](https://github.com/wanlong-church/service/issues/96)) ([e347949](https://github.com/wanlong-church/service/commit/e34794946e886073a18fb9cc3ac0cc78dae2ad30))
+* **deps:** bump framer-motion from 11.11.17 to 11.12.0 ([#116](https://github.com/wanlong-church/service/issues/116)) ([301fd34](https://github.com/wanlong-church/service/commit/301fd34aab1bcfaa924055097d78821c238a6c02))
+* **deps:** bump lucide-react from 0.461.0 to 0.462.0 ([#104](https://github.com/wanlong-church/service/issues/104)) ([a65c94b](https://github.com/wanlong-church/service/commit/a65c94be088044beb27c53d39652471fb5463725))
+* **deps:** bump lucide-react from 0.462.0 to 0.463.0 ([#132](https://github.com/wanlong-church/service/issues/132)) ([722fc4f](https://github.com/wanlong-church/service/commit/722fc4f56cb6e8e72be6372b50a7a2298541f969))
+* **deps:** bump react-icons from 5.3.0 to 5.4.0 ([#126](https://github.com/wanlong-church/service/issues/126)) ([1e8c6c4](https://github.com/wanlong-church/service/commit/1e8c6c44d42625c23e5e754e8029dda7692bb41f))
+
+
+### Chores
+
+* fix changlog ([d9693ba](https://github.com/wanlong-church/service/commit/d9693bae1678bef57ec4bc0d21539571499cc023))
+
+
+### Documentation
+
+* update release flow ([#115](https://github.com/wanlong-church/service/issues/115)) ([1a9228b](https://github.com/wanlong-church/service/commit/1a9228b47bd8520c7004ce93cf510a14ed93ce1d))
+
 ## [0.3.0](https://github.com/wanlong-church/service/compare/v0.2.1...v0.3.0) (2024-10-03)
 
 ### Features
