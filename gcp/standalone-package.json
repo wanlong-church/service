@@ -1,0 +1,10 @@
+{
+  "name": "wl_service_schedule",
+  "version": "production",
+  "description": "this file to overwrite the install command, see https://stackoverflow.com/questions/37310253/how-to-force-app-engine-upload-node-modules",
+  "private": true,
+  "scripts": {
+    "install": "mv -fn node_module_hack node_modules",
+    "start": "node server.js"
+  }
+}
