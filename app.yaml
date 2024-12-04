@@ -14,4 +14,7 @@ handlers:
   - url: /.*
     secure: always
     script: auto
+
+env_variables:
+  NODE_ENV: 'production'
 # [END app_yaml]
