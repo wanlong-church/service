@@ -17,18 +17,16 @@ runs:
         cp -r public standalone/
         cp app.yaml standalone/
         cd standalone
+        mv node_modules node_modules_hack
+        cat ".git" > .gcloudignore
         cat > package.json << EOL
         {
           "name": "wl_service_schedule",
           "version": "production",
           "private": true,
           "scripts": {
-            "gcp-build": ""
-          },
-          "dependencies": {
-            "import-in-the-middle": "^1.11.2",
-            "next": "^15.0.3",
-            "require-in-the-middle": "^7.4.0"
+            "install": "mv -fn node_modules_hack node_modules",
+            "start": "node server.js"
           }
         }
         EOL
