@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.4.2](https://github.com/wanlong-church/service/compare/v0.4.1...v0.4.2) (2024-12-04)
+
+
+### Bug Fixes
+
+* debug deploy pipeline ([1dd869a](https://github.com/wanlong-church/service/commit/1dd869af1ae079e0572aeab2616b5c4b20e0e8d9))
+
+
+### Build Related
+
+* deploy without extra next dependencies ([#137](https://github.com/wanlong-church/service/issues/137)) ([c665944](https://github.com/wanlong-church/service/commit/c665944e424609a9a3ca242a3b147d96f3816443))
+
 ## [0.4.1](https://github.com/wanlong-church/service/compare/v0.4.0...v0.4.1) (2024-12-03)
 
 
