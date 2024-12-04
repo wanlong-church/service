@@ -18,7 +18,7 @@ runs:
         cp app.yaml standalone/
         cd standalone
         mv node_modules node_modules_hack
-        cat ".git" > .gcloudignore
+        echo ".git" > .gcloudignore
         cat > package.json << EOL
         {
           "name": "wl_service_schedule",
