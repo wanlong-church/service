@@ -16,21 +16,10 @@ runs:
         cp -r .next/static standalone/.next/
         cp -r public standalone/
         cp app.yaml standalone/
+        cp gcp/standalone-package.json standalone/package.json
         cd standalone
-        mv node_modules node_modules_hack
-        cat ".git" > .gcloudignore
-        cat > package.json << EOL
-        {
-          "name": "wl_service_schedule",
-          "version": "production",
-          "private": true,
-          "scripts": {
-            "install": "mv -fn node_modules_hack node_modules",
-            "start": "node server.js"
-          }
-        }
-        EOL
-        npm install
+        mv node_modules node_module_hack
+        echo ".git" > .gcloudignore
       shell: bash
 
     - name: Authenticate with gcloud
