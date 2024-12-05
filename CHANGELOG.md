@@ -1,5 +1,15 @@
 # Changelog
 
+## [0.4.3](https://github.com/wanlong-church/service/compare/v0.4.2...v0.4.3) (2024-12-05)
+
+
+### Build Related
+
+* **deps-dev:** bump prettier from 3.4.1 to 3.4.2 ([#149](https://github.com/wanlong-church/service/issues/149)) ([8372b45](https://github.com/wanlong-church/service/commit/8372b45e4d81d055cfc1d5c7d61ec5afbbc0ec82))
+* **deps-dev:** bump tailwindcss from 3.4.15 to 3.4.16 ([#151](https://github.com/wanlong-church/service/issues/151)) ([5450167](https://github.com/wanlong-church/service/commit/54501676bdf3bd70b56eea93a1d402c1c1212c55))
+* **deps:** bump framer-motion from 11.12.0 to 11.13.1 ([#150](https://github.com/wanlong-church/service/issues/150)) ([feba161](https://github.com/wanlong-church/service/commit/feba16160b56c90d73fdf4b8b0e0075e1f838c5f))
+* **deps:** bump lucide-react from 0.463.0 to 0.465.0 ([#152](https://github.com/wanlong-church/service/issues/152)) ([685dad7](https://github.com/wanlong-church/service/commit/685dad76eb1d53e55a7ee964009e0a6cfcc8c9ee))
+
 ## [0.4.2](https://github.com/wanlong-church/service/compare/v0.4.1...v0.4.2) (2024-12-04)
 
 
