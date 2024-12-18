@@ -1,5 +1,25 @@
 # Changelog
 
+## [0.4.4](https://github.com/wanlong-church/service/compare/v0.4.3...v0.4.4) (2024-12-17)
+
+
+### Build Related
+
+* **deps-dev:** bump eslint-config-next from 15.0.3 to 15.1.0 ([#168](https://github.com/wanlong-church/service/issues/168)) ([52aa094](https://github.com/wanlong-church/service/commit/52aa094b194e42ce8106dea8cd497d86d1b80fb4))
+* **deps:** bump @next/third-parties from 15.0.3 to 15.1.0 ([#171](https://github.com/wanlong-church/service/issues/171)) ([52cac8d](https://github.com/wanlong-church/service/commit/52cac8d390bf2a118e5bf61f99ffec3371e4fc22))
+* **deps:** bump @tanstack/react-query from 5.62.2 to 5.62.7 ([#172](https://github.com/wanlong-church/service/issues/172)) ([381ba73](https://github.com/wanlong-church/service/commit/381ba73f0f2e522a3ec1ca1ed5eb2f8a50760018))
+* **deps:** bump @tanstack/react-query-devtools from 5.62.2 to 5.62.7 ([#169](https://github.com/wanlong-church/service/issues/169)) ([a2a140f](https://github.com/wanlong-church/service/commit/a2a140f05dd830ca58aa60e75f408e5233873e6b))
+* **deps:** bump @tanstack/react-query-persist-client ([#170](https://github.com/wanlong-church/service/issues/170)) ([3737771](https://github.com/wanlong-church/service/commit/3737771a6155d8f2fed8174fdad1a3be40d2332a))
+* **deps:** bump lucide-react from 0.465.0 to 0.468.0 ([#162](https://github.com/wanlong-church/service/issues/162)) ([e90b3a0](https://github.com/wanlong-church/service/commit/e90b3a044a21e6f826eedd96cbaac2f6c63dcec6))
+* **deps:** bump nanoid from 3.3.7 to 3.3.8 in the npm_and_yarn group ([#166](https://github.com/wanlong-church/service/issues/166)) ([49fe6b7](https://github.com/wanlong-church/service/commit/49fe6b77b163feb8789ca2adff9fcdf12da81185))
+* **deps:** bump next from 15.0.3 to 15.1.0 ([#167](https://github.com/wanlong-church/service/issues/167)) ([13172a5](https://github.com/wanlong-church/service/commit/13172a5385b55dda085bf48e8805fce08255a0b6))
+* **deps:** bump zustand from 5.0.1 to 5.0.2 ([#156](https://github.com/wanlong-church/service/issues/156)) ([4f54151](https://github.com/wanlong-church/service/commit/4f54151c58ce788af68d0d7e031cd68c0805ba31))
+
+
+### Chores
+
+* adjust dependabot update to weekly ([2731a76](https://github.com/wanlong-church/service/commit/2731a76b23910fa7ddc3e3a478e51c6b194a4340))
+
 ## [0.4.3](https://github.com/wanlong-church/service/compare/v0.4.2...v0.4.3) (2024-12-05)
 
 
