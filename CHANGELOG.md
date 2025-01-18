@@ -1,5 +1,21 @@
 # Changelog
 
+## [0.4.5](https://github.com/wanlong-church/service/compare/v0.4.4...v0.4.5) (2025-01-18)
+
+
+### Build Related
+
+* **deps-dev:** bump @typescript-eslint/eslint-plugin ([#189](https://github.com/wanlong-church/service/issues/189)) ([17bc11a](https://github.com/wanlong-church/service/commit/17bc11ab09d4e1e6306555c4ef493697cad7a537))
+* **deps-dev:** bump eslint-config-next from 15.1.0 to 15.1.4 ([#191](https://github.com/wanlong-church/service/issues/191)) ([f55498c](https://github.com/wanlong-church/service/commit/f55498c0435d44de2b1f807998d1f7a6b6db998a))
+* **deps-dev:** bump eslint-config-next from 15.1.0 to 15.1.5 ([#195](https://github.com/wanlong-church/service/issues/195)) ([eb687b6](https://github.com/wanlong-church/service/commit/eb687b6d7174368496b7306582743da4ee9a968a))
+* **deps-dev:** bump tailwindcss from 3.4.16 to 3.4.17 ([#181](https://github.com/wanlong-church/service/issues/181)) ([c5c2b6e](https://github.com/wanlong-church/service/commit/c5c2b6ea36c1d573b2c501c8c72c3761a62f2f0f))
+* **deps:** bump @radix-ui/react-alert-dialog from 1.1.2 to 1.1.4 ([#177](https://github.com/wanlong-church/service/issues/177)) ([3052dc7](https://github.com/wanlong-church/service/commit/3052dc750b7d37424a50464f9fd0c077d82b07de))
+* **deps:** bump @radix-ui/react-label from 2.1.0 to 2.1.1 ([#178](https://github.com/wanlong-church/service/issues/178)) ([5e5cd94](https://github.com/wanlong-church/service/commit/5e5cd9406f70f75fb814be372e753298d2981614))
+* **deps:** bump @radix-ui/react-switch from 1.1.1 to 1.1.2 ([#176](https://github.com/wanlong-church/service/issues/176)) ([91a71d4](https://github.com/wanlong-church/service/commit/91a71d45e5a246d1328ab08e91883a7bef865f2a))
+* **deps:** bump framer-motion from 11.13.1 to 11.18.1 ([#193](https://github.com/wanlong-church/service/issues/193)) ([7505ec0](https://github.com/wanlong-church/service/commit/7505ec004aff8162467f7511c0b822bd2b1af24c))
+* **deps:** bump lucide-react from 0.468.0 to 0.471.1 ([#192](https://github.com/wanlong-church/service/issues/192)) ([4f69e65](https://github.com/wanlong-church/service/commit/4f69e653fb16ab3c53e50a3544f9e01f87c5c648))
+* **deps:** bump next from 15.1.0 to 15.1.5 ([#194](https://github.com/wanlong-church/service/issues/194)) ([bcf08f5](https://github.com/wanlong-church/service/commit/bcf08f5cfb130ea8df4962d8743b753116adbaf4))
+
 ## [0.4.4](https://github.com/wanlong-church/service/compare/v0.4.3...v0.4.4) (2024-12-17)
 
 
