@@ -1,5 +1,22 @@
 # Changelog
 
+## [0.4.6](https://github.com/wanlong-church/service/compare/v0.4.5...v0.4.6) (2025-02-27)
+
+
+### Build Related
+
+* **deps-dev:** bump @tanstack/eslint-plugin-query ([#219](https://github.com/wanlong-church/service/issues/219)) ([0835546](https://github.com/wanlong-church/service/commit/08355469ac56b9c9519adf7fbdf93c7770cc1438))
+* **deps-dev:** bump eslint from 9.16.0 to 9.21.0 ([#222](https://github.com/wanlong-church/service/issues/222)) ([4ea2ec9](https://github.com/wanlong-church/service/commit/4ea2ec9e0a91dda30128cee0caf0b5a1cdc20c60))
+* **deps-dev:** bump eslint-config-prettier from 9.1.0 to 10.0.1 ([#201](https://github.com/wanlong-church/service/issues/201)) ([02e75ac](https://github.com/wanlong-church/service/commit/02e75ac043494c9e49135f285ca6e4a3f134853d))
+* **deps-dev:** bump eslint-plugin-prettier from 5.2.1 to 5.2.3 ([#206](https://github.com/wanlong-church/service/issues/206)) ([5b8aceb](https://github.com/wanlong-church/service/commit/5b8acebaab6f69a59a8322ed2aaab79c88679a76))
+* **deps-dev:** bump globals from 15.13.0 to 16.0.0 ([#221](https://github.com/wanlong-church/service/issues/221)) ([4b169be](https://github.com/wanlong-church/service/commit/4b169be3f6367f24508898bdd8f992a3fd4a5967))
+* **deps:** bump @radix-ui/react-accordion from 1.2.1 to 1.2.3 ([#214](https://github.com/wanlong-church/service/issues/214)) ([a007fd9](https://github.com/wanlong-church/service/commit/a007fd987c465d331be46790881accfa21e9e5ae))
+* **deps:** bump @radix-ui/react-slot from 1.1.0 to 1.1.2 ([#212](https://github.com/wanlong-church/service/issues/212)) ([4ac605b](https://github.com/wanlong-church/service/commit/4ac605be5c503b1480db99fd66e0ab427b6b4c14))
+* **deps:** bump @tanstack/react-query-persist-client ([#220](https://github.com/wanlong-church/service/issues/220)) ([8176efb](https://github.com/wanlong-church/service/commit/8176efb8de62bc26794ca937e98a31cfc7a7ed5d))
+* **deps:** bump lucide-react from 0.471.1 to 0.475.0 ([#215](https://github.com/wanlong-church/service/issues/215)) ([8e106cb](https://github.com/wanlong-church/service/commit/8e106cb8121890c74e19baf5ec07cd2aabf054e7))
+* **deps:** bump the npm_and_yarn group across 1 directory with 3 updates ([#223](https://github.com/wanlong-church/service/issues/223)) ([b72477a](https://github.com/wanlong-church/service/commit/b72477a7a967e7eca62c99d0fbb84097c7e68585))
+* **deps:** bump zustand from 5.0.2 to 5.0.3 ([#204](https://github.com/wanlong-church/service/issues/204)) ([1913a7f](https://github.com/wanlong-church/service/commit/1913a7f1913633ab5f50273a8aacb88185c42736))
+
 ## [0.4.5](https://github.com/wanlong-church/service/compare/v0.4.4...v0.4.5) (2025-01-18)
 
 
