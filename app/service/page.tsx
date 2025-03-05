@@ -10,7 +10,7 @@ import { useUserStore } from '@/stores/useUserStore'
 import { useEffect } from 'react'
 
 export default function ServicesPage() {
-  const { data: sheetData, isLoading, isSuccess } = useGoogleSheet()
+  const { data: sheetData = [], isLoading, isSuccess } = useGoogleSheet()
   const router = useRouter()
   const pathname = usePathname()
   const searchParams = useSearchParams()
