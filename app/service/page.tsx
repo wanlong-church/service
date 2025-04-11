@@ -33,6 +33,6 @@ export default function ServicesPage() {
     return queryUser ? (
       <PersonalView data={sheetData} user={queryUser} />
     ) : (
-      <AllServiceView serviceData={sheetData} className="flex-grow pb-16" />
+      <AllServiceView serviceData={sheetData} className="grow pb-16" />
     )
 }
