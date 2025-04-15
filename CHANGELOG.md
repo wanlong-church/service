@@ -1,5 +1,28 @@
 # Changelog
 
+## [0.5.0](https://github.com/wanlong-church/service/compare/v0.4.6...v0.5.0) (2025-04-15)
+
+
+### Features
+
+* improve Google Sheet data fetching with robust error handling and Sentry reporting ([#226](https://github.com/wanlong-church/service/issues/226)) ([120df78](https://github.com/wanlong-church/service/commit/120df781784cfc15adadbc63afc6b56418f6246a))
+
+
+### Bug Fixes
+
+* prettier issues ([#274](https://github.com/wanlong-church/service/issues/274)) ([80b2ad9](https://github.com/wanlong-church/service/commit/80b2ad978c0bf25c7ad646a96ccfe5ef2ce8d2c8))
+
+
+### Build Related
+
+* **deps:** bump @radix-ui/react-alert-dialog from 1.1.4 to 1.1.6 ([#228](https://github.com/wanlong-church/service/issues/228)) ([cf795fe](https://github.com/wanlong-church/service/commit/cf795feb41074e99b2e46eb7f259bb1b404d8883))
+* **deps:** bump @tanstack/react-query-devtools from 5.62.7 to 5.66.11 ([#227](https://github.com/wanlong-church/service/issues/227)) ([0f3d032](https://github.com/wanlong-church/service/commit/0f3d032df4f064c270c649746bdb54dddc0c548b))
+
+
+### Chores
+
+* upgrade tailwind to 4 ([#262](https://github.com/wanlong-church/service/issues/262)) ([ff22b64](https://github.com/wanlong-church/service/commit/ff22b645e874ebb35e77ace64300c2582784b0b1))
+
 ## [0.4.6](https://github.com/wanlong-church/service/compare/v0.4.5...v0.4.6) (2025-02-27)
 
 
