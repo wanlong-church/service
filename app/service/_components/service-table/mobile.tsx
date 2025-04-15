@@ -63,7 +63,7 @@ function ServiceCard({ row }: { row: Row }) {
               <div className="w-1/2 text-left font-bold text-gray-600 dark:text-gray-400">
                 {COLUMN_MAPPING[key]}
               </div>
-              <div className="w-1/2 break-words text-left font-bold text-gray-800 dark:text-gray-200">
+              <div className="w-1/2 text-left font-bold break-words text-gray-800 dark:text-gray-200">
                 {row[key]}
               </div>
             </div>
