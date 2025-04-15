@@ -19,7 +19,7 @@ function ServiceTableRow({ row, index }: { row: Row; index: number }) {
       )}
     >
       {SHEET_FIELDS.map((key) => (
-        <TableCell key={key} className="whitespace-nowrap text-center font-bold dark:text-gray-300">
+        <TableCell key={key} className="text-center font-bold whitespace-nowrap dark:text-gray-300">
           {row[key]}
         </TableCell>
       ))}
@@ -36,7 +36,7 @@ export default function DesktopServiceTable({ rows }: { rows: Row[] }) {
             {SHEET_FIELDS.map((key) => (
               <TableHead
                 key={key}
-                className="whitespace-nowrap bg-gray-100 text-center font-bold dark:bg-gray-900 dark:text-gray-200"
+                className="bg-gray-100 text-center font-bold whitespace-nowrap dark:bg-gray-900 dark:text-gray-200"
               >
                 {COLUMN_MAPPING[key]}
               </TableHead>
