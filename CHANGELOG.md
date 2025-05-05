@@ -1,5 +1,28 @@
 # Changelog
 
+## [0.5.1](https://github.com/wanlong-church/service/compare/v0.5.0...v0.5.1) (2025-05-05)
+
+
+### Bug Fixes
+
+* service filter range exclude today ([#290](https://github.com/wanlong-church/service/issues/290)) ([96827b2](https://github.com/wanlong-church/service/commit/96827b2acfaaf7a13f90560f52fe4c3bd74afa4e))
+
+
+### Build Related
+
+* **deps-dev:** bump @eslint/js from 9.21.0 to 9.25.1 ([#284](https://github.com/wanlong-church/service/issues/284)) ([dbd608c](https://github.com/wanlong-church/service/commit/dbd608c62b1452efba1d1b549698d65ecf1bef52))
+* **deps-dev:** bump postcss from 8.4.49 to 8.5.3 ([#237](https://github.com/wanlong-church/service/issues/237)) ([42f4a75](https://github.com/wanlong-church/service/commit/42f4a75aa6c8dbe7163342e6402ed01b22208ca4))
+* **deps:** bump @babel/helpers from 7.26.0 to 7.27.0 ([#265](https://github.com/wanlong-church/service/issues/265)) ([6a408c8](https://github.com/wanlong-church/service/commit/6a408c87905b68c01f3e5e5a40cf8aa61231a054))
+* **deps:** bump @babel/runtime from 7.26.0 to 7.27.0 ([#263](https://github.com/wanlong-church/service/issues/263)) ([c359dbd](https://github.com/wanlong-church/service/commit/c359dbd3d0d3264a7f59ae9544a962268c72a100))
+* **deps:** bump @radix-ui/react-label from 2.1.1 to 2.1.4 ([#276](https://github.com/wanlong-church/service/issues/276)) ([3e9cb95](https://github.com/wanlong-church/service/commit/3e9cb95e09d0aa69797c66c5d853d1069a3f2794))
+* **deps:** bump @radix-ui/react-switch from 1.1.2 to 1.2.2 ([#282](https://github.com/wanlong-church/service/issues/282)) ([1a7eabe](https://github.com/wanlong-church/service/commit/1a7eabe5fde9eb5f9cdc131f8e4409eda204c70a))
+* **deps:** bump @tanstack/query-sync-storage-persister ([#289](https://github.com/wanlong-church/service/issues/289)) ([ae243b0](https://github.com/wanlong-church/service/commit/ae243b07b37e7b3f3ab37c6fbf22d957578dfc77))
+* **deps:** bump @tanstack/react-query from 5.66.11 to 5.74.7 ([#288](https://github.com/wanlong-church/service/issues/288)) ([0b2d78b](https://github.com/wanlong-church/service/commit/0b2d78b3fad6c105bdbbb955f72544f423695eb5))
+* **deps:** bump @tanstack/react-query-devtools from 5.66.11 to 5.74.7 ([#285](https://github.com/wanlong-church/service/issues/285)) ([fb2ee01](https://github.com/wanlong-church/service/commit/fb2ee0179d4259b730f324370c6124990e77609f))
+* **deps:** bump @tanstack/react-query-persist-client ([#287](https://github.com/wanlong-church/service/issues/287)) ([48eba04](https://github.com/wanlong-church/service/commit/48eba04e5f67cf6337ba2c39a2fc451e709d84e4))
+* **deps:** bump axios from 1.7.8 to 1.8.4 ([#264](https://github.com/wanlong-church/service/issues/264)) ([1a24fb4](https://github.com/wanlong-church/service/commit/1a24fb42fc13de04b850fd68a7f41db018803fe0))
+* **deps:** bump framer-motion from 11.18.1 to 12.9.2 ([#286](https://github.com/wanlong-church/service/issues/286)) ([97e5461](https://github.com/wanlong-church/service/commit/97e5461bd2fcad7dbb00218f15fe45a4d4ff7f7d))
+
 ## [0.5.0](https://github.com/wanlong-church/service/compare/v0.4.6...v0.5.0) (2025-04-15)
 
 
