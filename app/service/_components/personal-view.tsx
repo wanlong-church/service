@@ -1,6 +1,6 @@
 'use client'
 import { useMemo, useState } from 'react'
-import { subDays, compareAsc, isBefore } from 'date-fns'
+import { subDays, compareAsc, isBefore, isSameDay, isAfter } from 'date-fns'
 import { COLUMN_MAPPING, SERVICE_TYPES } from '@/app/const'
 import { GoogleSheetResponse, Row, ServiceRecord, ServiceType } from '@/app/type'
 import { Switch } from '@/components/ui/switch'
@@ -46,8 +46,9 @@ export default function PersonalView({
          **/
         const resolvedDate = key === 'prayer' ? subDays(new Date(date), 2) : new Date(date)
         const serviceRecord = { date: resolvedDate, type: key, user: restRow[key], title }
-        if (isBefore(resolvedDate, now)) pastServices.push(serviceRecord)
-        else newServices.push(serviceRecord)
+        if (isSameDay(resolvedDate, now) || isAfter(resolvedDate, now))
+          newServices.push(serviceRecord)
+        else pastServices.push(serviceRecord)
       })
     })
     newServices.sort((a, b) => compareAsc(a.date, b.date))
