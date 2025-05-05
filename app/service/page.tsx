@@ -30,7 +30,7 @@ export default function ServicesPage() {
  * 用於同步URL查詢參數和用戶名稱的狀態
  * @param isClient 是否在客戶端渲染
  */
-export function useSyncUserWithQuery(isClient: boolean): {
+function useSyncUserWithQuery(isClient: boolean): {
   /** 查詢參數中的用戶名稱  */
   queryUser: string | null
 } {
