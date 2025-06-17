@@ -1,5 +1,22 @@
 # Changelog
 
+## [0.5.2](https://github.com/wanlong-church/service/compare/v0.5.1...v0.5.2) (2025-06-17)
+
+
+### Build Related
+
+* **deps-dev:** bump @eslint/eslintrc from 3.3.0 to 3.3.1 ([#298](https://github.com/wanlong-church/service/issues/298)) ([f503cdf](https://github.com/wanlong-church/service/commit/f503cdf34c2993f78427ee5add98774aebe18a86))
+* **deps-dev:** bump @tanstack/eslint-plugin-query ([#320](https://github.com/wanlong-church/service/issues/320)) ([592d36c](https://github.com/wanlong-church/service/commit/592d36cdde65f3da4add828092cabd06640b63ee))
+* **deps-dev:** bump @typescript-eslint/eslint-plugin ([#326](https://github.com/wanlong-church/service/issues/326)) ([08fc774](https://github.com/wanlong-church/service/commit/08fc774310d5d127b31b300d42776581d736e962))
+* **deps-dev:** bump brace-expansion from 1.1.11 to 1.1.12 ([#325](https://github.com/wanlong-church/service/issues/325)) ([37e2775](https://github.com/wanlong-church/service/commit/37e277598f6d34d504f1afa4f223805b82b5be6f))
+* **deps-dev:** bump lint-staged from 15.2.10 to 16.1.2 ([#328](https://github.com/wanlong-church/service/issues/328)) ([975cee0](https://github.com/wanlong-church/service/commit/975cee074696de9e6603109c7fb743e56a24de71))
+* **deps:** bump @next/third-parties from 15.1.0 to 15.3.3 ([#318](https://github.com/wanlong-church/service/issues/318)) ([3b3bbb3](https://github.com/wanlong-church/service/commit/3b3bbb31f62974894614c26164d374909bea6f68))
+* **deps:** bump @radix-ui/react-slot from 1.1.2 to 1.2.3 ([#314](https://github.com/wanlong-church/service/issues/314)) ([059ee4d](https://github.com/wanlong-church/service/commit/059ee4d41b68349396f30717271c73734131167c))
+* **deps:** bump @radix-ui/react-toast from 1.2.2 to 1.2.14 ([#316](https://github.com/wanlong-church/service/issues/316)) ([efc1e2b](https://github.com/wanlong-church/service/commit/efc1e2b5e6ef3867f4fd523963705fbb43174657))
+* **deps:** bump @sentry/nextjs from 9.2.0 to 9.29.0 ([#327](https://github.com/wanlong-church/service/issues/327)) ([db6cd0c](https://github.com/wanlong-church/service/commit/db6cd0c7309b78696d5062ac6be3cc9db3225f2a))
+* **deps:** bump embla-carousel-react from 8.5.1 to 8.6.0 ([#296](https://github.com/wanlong-church/service/issues/296)) ([a74e944](https://github.com/wanlong-church/service/commit/a74e94480a9047ab9c007d1704b21d1a0d1e6501))
+* **deps:** bump next from 15.1.6 to 15.3.3 ([#319](https://github.com/wanlong-church/service/issues/319)) ([eafd722](https://github.com/wanlong-church/service/commit/eafd7220b81be9a62f3ca446f5eff5afaa7e2797))
+
 ## [0.5.1](https://github.com/wanlong-church/service/compare/v0.5.0...v0.5.1) (2025-05-05)
 
 
