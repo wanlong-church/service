@@ -14,6 +14,14 @@ $ npm run dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
+### 年度更新（例：移除 2024、加入 2026）
+
+服務表會同時讀取 `MAIN_SPREAD_SHEET_ID`（當年度）與 `NEXT_YEAR_SPREAD_SHEET_ID`（下一年度）。年底換年度時：
+
+1. 將 `.env` 的 `MAIN_SPREAD_SHEET_ID` 設成 2025 的表單 ID（通常是原本的 `NEXT_YEAR_SPREAD_SHEET_ID` 值）。
+2. 將 `.env` 的 `NEXT_YEAR_SPREAD_SHEET_ID` 設成 2026 的表單 ID：`1F8NSEpo2w9TSQMVRrB4mij69wqluljL3Z8jpBaWIsaU`。
+3. 重新部署（或在 Vercel/GAE 上更新環境變數後重啟服務），新的 UI 連結與資料就會改讀 2025+2026，不會再載入 2024。
+
 ## 目錄結構
 
 ```
