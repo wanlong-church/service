@@ -6,7 +6,7 @@
     "dev": "next dev --turbopack -H 0.0.0.0",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint --fix --dir pages --dir app --dir components --dir lib --dir layouts --dir scripts && tsc",
+    "lint": "eslint --fix app components lib providers stores hooks && tsc",
     "prepare": "husky"
   },
   "lint-staged": {
@@ -21,7 +21,7 @@
     ]
   },
   "dependencies": {
-    "@next/third-parties": "^15.3.3",
+    "@next/third-parties": "^16.2.9",
     "@radix-ui/react-accordion": "^1.2.12",
     "@radix-ui/react-alert-dialog": "^1.1.16",
     "@radix-ui/react-dialog": "^1.1.2",
@@ -43,7 +43,7 @@
     "google-spreadsheet": "^4.1.2",
     "googleapis": "^166.0.0",
     "lucide-react": "^0.475.0",
-    "next": "15.5.18",
+    "next": "^16.2.9",
     "next-pwa": "^5.6.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
@@ -53,21 +53,15 @@
     "zustand": "^5.0.3"
   },
   "devDependencies": {
-    "@eslint/eslintrc": "^3.3.1",
-    "@eslint/js": "^9.25.1",
     "@tailwindcss/postcss": "^4.1.17",
-    "@tanstack/eslint-plugin-query": "^5.78.0",
     "@types/next-pwa": "^5.6.9",
     "@types/node": "^20.16.3",
     "@types/react": "^18.3.12",
     "@types/react-dom": "^18.3.1",
-    "@typescript-eslint/eslint-plugin": "^8.34.0",
-    "eslint": "^9.21.0",
-    "eslint-config-next": "15.1.5",
+    "eslint": "^9.39.4",
+    "eslint-config-next": "^16.2.9",
     "eslint-config-prettier": "^10.0.1",
-    "eslint-plugin-jsx-a11y": "^6.10.2",
     "eslint-plugin-prettier": "^5.5.4",
-    "globals": "^17.6.0",
     "husky": "^9.1.7",
     "lint-staged": "^16.1.2",
     "postcss": "^8.5.15",
