@@ -1,5 +1,32 @@
 # Changelog
 
+## [0.5.4](https://github.com/wanlong-church/service/compare/v0.5.3...v0.5.4) (2026-06-15)
+
+
+### Build Related
+
+* **deps-dev:** bump globals from 16.0.0 to 17.6.0 ([#423](https://github.com/wanlong-church/service/issues/423)) ([cbdca58](https://github.com/wanlong-church/service/commit/cbdca5823c51a7268a23de1842d7f75ca056005a))
+* **deps-dev:** bump minimatch from 3.1.2 to 3.1.5 ([#442](https://github.com/wanlong-church/service/issues/442)) ([ce0a588](https://github.com/wanlong-church/service/commit/ce0a588501dee40cd82657cb5f4765ec184d601b))
+* **deps-dev:** bump postcss from 8.5.3 to 8.5.15 ([#421](https://github.com/wanlong-church/service/issues/421)) ([c8792c0](https://github.com/wanlong-church/service/commit/c8792c05a032f4c0984bd5d48b8375830048344f))
+* **deps-dev:** bump prettier-plugin-tailwindcss to 0.8.0 ([#426](https://github.com/wanlong-church/service/issues/426)) ([617a978](https://github.com/wanlong-church/service/commit/617a9780c575ffce061c8ddece042ceee37c1d8e))
+* **deps:** bump @babel/plugin-transform-modules-systemjs ([#446](https://github.com/wanlong-church/service/issues/446)) ([20c5787](https://github.com/wanlong-church/service/commit/20c57873a791bbcaa70aa91518656b1f1d401ab1))
+* **deps:** bump @radix-ui/react-alert-dialog from 1.1.6 to 1.1.16 ([#424](https://github.com/wanlong-church/service/issues/424)) ([98a9198](https://github.com/wanlong-church/service/commit/98a9198989b231e61fbafa88528e9072c14591dd))
+* **deps:** bump @radix-ui/react-toast from 1.2.14 to 1.2.16 ([#422](https://github.com/wanlong-church/service/issues/422)) ([47c8ff2](https://github.com/wanlong-church/service/commit/47c8ff2d7fbf11c96267b25333292568e7a0807a))
+* **deps:** bump @tanstack/query-sync-storage-persister ([#427](https://github.com/wanlong-church/service/issues/427)) ([8484883](https://github.com/wanlong-church/service/commit/8484883b3d0671fe417e84147adaedeb5c53258c))
+* **deps:** bump ajv from 6.12.6 to 6.14.0 ([#439](https://github.com/wanlong-church/service/issues/439)) ([923c083](https://github.com/wanlong-church/service/commit/923c0833b865f765a6676ea39d2881b06e8c2419))
+* **deps:** bump axios from 1.12.2 to 1.18.0 ([#443](https://github.com/wanlong-church/service/issues/443)) ([84a4e20](https://github.com/wanlong-church/service/commit/84a4e207b654c234d0781fa2b69c59787433b1ab))
+* **deps:** bump fast-uri from 3.0.3 to 3.1.2 ([#447](https://github.com/wanlong-church/service/issues/447)) ([530b093](https://github.com/wanlong-church/service/commit/530b093b41d95048c13d6a1fbcb43b91ec816f39))
+* **deps:** bump googleapis from 144.0.0 to 166.0.0 ([#420](https://github.com/wanlong-church/service/issues/420)) ([c7ea1de](https://github.com/wanlong-church/service/commit/c7ea1de6648e2bd231c4f364f9a7980cec05585c))
+* **deps:** bump jws from 4.0.0 to 4.0.1 ([#430](https://github.com/wanlong-church/service/issues/430)) ([26364a9](https://github.com/wanlong-church/service/commit/26364a919e5beda9b4afbce35dea6beb8ca0bc08))
+* **deps:** bump lodash from 4.17.21 to 4.17.23 ([#433](https://github.com/wanlong-church/service/issues/433)) ([e39bbad](https://github.com/wanlong-church/service/commit/e39bbad99d47cf079c90e5ed9a8ea6e128c98134))
+* **deps:** bump next ([#435](https://github.com/wanlong-church/service/issues/435)) ([ab63fd8](https://github.com/wanlong-church/service/commit/ab63fd8088e116ec641daf6d3e4371acdea71398))
+* **deps:** bump next from 15.5.12 to 15.5.18 ([#445](https://github.com/wanlong-church/service/issues/445)) ([3ace390](https://github.com/wanlong-church/service/commit/3ace39006b3eea6ea035ddeaff0797b3c5d2cac4))
+* **deps:** bump qs from 6.13.1 to 6.14.2 ([#438](https://github.com/wanlong-church/service/issues/438)) ([e43bf1b](https://github.com/wanlong-church/service/commit/e43bf1b59a4a578a894d0eb1ff9b575499243947))
+* **deps:** bump qs from 6.14.2 to 6.15.2 ([#444](https://github.com/wanlong-church/service/issues/444)) ([852519e](https://github.com/wanlong-church/service/commit/852519e5671ce314aa46cfcb21f233bd5afb0f42))
+* **deps:** bump rollup ([#441](https://github.com/wanlong-church/service/issues/441)) ([2c069a5](https://github.com/wanlong-church/service/commit/2c069a55eeccddf35a71e70da3c6f5ae29dd04d8))
+* **deps:** bump webpack from 5.96.1 to 5.105.0 ([#436](https://github.com/wanlong-church/service/issues/436)) ([0ad5cd2](https://github.com/wanlong-church/service/commit/0ad5cd23153296481d1ed56c76734f58469d1398))
+* **deps:** upgrade to Next 16 and migrate ESLint to flat config ([#448](https://github.com/wanlong-church/service/issues/448)) ([ce4982b](https://github.com/wanlong-church/service/commit/ce4982b6b0f757ad7471c2e5cf370903f6a5d2d5))
+
 ## [0.5.3](https://github.com/wanlong-church/service/compare/v0.5.2...v0.5.3) (2025-11-25)
 
 
