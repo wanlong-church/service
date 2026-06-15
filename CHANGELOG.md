@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.5.7](https://github.com/wanlong-church/service/compare/v0.5.6...v0.5.7) (2026-06-15)
+
+
+### Build Related
+
+* **deps:** bump @opentelemetry/core and @sentry/nextjs ([#454](https://github.com/wanlong-church/service/issues/454)) ([fbd48c3](https://github.com/wanlong-church/service/commit/fbd48c3d197c5681d50640baa631454fcbba0143))
+
+
+### Chores
+
+* **deps:** upgrade Node runtime to 24 and align tooling ([#455](https://github.com/wanlong-church/service/issues/455)) ([4e51504](https://github.com/wanlong-church/service/commit/4e5150400a55cb063236cd50ef353a0f5f80521b))
+
 ## [0.5.6](https://github.com/wanlong-church/service/compare/v0.5.5...v0.5.6) (2026-06-15)
 
 
