@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.5.5](https://github.com/wanlong-church/service/compare/v0.5.4...v0.5.5) (2026-06-15)
+
+
+### Bug Fixes
+
+* **deploy:** build standalone output with webpack instead of Turbopack ([#450](https://github.com/wanlong-church/service/issues/450)) ([cb82c1e](https://github.com/wanlong-church/service/commit/cb82c1e9d44149fcdba9c81275ded42d76bfcc52))
+
 ## [0.5.4](https://github.com/wanlong-church/service/compare/v0.5.3...v0.5.4) (2026-06-15)
 
 
