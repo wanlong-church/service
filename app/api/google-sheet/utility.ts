@@ -82,7 +82,11 @@ function createGoogleSheetClient({
         })
     )
   }
-  const client = new google.auth.JWT(clientEmail, undefined, privateKey, [driveEndpoint])
+  const client = new google.auth.JWT({
+    email: clientEmail,
+    key: privateKey,
+    scopes: [driveEndpoint],
+  })
   return google.sheets({ version: 'v4', auth: client })
 }
 
