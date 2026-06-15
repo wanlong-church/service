@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.5.6](https://github.com/wanlong-church/service/compare/v0.5.5...v0.5.6) (2026-06-15)
+
+
+### Bug Fixes
+
+* **deploy:** upgrade to the Node.js 22 runtime ([#452](https://github.com/wanlong-church/service/issues/452)) ([03e7e8c](https://github.com/wanlong-church/service/commit/03e7e8c1c6e11cfd3fdd2191b547e9ee9ab40c57))
+
 ## [0.5.5](https://github.com/wanlong-church/service/compare/v0.5.4...v0.5.5) (2026-06-15)
 
 
