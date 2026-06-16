@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.5.8](https://github.com/wanlong-church/service/compare/v0.5.7...v0.5.8) (2026-06-16)
+
+
+### Chores
+
+* **deps:** remove unused dependencies ([#458](https://github.com/wanlong-church/service/issues/458)) ([cbc77bd](https://github.com/wanlong-church/service/commit/cbc77bd3e16263855f4ecc5db8edb36877df80d8))
+* **deps:** upgrade React to 19 ([#457](https://github.com/wanlong-church/service/issues/457)) ([4bf4b1e](https://github.com/wanlong-church/service/commit/4bf4b1e9d8e498db49d7648ca48a35714b527180))
+
 ## [0.5.7](https://github.com/wanlong-church/service/compare/v0.5.6...v0.5.7) (2026-06-15)
 
 
