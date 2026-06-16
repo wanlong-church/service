@@ -48,12 +48,12 @@ export default function ServiceCard({ service }: { service: ServiceRecord }) {
           {service.date.toLocaleDateString()} {service.title}
         </CardTitle>
         <CardDescription>
-          <p>
+          <span className="block">
             {COLUMN_MAPPING[service.type]}: {service.user}
-          </p>
-          <p>
+          </span>
+          <span className="block">
             {SERVICE_META[service.type].time.start} - {SERVICE_META[service.type].time.end}
-          </p>
+          </span>
         </CardDescription>
       </CardHeader>
       <CardContent>
