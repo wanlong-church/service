@@ -1,10 +1,14 @@
 /** @type {import('next').NextConfig} */
 
-import nextPwa from 'next-pwa'
+import withSerwistInit from '@serwist/next'
 import { withSentryConfig } from '@sentry/nextjs'
 
-const withPWA = nextPwa({
-  dest: 'public',
+const withSerwist = withSerwistInit({
+  swSrc: 'app/sw.ts',
+  swDest: 'public/sw.js',
+  // Disable the service worker in development so it doesn't fight HMR.
+  disable: process.env.NODE_ENV === 'development',
+  additionalPrecacheEntries: [{ url: '/~offline', revision: null }],
 })
 
 let nextConfig = {
@@ -31,4 +35,4 @@ const sentryOptions = {
 
 nextConfig = withSentryConfig(nextConfig, sentryWebpackPluginOptions, sentryOptions)
 
-export default process.env.NODE_ENV === 'development' ? nextConfig : withPWA(nextConfig)
+export default withSerwist(nextConfig)

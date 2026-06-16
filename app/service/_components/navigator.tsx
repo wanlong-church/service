@@ -15,7 +15,7 @@ export default function Navigator() {
   const searchParams = useSearchParams()
   const onPersonalPage = pathname === '/service' && !!searchParams.get('user')
   return (
-    <div className="flex h-16 items-center justify-center space-x-5 border-b bg-gray-200 p-3">
+    <div className="flex min-h-16 items-center justify-center space-x-5 border-b bg-gray-200 px-3 pt-3 pb-[calc(0.75rem+env(safe-area-inset-bottom))]">
       <SyncButton />
       {user && !onPersonalPage ? (
         <Button asChild>

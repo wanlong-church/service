@@ -3,9 +3,26 @@
   "short_name": "服事表",
   "theme_color": "#FFFFFF",
   "background_color": "#FFFFFF",
+  "id": "/",
   "start_url": "/",
   "display": "standalone",
   "orientation": "portrait",
+  "categories": ["productivity"],
+  "shortcuts": [
+    {
+      "name": "看總表",
+      "short_name": "總表",
+      "description": "查看完整服事表",
+      "url": "/service",
+      "icons": [
+        {
+          "src": "/android/android-launchericon-192-192.png",
+          "sizes": "192x192",
+          "type": "image/png"
+        }
+      ]
+    }
+  ],
   "icons": [
     {
       "src": "/windows11/SmallTile.scale-100.png",

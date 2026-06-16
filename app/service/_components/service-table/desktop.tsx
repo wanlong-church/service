@@ -30,7 +30,7 @@ function ServiceTableRow({ row, index }: { row: Row; index: number }) {
 export default function DesktopServiceTable({ rows }: { rows: Row[] }) {
   return (
     <div className="w-full overflow-auto dark:bg-gray-800">
-      <Table>
+      <Table className="text-base">
         <TableHeader>
           <TableRow className="dark:border-gray-700">
             {SHEET_FIELDS.map((key) => (
