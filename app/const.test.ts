@@ -13,14 +13,9 @@ describe('QUERY_KEY', () => {
     vi.resetModules()
     vi.stubEnv('NEXT_PUBLIC_MAIN_SPREAD_SHEET_ID', 'sheet-2027')
     const next = await loadQueryKey()
+    expect(next.GOOGLE_SHEET).toBe('GOOGLE_SHEET_sheet-2027')
+    expect(next.GOOGLE_SHEET_URL).toBe('GOOGLE_SHEET_URL_sheet-2027')
     expect(next.GOOGLE_SHEET).not.toBe(current.GOOGLE_SHEET)
     expect(next.GOOGLE_SHEET_URL).not.toBe(current.GOOGLE_SHEET_URL)
-  })
-
-  it('inlines the configured sheet ID instead of leaving undefined in the key', async () => {
-    vi.stubEnv('NEXT_PUBLIC_MAIN_SPREAD_SHEET_ID', 'sheet-2026')
-    const { QUERY_KEY } = await import('./const')
-    expect(QUERY_KEY.GOOGLE_SHEET).not.toContain('undefined')
-    expect(QUERY_KEY.GOOGLE_SHEET_URL).not.toContain('undefined')
   })
 })
