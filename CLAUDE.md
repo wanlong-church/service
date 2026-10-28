@@ -44,6 +44,7 @@ npm test                             # vitest run
    - Unknown headers (貝士, 鼓) are dropped.
    - A field with no header gets a Sentry warning.
    - Rows with a blank date are skipped. Rows with an unparseable date (such as `#REF!`) are dropped and reported to Sentry.
+   - A mapped cell holding a spreadsheet error value (`#REF!`, `#N/A`, ...) is replaced with `''` and recorded in `issues` with its A1 reference; `utility.ts` reports these to Sentry too.
    - A file with no header or no valid rows throws `SheetError` `NO_VALID_ROWS`.
    - Rows from both files are merged and sorted newest first.
 4. `app/api/google-sheet/url/route.ts` returns the two sheets' edit URLs.
@@ -65,7 +66,7 @@ npm test                             # vitest run
 
 `providers/query-client-provider.tsx` persists the React Query cache to localStorage with a 7-day `staleTime` and infinite `gcTime`, so data is normally served from cache. The sync button (`app/service/_components/sync-button.tsx`) forces a refetch. Query errors show as toasts.
 
-`QUERY_KEY` embeds `process.env.MAIN_SPREAD_SHEET_ID`. That variable is not `NEXT_PUBLIC_`, so it is likely `undefined` in the browser bundle and the key does not change when the sheet changes.
+`next.config.mjs` inlines `NEXT_PUBLIC_APP_VERSION` (from `package.json`) as the persist `buster`, so a deploy drops old persisted payloads, and `NEXT_PUBLIC_MAIN_SPREAD_SHEET_ID`, which `QUERY_KEY` embeds so a year rollover (a new sheet ID, no version bump) also invalidates the cache.
 
 ### Pages
 

@@ -147,10 +147,12 @@ export const SERVICE_META: Record<ServiceType, ServiceMeta> = {
 }
 
 //#region React Query 相關變數
+// NEXT_PUBLIC_MAIN_SPREAD_SHEET_ID is inlined at build time by next.config.mjs, so the key
+// changes when the sheet changes (a year rollover), even without a version bump
 export const QUERY_KEY = {
   /** The key for useGoogleSheet, ensures that data is invalidated when the sheet is updated */
-  GOOGLE_SHEET: `GOOGLE_SHEET_${process.env.MAIN_SPREAD_SHEET_ID}`,
+  GOOGLE_SHEET: `GOOGLE_SHEET_${process.env.NEXT_PUBLIC_MAIN_SPREAD_SHEET_ID}`,
   /** The key for useGoogleSheetUrl, ensures that data is invalidated when the sheet is updated */
-  GOOGLE_SHEET_URL: `GOOGLE_SHEET_URL_${process.env.MAIN_SPREAD_SHEET_ID}`,
+  GOOGLE_SHEET_URL: `GOOGLE_SHEET_URL_${process.env.NEXT_PUBLIC_MAIN_SPREAD_SHEET_ID}`,
 } as const
 //#endregion

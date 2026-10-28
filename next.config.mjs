@@ -1,7 +1,11 @@
 /** @type {import('next').NextConfig} */
 
+import { createRequire } from 'module'
 import withSerwistInit from '@serwist/next'
 import { withSentryConfig } from '@sentry/nextjs'
+
+const require = createRequire(import.meta.url)
+const { version } = require('./package.json')
 
 const withSerwist = withSerwistInit({
   swSrc: 'app/sw.ts',
@@ -12,7 +16,11 @@ const withSerwist = withSerwistInit({
 })
 
 let nextConfig = {
-  env: {},
+  // Inlined into the client bundle: the persisted-cache buster and the query-key sheet ID
+  env: {
+    NEXT_PUBLIC_APP_VERSION: version,
+    NEXT_PUBLIC_MAIN_SPREAD_SHEET_ID: process.env.MAIN_SPREAD_SHEET_ID ?? '',
+  },
   devIndicators: {
     autoPrerender: false,
   },

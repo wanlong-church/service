@@ -46,7 +46,12 @@ export default function ReactQueryProvider({ children }: { children: React.React
   }, [toast])
 
   return (
-    <PersistQueryClientProvider client={queryClient} persistOptions={{ persister: persister }}>
+    <PersistQueryClientProvider
+      client={queryClient}
+      // A new app version invalidates the persisted cache, so a deploy never
+      // hydrates a payload stored by an older build
+      persistOptions={{ persister: persister, buster: process.env.NEXT_PUBLIC_APP_VERSION }}
+    >
       {children}
       <ReactQueryDevtools />
     </PersistQueryClientProvider>
