@@ -1,5 +1,8 @@
 import { ServiceLink, ServiceTime, ServiceType, SheetField } from './type'
 
+/** 服事總表的分頁名稱，網站只讀取這個分頁 */
+export const SHEET_TAB = '總表'
+
 /** 服事總表表頭順序 */
 export const SERVICE_TYPES = [
   'speaker',
@@ -51,15 +54,11 @@ export const COLUMN_MAPPING: Record<SheetField, string> = {
   sundaySchool2Topic: '(初小級)聚會內容',
 }
 
-export const COLUMN_MAPPING_REVERSE: Record<string, SheetField> = Object.entries(
-  COLUMN_MAPPING
-).reduce(
-  (acc, [key, value]) => {
-    acc[value] = key as SheetField
-    return acc
-  },
-  {} as Record<string, SheetField>
-)
+/** 同一欄位在表單中的其他寫法，例如分頁名稱「愛宴」與總表表頭「愛筵」 */
+export const COLUMN_ALIASES: Partial<Record<SheetField, string[]>> = {
+  soundControl: ['音控'],
+  meal: ['愛宴'],
+}
 
 /** 服事相關資料 */
 const ATTEND_PRAYER = '提早到場，參加 9：50 分會前禱告'

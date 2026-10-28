@@ -12,18 +12,16 @@ import { useEffect } from 'react'
 
 export default function ServicesPage() {
   // 數據和客戶端狀態
-  const { data: sheetData = [], isLoading, isSuccess } = useGoogleSheet()
+  const { data: sheetData, isLoading } = useGoogleSheet()
   const isClient = useIsClient()
   const { queryUser } = useSyncUserWithQuery(isClient)
-  if (!isClient || isLoading) return <Loading />
-  if (isSuccess)
-    return queryUser ? (
-      <PersonalView data={sheetData} user={queryUser} />
-    ) : (
-      <AllServiceView serviceData={sheetData} className="grow pb-16" />
-    )
-
-  return <Loading />
+  // 只要有資料就顯示，包含同步失敗但仍保有快取資料的情況
+  if (!isClient || isLoading || !sheetData) return <Loading />
+  return queryUser ? (
+    <PersonalView data={sheetData} user={queryUser} />
+  ) : (
+    <AllServiceView serviceData={sheetData} className="grow pb-16" />
+  )
 }
 
 /**
