@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.6.2](https://github.com/wanlong-church/service/compare/v0.6.1...v0.6.2) (2026-10-28)
+
+
+### Bug Fixes
+
+* tolerate roster sheet drift and keep the last good data ([#503](https://github.com/wanlong-church/service/issues/503)) ([e1d660b](https://github.com/wanlong-church/service/commit/e1d660b3821e7af993f8c32269580266183b2d35))
+
 ## [0.6.1](https://github.com/wanlong-church/service/compare/v0.6.0...v0.6.1) (2026-10-28)
 
 
