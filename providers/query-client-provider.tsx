@@ -18,9 +18,10 @@ export default function ReactQueryProvider({ children }: { children: React.React
           gcTime: Infinity,
         },
         dehydrate: {
-          // include pending queries in dehydration
-          shouldDehydrateQuery: (query) =>
-            defaultShouldDehydrateQuery(query) || query.state.status === 'pending',
+          // Only persist successful queries. A pending query carries a Promise,
+          // which JSON.stringify turns into `{}`; persist-client's hydrate() then
+          // calls `.then()` on it, throws, and wipes the whole persisted cache.
+          shouldDehydrateQuery: (query) => defaultShouldDehydrateQuery(query),
         },
       },
       queryCache: new QueryCache({
