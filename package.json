@@ -63,7 +63,7 @@
     "prettier-plugin-tailwindcss": "^0.8.0",
     "serwist": "^9.5.11",
     "tailwindcss": "^4.1.17",
-    "typescript": "^5.7.2"
+    "typescript": "^6.0.3"
   },
   "engines": {
     "npm": ">=10.0.0",
