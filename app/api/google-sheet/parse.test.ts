@@ -156,7 +156,7 @@ describe('parseRosterSheet', () => {
         [],
         HEADER,
         dataRow(HEADER, '1/4/2026'), // row 3
-        dataRow(HEADER, '#REF!'), // row 4
+        dataRow(HEADER, 'not-a-date'), // row 4
         [], // row 5
         dataRow(HEADER, ''), // row 6
         dataRow(HEADER, '1/18/2026'), // row 7
@@ -164,7 +164,80 @@ describe('parseRosterSheet', () => {
       'current'
     )
     expect(rows.map((row) => row.date)).toEqual(['1/4/2026', '1/18/2026'])
-    expect(invalidDates).toEqual([{ rowNumber: 4, value: '#REF!' }])
+    expect(invalidDates).toEqual([{ rowNumber: 4, value: 'not-a-date' }])
+  })
+
+  it('treats every spreadsheet error value as empty and records an issue', () => {
+    // One error value per mapped column, in header order after 日期
+    const errors: [string, string][] = [
+      ['講員', '#REF!'],
+      ['領會', '#N/A'],
+      ['擘餅', '#VALUE!'],
+      ['司琴', '#DIV/0!'],
+      ['合音1', '#NAME?'],
+      ['合音2', '#NUM!'],
+      ['吉他', '#ERROR!'],
+      ['投影片', '#NULL!'],
+    ]
+    const cells = [...dataRow(HEADER, '1/4/2026')]
+    errors.forEach(([header, value]) => {
+      cells[HEADER.indexOf(header)] = value
+    })
+    const { rows, issues } = parseRosterSheet([[], HEADER, cells], 'current')
+    expect(rows).toHaveLength(1)
+    errors.forEach(([header, value]) => {
+      const field = SHEET_FIELDS.find((f) => COLUMN_MAPPING[f] === header)!
+      const column = HEADER.indexOf(header)
+      expect(rows[0][field]).toBe('')
+      expect(issues).toContainEqual({
+        sheet: 'current',
+        rowNumber: 3,
+        date: '1/4/2026',
+        field,
+        cell: `總表!${String.fromCharCode(65 + column)}3`,
+        value,
+      })
+    })
+    expect(issues).toHaveLength(8)
+  })
+
+  it('reports an error date cell as an issue and drops the row without an invalidDates entry', () => {
+    const { rows, invalidDates, issues } = parseRosterSheet(
+      [[], HEADER, dataRow(HEADER, '1/4/2026'), dataRow(HEADER, '#REF!')],
+      'current'
+    )
+    expect(rows.map((row) => row.date)).toEqual(['1/4/2026'])
+    expect(invalidDates).toEqual([])
+    expect(issues).toEqual([
+      { sheet: 'current', rowNumber: 4, date: '', field: 'date', cell: '總表!A4', value: '#REF!' },
+    ])
+  })
+
+  it('leaves non-error values that merely start with # alone', () => {
+    const cells = [...dataRow(HEADER, '1/4/2026')]
+    cells[HEADER.indexOf('講員')] = '#hashtag'
+    const { rows, issues } = parseRosterSheet([[], HEADER, cells], 'current')
+    expect(rows[0].speaker).toBe('#hashtag')
+    expect(issues).toEqual([])
+  })
+
+  it('reports the shifted cell reference when a column is inserted', () => {
+    const header = ['備註', ...HEADER]
+    const cells = [...dataRow(header, '1/4/2026')]
+    // 兒主中年級 moves from column M to N under the inserted 備註
+    cells[header.indexOf('兒主中年級')] = '#N/A'
+    const { rows, issues } = parseRosterSheet([[], header, cells], 'current')
+    expect(rows[0].sundaySchool1).toBe('')
+    expect(issues).toEqual([
+      {
+        sheet: 'current',
+        rowNumber: 3,
+        date: '1/4/2026',
+        field: 'sundaySchool1',
+        cell: '總表!N3',
+        value: '#N/A',
+      },
+    ])
   })
 
   it('uses the first column when two headers match the same field', () => {

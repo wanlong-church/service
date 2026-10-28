@@ -7,6 +7,12 @@ import { SHEET_LABEL, SheetError } from './errors'
 const HEADER_SEARCH_ROWS = 5
 
 /**
+ * A cell value that Google Sheets renders for a broken formula, e.g. #REF! from a
+ * cross-tab reference whose row was deleted. Never a person's name or a date.
+ */
+const SPREADSHEET_ERROR = /^#(REF!|N\/A|VALUE!|DIV\/0!|NAME\?|NUM!|ERROR!|NULL!)/
+
+/**
  * The result of parsing one sheet's 總表 tab.
  */
 export type ParsedSheet = {
@@ -18,6 +24,33 @@ export type ParsedSheet = {
   unmatchedHeaders: string[]
   /** Rows dropped because their date is not empty but cannot be parsed. */
   invalidDates: { rowNumber: number; value: string }[]
+  /** Cells whose spreadsheet error value was replaced with an empty string. */
+  issues: SheetIssue[]
+}
+
+/** One cell that held a spreadsheet error value such as #REF!. */
+export type SheetIssue = {
+  sheet: GoogleSheetYear
+  /** The 1-based row number in the sheet. */
+  rowNumber: number
+  /** The row's date cell value; '' when the date cell itself is the error. */
+  date: string
+  field: SheetField
+  /** An A1 reference into the sheet, e.g. 總表!M54. */
+  cell: string
+  /** The original error value, e.g. '#REF!'. */
+  value: string
+}
+
+/** Turns a zero-based column index into A1 letters (the sheet range is A:Z, so usually one letter) */
+function toColumnLetters(column: number): string {
+  let letters = ''
+  let index = column
+  while (index >= 0) {
+    letters = String.fromCharCode((index % 26) + 65) + letters
+    index = Math.floor(index / 26) - 1
+  }
+  return letters
 }
 
 /**
@@ -71,18 +104,43 @@ export function parseRosterSheet(values: string[][], sheet: GoogleSheetYear): Pa
 
   const rows: Row[] = []
   const invalidDates: ParsedSheet['invalidDates'] = []
+  const issues: SheetIssue[] = []
+  // The date field is always mapped: the header was found by its 日期 cell
+  const dateColumn = fieldColumns.get('date')!
   values.slice(headerIndex + 1).forEach((cells, offset) => {
-    const row = {} as Row
-    fieldColumns.forEach((column, field) => {
-      row[field] = cells[column]
-    })
-    // Skip blank rows without reporting them
-    if (!row.date?.trim()) return
-    // Drop and report rows whose date cannot be parsed (e.g., #REF!)
-    if (!isValid(new Date(row.date))) {
-      invalidDates.push({ rowNumber: headerIndex + offset + 2, value: row.date })
+    const rowNumber = headerIndex + offset + 2
+    // Read the date cell directly; header order is not guaranteed, so row.date may not be set yet
+    const dateCell = cells[dateColumn] ?? ''
+    const cellRef = (column: number) => `${SHEET_TAB}!${toColumnLetters(column)}${rowNumber}`
+    // A date cell holding an error value counts as blank: report it and drop the row
+    if (SPREADSHEET_ERROR.test(dateCell)) {
+      issues.push({
+        sheet,
+        rowNumber,
+        date: '',
+        field: 'date',
+        cell: cellRef(dateColumn),
+        value: dateCell,
+      })
       return
     }
+    // Skip blank rows without reporting them
+    if (!dateCell.trim()) return
+    // Drop and report rows whose date cannot be parsed
+    if (!isValid(new Date(dateCell))) {
+      invalidDates.push({ rowNumber, value: dateCell })
+      return
+    }
+    const row = {} as Row
+    fieldColumns.forEach((column, field) => {
+      const value = cells[column] ?? ''
+      if (SPREADSHEET_ERROR.test(value)) {
+        issues.push({ sheet, rowNumber, date: dateCell, field, cell: cellRef(column), value })
+        row[field] = ''
+      } else {
+        row[field] = value
+      }
+    })
     rows.push(row)
   })
   if (rows.length === 0) {
@@ -93,5 +151,5 @@ export function parseRosterSheet(values: string[][], sheet: GoogleSheetYear): Pa
     )
   }
 
-  return { rows, missingFields, unmatchedHeaders, invalidDates }
+  return { rows, missingFields, unmatchedHeaders, invalidDates, issues }
 }

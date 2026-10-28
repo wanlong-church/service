@@ -82,7 +82,7 @@ async function fetchSheetRows(
  * grouped by sheet and problem.
  */
 function reportSheetProblems(
-  { missingFields, unmatchedHeaders, invalidDates }: ParsedSheet,
+  { missingFields, unmatchedHeaders, invalidDates, issues }: ParsedSheet,
   sheet: GoogleSheetYear
 ) {
   if (missingFields.length > 0) {
@@ -106,6 +106,15 @@ function reportSheetProblems(
       tags: { sheet },
       extra: { invalidDates },
       fingerprint: ['sheet-invalid-dates', sheet],
+    })
+  }
+  if (issues.length > 0) {
+    console.warn(`${SHEET_TAB} has spreadsheet error values:`, { sheet, issues })
+    Sentry.captureMessage(`${SHEET_TAB} has spreadsheet error values`, {
+      level: 'warning',
+      tags: { sheet },
+      extra: { issues },
+      fingerprint: ['sheet-error-values', sheet],
     })
   }
 }
