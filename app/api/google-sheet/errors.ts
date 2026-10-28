@@ -46,11 +46,6 @@ export class SheetError extends Error {
   }
 }
 
-/**
- * Converts any error from reading a sheet into a SheetError with an actionable message.
- * @param error The error thrown by googleapis, or by our own checks.
- * @param sheet The sheet that was being read, if known.
- */
 export function toSheetError(error: unknown, sheet?: GoogleSheetYear): SheetError {
   if (error instanceof SheetError) return error
 

@@ -3,7 +3,6 @@ import { COLUMN_ALIASES, COLUMN_MAPPING, SHEET_FIELDS, SHEET_TAB } from '@/app/c
 import { GoogleSheetYear, Row, SheetField } from '@/app/type'
 import { SHEET_LABEL, SheetError } from './errors'
 
-/** The header row must be within this many rows from the top of the tab */
 const HEADER_SEARCH_ROWS = 5
 
 /**
@@ -12,13 +11,9 @@ const HEADER_SEARCH_ROWS = 5
  */
 const SPREADSHEET_ERROR = /^#(REF!|N\/A|VALUE!|DIV\/0!|NAME\?|NUM!|ERROR!|NULL!)/
 
-/**
- * The result of parsing one sheet's 總表 tab.
- */
 export type ParsedSheet = {
   /** Rows with a valid date, in sheet order. */
   rows: Row[]
-  /** Fields whose header was not found. */
   missingFields: SheetField[]
   /** Non-empty headers that match no field, e.g. 貝士 and 鼓. */
   unmatchedHeaders: string[]
@@ -28,7 +23,6 @@ export type ParsedSheet = {
   issues: SheetIssue[]
 }
 
-/** One cell that held a spreadsheet error value such as #REF!. */
 export type SheetIssue = {
   sheet: GoogleSheetYear
   /** The 1-based row number in the sheet. */
@@ -42,7 +36,6 @@ export type SheetIssue = {
   value: string
 }
 
-/** Turns a zero-based column index into A1 letters (the sheet range is A:Z, so usually one letter) */
 function toColumnLetters(column: number): string {
   let letters = ''
   let index = column
@@ -61,7 +54,6 @@ export function normalizeHeader(header: string): string {
   return header.normalize('NFKC').replace(/\s+/g, '')
 }
 
-/** Normalized header text → field, including the aliases */
 const HEADER_TO_FIELD = new Map<string, SheetField>(
   SHEET_FIELDS.flatMap((field) =>
     [COLUMN_MAPPING[field], ...(COLUMN_ALIASES[field] ?? [])].map(
@@ -89,7 +81,6 @@ export function parseRosterSheet(values: string[][], sheet: GoogleSheetYear): Pa
     )
   }
 
-  // Map each field to its column; if two headers match the same field, the first one wins
   const fieldColumns = new Map<SheetField, number>()
   const unmatchedHeaders: string[] = []
   values[headerIndex].forEach((header, column) => {
@@ -112,7 +103,6 @@ export function parseRosterSheet(values: string[][], sheet: GoogleSheetYear): Pa
     // Read the date cell directly; header order is not guaranteed, so row.date may not be set yet
     const dateCell = cells[dateColumn] ?? ''
     const cellRef = (column: number) => `${SHEET_TAB}!${toColumnLetters(column)}${rowNumber}`
-    // A date cell holding an error value counts as blank: report it and drop the row
     if (SPREADSHEET_ERROR.test(dateCell)) {
       issues.push({
         sheet,
@@ -124,9 +114,7 @@ export function parseRosterSheet(values: string[][], sheet: GoogleSheetYear): Pa
       })
       return
     }
-    // Skip blank rows without reporting them
     if (!dateCell.trim()) return
-    // Drop and report rows whose date cannot be parsed
     if (!isValid(new Date(dateCell))) {
       invalidDates.push({ rowNumber, value: dateCell })
       return

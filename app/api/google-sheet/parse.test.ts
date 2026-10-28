@@ -168,7 +168,6 @@ describe('parseRosterSheet', () => {
   })
 
   it('treats every spreadsheet error value as empty and records an issue', () => {
-    // One error value per mapped column, in header order after 日期
     const errors: [string, string][] = [
       ['講員', '#REF!'],
       ['領會', '#N/A'],

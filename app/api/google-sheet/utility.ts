@@ -30,13 +30,10 @@ export async function fetchGoogleSheetData(): Promise<GoogleSheetResponse> {
   const sheetClient = createGoogleSheetClient()
   const [currentYear, nextYear] = await Promise.allSettled([
     fetchSheetRows(sheetClient, 'current', mainSheetId),
-    // Skip the next year's sheet if its ID is not set
     nextYearSheetId ? fetchSheetRows(sheetClient, 'next', nextYearSheetId) : [],
   ])
-  // Nothing can be shown without the current year's sheet
   if (currentYear.status === 'rejected') throw currentYear.reason
 
-  // Keep serving the current year when only the next year's sheet fails
   const warnings: SheetWarning[] = []
   if (nextYear.status === 'rejected') {
     const sheetError = toSheetError(nextYear.reason, 'next')
@@ -77,10 +74,6 @@ async function fetchSheetRows(
   return parsedSheet.rows
 }
 
-/**
- * Sends a Sentry warning for missing columns and for rows dropped because of their date,
- * grouped by sheet and problem.
- */
 function reportSheetProblems(
   { missingFields, unmatchedHeaders, invalidDates, issues }: ParsedSheet,
   sheet: GoogleSheetYear

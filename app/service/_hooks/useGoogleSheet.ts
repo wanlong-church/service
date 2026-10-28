@@ -4,7 +4,6 @@ import { QUERY_KEY } from '@/app/const'
 import { toast } from '@/hooks/use-toast'
 import { captureMessage } from '@sentry/nextjs'
 
-/** 取得服事表資料；部分服事表無法讀取時，以 toast 提示原因 */
 async function fetchGoogleSheetDataWithWarnings() {
   const data = await fetchGoogleSheetData()
   data.warnings?.forEach((warning) => toast({ variant: 'error', description: warning.message }))

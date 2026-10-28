@@ -20,9 +20,6 @@ export type GoogleSheetResponse = {
   errorCode?: SheetErrorCode
 }
 
-/**
- * Why reading a Google Sheet failed.
- */
 export type SheetErrorCode =
   | 'CONFIG_MISSING'
   | 'AUTH_FAILED'

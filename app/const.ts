@@ -1,6 +1,5 @@
 import { ServiceLink, ServiceTime, ServiceType, SheetField } from './type'
 
-/** 服事總表的分頁名稱，網站只讀取這個分頁 */
 export const SHEET_TAB = '總表'
 
 /** 服事總表表頭順序 */
