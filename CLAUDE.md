@@ -20,7 +20,7 @@ npm run lint                         # eslint --fix on app components lib provid
 npm test                             # vitest run
 ```
 
-- Tests are vitest, colocated as `*.test.ts`. So far only the sheet parser (`app/api/google-sheet/parse.test.ts`) has them. CI runs `npm run lint`, `npm test`, and `npm run build`.
+- Tests are vitest, colocated as `*.test.ts`. The sheet parser and the query-key module have them. CI runs `npm run lint`, `npm test`, and `npm run build`.
 - `npm run lint` rewrites files in place (`--fix`).
 - The pre-commit hook runs `npm install`, then lint-staged (`tsc`, `eslint --fix`, `prettier --write` on staged files).
 - Keep `--webpack` on `build`. Dev uses Turbopack, but the standalone output deployed to App Engine is built with webpack (commit cb82c1e).
@@ -43,12 +43,12 @@ npm test                             # vitest run
 3. Columns map to fields by header text, compared after NFKC normalization with all whitespace removed. NFKC turns full-width `（）` and digits into ASCII. Matching covers `COLUMN_MAPPING` plus `COLUMN_ALIASES`, and if two headers match one field, the first wins.
    - Unknown headers (貝士, 鼓) are dropped.
    - A field with no header gets a Sentry warning.
-   - Rows with a blank date are skipped. Rows with an unparseable date (such as `#REF!`) are dropped and reported to Sentry.
+   - Rows with a blank date are skipped. Rows with an unparseable date are dropped and reported to Sentry.
    - A mapped cell holding a spreadsheet error value (`#REF!`, `#N/A`, ...) is replaced with `''` and recorded in `issues` with its A1 reference; `utility.ts` reports these to Sentry too.
    - A file with no header or no valid rows throws `SheetError` `NO_VALID_ROWS`.
    - Rows from both files are merged and sorted newest first.
 4. `app/api/google-sheet/url/route.ts` returns the two sheets' edit URLs.
-5. On the client, `app/api/client.ts` fetches those routes, and `app/service/_hooks/useGoogleSheet*.ts` wrap them in React Query. `useGoogleSheet` sets `throwOnError`, so failures reach `app/error.tsx`.
+5. On the client, `app/api/client.ts` fetches those routes, and `app/service/_hooks/useGoogleSheet*.ts` wrap them in React Query. `useGoogleSheet` sets `throwOnError` only when no data is cached, so a failed sync with cached data keeps the page and shows a toast.
 
 ### Schema
 
