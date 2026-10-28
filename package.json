@@ -29,7 +29,7 @@
     "@radix-ui/react-switch": "^1.2.2",
     "@radix-ui/react-toast": "^1.2.16",
     "@sentry/nextjs": "^10.75.2",
-    "@serwist/next": "^9.5.11",
+    "@serwist/next": "^9.5.13",
     "@tanstack/query-sync-storage-persister": "^5.101.0",
     "@tanstack/react-query": "^5.101.0",
     "@tanstack/react-query-devtools": "^5.75.2",
