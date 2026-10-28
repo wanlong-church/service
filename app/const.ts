@@ -1,5 +1,7 @@
 import { ServiceLink, ServiceTime, ServiceType, SheetField } from './type'
 
+export const SHEET_TAB = '總表'
+
 /** 服事總表表頭順序 */
 export const SERVICE_TYPES = [
   'speaker',
@@ -51,15 +53,11 @@ export const COLUMN_MAPPING: Record<SheetField, string> = {
   sundaySchool2Topic: '(初小級)聚會內容',
 }
 
-export const COLUMN_MAPPING_REVERSE: Record<string, SheetField> = Object.entries(
-  COLUMN_MAPPING
-).reduce(
-  (acc, [key, value]) => {
-    acc[value] = key as SheetField
-    return acc
-  },
-  {} as Record<string, SheetField>
-)
+/** 同一欄位在表單中的其他寫法，例如分頁名稱「愛宴」與總表表頭「愛筵」 */
+export const COLUMN_ALIASES: Partial<Record<SheetField, string[]>> = {
+  soundControl: ['音控'],
+  meal: ['愛宴'],
+}
 
 /** 服事相關資料 */
 const ATTEND_PRAYER = '提早到場，參加 9：50 分會前禱告'
@@ -148,10 +146,12 @@ export const SERVICE_META: Record<ServiceType, ServiceMeta> = {
 }
 
 //#region React Query 相關變數
+// NEXT_PUBLIC_MAIN_SPREAD_SHEET_ID is inlined at build time by next.config.mjs, so the key
+// changes when the sheet changes (a year rollover), even without a version bump
 export const QUERY_KEY = {
   /** The key for useGoogleSheet, ensures that data is invalidated when the sheet is updated */
-  GOOGLE_SHEET: `GOOGLE_SHEET_${process.env.MAIN_SPREAD_SHEET_ID}`,
+  GOOGLE_SHEET: `GOOGLE_SHEET_${process.env.NEXT_PUBLIC_MAIN_SPREAD_SHEET_ID}`,
   /** The key for useGoogleSheetUrl, ensures that data is invalidated when the sheet is updated */
-  GOOGLE_SHEET_URL: `GOOGLE_SHEET_URL_${process.env.MAIN_SPREAD_SHEET_ID}`,
+  GOOGLE_SHEET_URL: `GOOGLE_SHEET_URL_${process.env.NEXT_PUBLIC_MAIN_SPREAD_SHEET_ID}`,
 } as const
 //#endregion

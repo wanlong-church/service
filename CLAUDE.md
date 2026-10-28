@@ -17,9 +17,10 @@ cp .env.local.template .env.local    # then add GOOGLE_PRIVATE_KEY and delete th
 npm run dev                          # next dev --turbopack, bound to 0.0.0.0:3000
 npm run build                        # next build --webpack, standalone output
 npm run lint                         # eslint --fix on app components lib providers stores hooks, then tsc
+npm test                             # vitest run
 ```
 
-- There is no test suite. CI runs `npm run lint` and `npm run build`.
+- Tests are vitest, colocated as `*.test.ts`. The sheet parser and the query-key module have them. CI runs `npm run lint`, `npm test`, and `npm run build`.
 - `npm run lint` rewrites files in place (`--fix`).
 - The pre-commit hook runs `npm install`, then lint-staged (`tsc`, `eslint --fix`, `prettier --write` on staged files).
 - Keep `--webpack` on `build`. Dev uses Turbopack, but the standalone output deployed to App Engine is built with webpack (commit cb82c1e).
@@ -37,11 +38,17 @@ npm run lint                         # eslint --fix on app components lib provid
 
 ### Data flow
 
-1. `app/api/google-sheet/route.ts` (server, `force-dynamic`) calls `utility.ts`. It authenticates with a service-account JWT through `googleapis` and reads range `總表!A:V` from both the current-year and next-year spreadsheets.
-2. Sheet layout: row 1 is skipped, row 2 is the header, and data starts at row 3. Only the current-year sheet's header is used, so the next-year sheet must have the same column order.
-3. Columns map to fields by matching the Chinese header text against `COLUMN_MAPPING`. Unknown headers are dropped, rows with unparseable dates (such as `#REF`) are filtered out, and rows are sorted newest first.
+1. `app/api/google-sheet/route.ts` (server, `force-dynamic`) calls `utility.ts`. It authenticates with a service-account JWT through `googleapis` and reads range `總表!A:Z` from both the current-year and next-year spreadsheets.
+2. `parse.ts` (`parseRosterSheet`, pure) parses each file with its own header row. The header is the first row in the top 5 that has a `日期` cell; today that is row 2, and data starts below it. The two files may order their columns differently.
+3. Columns map to fields by header text, compared after NFKC normalization with all whitespace removed. NFKC turns full-width `（）` and digits into ASCII. Matching covers `COLUMN_MAPPING` plus `COLUMN_ALIASES`, and if two headers match one field, the first wins.
+   - Unknown headers (貝士, 鼓) are dropped.
+   - A field with no header gets a Sentry warning.
+   - Rows with a blank date are skipped. Rows with an unparseable date are dropped and reported to Sentry.
+   - A mapped cell holding a spreadsheet error value (`#REF!`, `#N/A`, ...) is replaced with `''` and recorded in `issues` with its A1 reference; `utility.ts` reports these to Sentry too.
+   - A file with no header or no valid rows throws `SheetError` `NO_VALID_ROWS`.
+   - Rows from both files are merged and sorted newest first.
 4. `app/api/google-sheet/url/route.ts` returns the two sheets' edit URLs.
-5. On the client, `app/api/client.ts` fetches those routes, and `app/service/_hooks/useGoogleSheet*.ts` wrap them in React Query. `useGoogleSheet` sets `throwOnError`, so failures reach `app/error.tsx`.
+5. On the client, `app/api/client.ts` fetches those routes, and `app/service/_hooks/useGoogleSheet*.ts` wrap them in React Query. `useGoogleSheet` sets `throwOnError` only when no data is cached, so a failed sync with cached data keeps the page and shows a toast.
 
 ### Schema
 
@@ -49,7 +56,8 @@ npm run lint                         # eslint --fix on app components lib provid
 
 - `SERVICE_TYPES`: duty roles, in sheet column order.
 - `SHEET_FIELDS`: `date`, the roles, and the topic/special-day columns.
-- `COLUMN_MAPPING`: field → sheet header text.
+- `COLUMN_MAPPING`: field → sheet header text. The UI shows these as labels.
+- `COLUMN_ALIASES`: other spellings of a header that already appear in the files, such as 愛宴 for 愛筵 and 音控 for 音控直播.
 - `SERVICE_META`: per-role arrival time, notes, and manual links.
 
 `app/type.ts` derives `ServiceType` and `SheetField` from those arrays. To add or rename a sheet column, update `SERVICE_TYPES`/`SHEET_FIELDS` and `COLUMN_MAPPING`; for a new role, also add `SERVICE_META`.
@@ -58,7 +66,7 @@ npm run lint                         # eslint --fix on app components lib provid
 
 `providers/query-client-provider.tsx` persists the React Query cache to localStorage with a 7-day `staleTime` and infinite `gcTime`, so data is normally served from cache. The sync button (`app/service/_components/sync-button.tsx`) forces a refetch. Query errors show as toasts.
 
-`QUERY_KEY` embeds `process.env.MAIN_SPREAD_SHEET_ID`. That variable is not `NEXT_PUBLIC_`, so it is likely `undefined` in the browser bundle and the key does not change when the sheet changes.
+`next.config.mjs` inlines `NEXT_PUBLIC_APP_VERSION` (from `package.json`) as the persist `buster`, so a deploy drops old persisted payloads, and `NEXT_PUBLIC_MAIN_SPREAD_SHEET_ID`, which `QUERY_KEY` embeds so a year rollover (a new sheet ID, no version bump) also invalidates the cache.
 
 ### Pages
 
@@ -92,8 +100,18 @@ npm run lint                         # eslint --fix on app components lib provid
 
 ## Deployment
 
-- **CI** (`.github/workflows/ci.yaml`): lint and build on PRs and on pushes to `main`.
+- **CI** (`.github/workflows/ci.yaml`): lint, test, and build on PRs and on pushes to `main`.
 - **Release** (`release.yaml`): release-please runs on manual dispatch, or on a push whose commit message starts with `release:`. It opens a `release: release x.y.z` PR; merging that PR publishes a GitHub Release.
 - **Deploy** (`deploy.yaml`): a published GitHub Release triggers a build and a deploy to Google App Engine (service `service`, runtime `nodejs24`, `app.yaml`). `.github/actions/release` puts `.next/standalone`, static assets, `public/`, and `app.yaml` into `standalone/` and swaps in `gcp/standalone-package.json`. It renames `node_modules` to `node_module_hack` so App Engine doesn't reinstall dependencies; the `gcp-build` script renames it back.
 - **Routing**: route changes go in `dispatch.yaml`, deployed by hand with `gcloud app deploy dispatch.yaml`.
 - **Sentry releases**: Vercel preview deploys (from the fork `schwannden/service`) report to Sentry as `preview`. GitHub Releases use the `package.json` version.
+
+<!-- BEGIN:nextjs-agent-rules -->
+
+## This is NOT the Next.js you know
+
+This version has breaking changes — APIs, conventions, and file structure may all differ from your training data. Read the relevant guide in `node_modules/next/dist/docs/` (resolved from this file's directory; in monorepos the `next` package may not be visible from the repo root) before writing any code. Heed deprecation notices.
+
+This block is written and re-added by `next dev` — verify at `node_modules/next/dist/server/lib/generate-agent-files.js`. Removing it from a diff only re-creates the uncommitted change; committing it with your work keeps the tree clean.
+
+<!-- END:nextjs-agent-rules -->

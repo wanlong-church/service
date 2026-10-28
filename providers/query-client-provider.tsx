@@ -18,10 +18,14 @@ export default function ReactQueryProvider({ children }: { children: React.React
           gcTime: Infinity,
         },
         dehydrate: {
-          // Only persist successful queries. A pending query carries a Promise,
-          // which JSON.stringify turns into `{}`; persist-client's hydrate() then
-          // calls `.then()` on it, throws, and wipes the whole persisted cache.
-          shouldDehydrateQuery: (query) => defaultShouldDehydrateQuery(query),
+          // Persist queries that hold data: successful ones, and ones whose latest
+          // refetch failed, so a failed sync keeps the last good roster in localStorage.
+          // Never persist a pending query. It carries a Promise, which JSON.stringify
+          // turns into `{}`; persist-client's hydrate() then calls `.then()` on it,
+          // throws, and wipes the whole persisted cache. A pending query has no data,
+          // so the data check below already excludes it.
+          shouldDehydrateQuery: (query) =>
+            defaultShouldDehydrateQuery(query) || query.state.data !== undefined,
         },
       },
       queryCache: new QueryCache({
@@ -42,7 +46,12 @@ export default function ReactQueryProvider({ children }: { children: React.React
   }, [toast])
 
   return (
-    <PersistQueryClientProvider client={queryClient} persistOptions={{ persister: persister }}>
+    <PersistQueryClientProvider
+      client={queryClient}
+      // A new app version invalidates the persisted cache, so a deploy never
+      // hydrates a payload stored by an older build
+      persistOptions={{ persister: persister, buster: process.env.NEXT_PUBLIC_APP_VERSION }}
+    >
       {children}
       <ReactQueryDevtools />
     </PersistQueryClientProvider>

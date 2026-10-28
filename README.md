@@ -29,10 +29,10 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 1. 將 `.env` 的 `MAIN_SPREAD_SHEET_ID` 改成原本 `NEXT_YEAR_SPREAD_SHEET_ID` 的值。
 2. 將 `.env` 的 `NEXT_YEAR_SPREAD_SHEET_ID` 設成新年度的表單 ID。
-3. 確認新表單符合以下條件。兩份表單是一起讀取的，任一份讀取失敗，整個服事表都會無法載入。
+3. 確認新表單符合以下條件。兩份表單是一起讀取的；下年度表單讀取失敗時，仍會顯示今年度資料並提示原因。
    - 已分享給 `.env` 中的 `GOOGLE_CLIENT_EMAIL`（至少檢視權限）。
-   - 有 `總表` 分頁，而且不是空的（至少要有標題列）。
-   - 欄位順序與當年度表單相同（只會用當年度表單的標題列對應欄位）。
+   - 有 `總表` 分頁，前 5 列內有含「日期」的標題列，且至少一列的日期有效。
+   - 標題文字與當年度表單相同。欄位順序可以不同，每份表單都用自己的標題列對應欄位；全形括號與多餘空白不影響比對。
 4. 依照下方「部署」流程發佈新版本。若 Vercel 預覽環境另外設定了這兩個變數，也要一併更新。
 
 ## 目錄結構
@@ -40,7 +40,7 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 ```
 ├─app
 │ ├─api # API routes
-│ │ ├─google-sheet # 讀取服事資料與表單連結，utility.ts 負責讀取與解析表單
+│ │ ├─google-sheet # 讀取服事資料與表單連結，utility.ts 負責讀取表單，parse.ts 依標題列解析總表
 │ │ ├─client.ts # 前端呼叫 API 的函式
 │ ├─service # 服事表相關頁面與元件
 │ │ ├─_components # 包含服事表邏輯的元件

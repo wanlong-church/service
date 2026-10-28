@@ -12,8 +12,34 @@ export type Row = Record<SheetField, string>
 export type GoogleSheetResponse = {
   /** An array of Row objects containing the sheet data. */
   data: Row[]
+  /** Problems that did not stop the fetch, e.g. the next year's sheet could not be read. */
+  warnings?: SheetWarning[]
   /** Optional error message if the fetch operation fails. */
   error?: string
+  /** Why the fetch failed, set together with `error`. */
+  errorCode?: SheetErrorCode
+}
+
+export type SheetErrorCode =
+  | 'CONFIG_MISSING'
+  | 'AUTH_FAILED'
+  | 'SHEET_FORBIDDEN'
+  | 'SHEET_NOT_FOUND'
+  | 'TAB_NOT_FOUND'
+  | 'EMPTY_SHEET'
+  | 'NO_VALID_ROWS'
+  | 'QUOTA'
+  | 'GOOGLE_UNAVAILABLE'
+  | 'UNKNOWN'
+
+/**
+ * A sheet that could not be read while the rest of the data was still returned.
+ */
+export type SheetWarning = {
+  code: SheetErrorCode
+  sheet: GoogleSheetYear
+  /** A zh-TW message that can be shown to users as is. */
+  message: string
 }
 
 /**
