@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.6.3](https://github.com/wanlong-church/service/compare/v0.6.2...v0.6.3) (2026-10-31)
+
+
+### Bug Fixes
+
+* disable the image optimizer disk cache on App Engine ([#505](https://github.com/wanlong-church/service/issues/505)) ([ee14a00](https://github.com/wanlong-church/service/commit/ee14a002f30e5e2f88d4cf62329edd3b1163a007))
+
 ## [0.6.2](https://github.com/wanlong-church/service/compare/v0.6.1...v0.6.2) (2026-10-28)
 
 
