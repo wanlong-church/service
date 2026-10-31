@@ -25,6 +25,12 @@ let nextConfig = {
     autoPrerender: false,
   },
   output: 'standalone',
+  // App Engine's filesystem is read-only. Without this, Next creates
+  // .next/cache/images on the first /_next/image request and the mkdir fails
+  // (ENOENT on App Engine), which surfaces as an unhandled rejection in Sentry.
+  images: {
+    maximumDiskCacheSize: 0,
+  },
 }
 
 const sentryWebpackPluginOptions = {
